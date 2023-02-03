@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Data.Models
+{
+    public class SubCategory
+    {
+        public int SubCateId { get; set; }
+        public string? SubcateName { get; set; }
+        public byte[]? SubcateImage { get; set; }
+        public bool? SubcateStatus { get; set; }
+        public string? SubcateDesc { get; set; }
+        public int? CategoryId { get; set; }
+    }
+}
