@@ -11,8 +11,13 @@ namespace Data.Models
         public int SubCateId { get; set; }
         public string? SubcateName { get; set; }
         public byte[]? SubcateImage { get; set; }
-        public bool? SubcateStatus { get; set; }
+        public bool? isSubCateActive { get; set; }
         public string? SubcateDesc { get; set; }
         public int? CategoryId { get; set; }
+
+        public virtual Category? Category { get; set; }
+
+        public virtual ICollection<Service>? Services { get; set; }
+
     }
 }

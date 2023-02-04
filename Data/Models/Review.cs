@@ -16,5 +16,7 @@ namespace Data.Models
         public int? ServiceId { get; set; }
         public int? Liked { get; set; }
         public int? Report { get; set; }
+
+        public virtual Service? Service { get; set; }
     }
 }

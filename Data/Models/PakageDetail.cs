@@ -10,7 +10,10 @@ namespace Data.Models
     {
         public int? PakageDetailId { get; set; }
         public string? PakageDetailDesc { get; set; }
-        public bool? IsPakageActive { get; set; }
+        public bool? IsDetailActive { get; set; }
         public int? PakageId { get; set; }
+
+        public virtual Pakage? Pakage { get; set; }
+
     }
 }

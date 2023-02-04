@@ -1,4 +1,5 @@
-﻿using Data.Models;
+﻿using Data.Confiuration;
+using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,19 @@ namespace Data.EntityDbContext
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderRequestConfiguration());
+            modelBuilder.ApplyConfiguration(new PakageConfiguration());
+            modelBuilder.ApplyConfiguration(new PakageDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new PostConfiguration());
+            modelBuilder.ApplyConfiguration(new ReviewConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceConfiguration());
+            modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
+
+            //base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Category> Categories { get; set; }
         public DbSet<OrderRequest> OrderRequests { get; set; }
         public DbSet<Pakage> Pakages { get; set; }

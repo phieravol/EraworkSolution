@@ -13,6 +13,10 @@ namespace Data.Models
         public string? PostDetails { get; set; }
         public decimal? Budget { get; set; }
         public DateTime? ExpirationDate { get; set; }
+        public DateTime? PostedDate { get; set; }
         public int? CategoryId { get; set; }
+
+        public virtual Category? Category { get; set; }
+        public virtual ICollection<OrderRequest>? OrderRequests { get; set; }
     }
 }
