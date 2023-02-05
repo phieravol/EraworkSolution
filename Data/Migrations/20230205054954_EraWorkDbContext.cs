@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class EraWorkDbContext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,7 +37,7 @@ namespace Data.Migrations
                     PostDetails = table.Column<string>(type: "nvarchar(4000)", maxLength: 4000, nullable: true),
                     Budget = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    PostedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 2, 4, 0, 0, 0, 0, DateTimeKind.Local)),
+                    PostedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local)),
                     CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -76,26 +76,24 @@ namespace Data.Migrations
                 name: "Service",
                 columns: table => new
                 {
-                    ServiceId = table.Column<int>(type: "int", nullable: false),
-                    ReviewId = table.Column<int>(type: "int", nullable: false),
-                    ServiceTitle = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: false),
-                    Stars = table.Column<int>(type: "int", nullable: true),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsHelpfull = table.Column<bool>(type: "bit", nullable: true),
-                    ReviewTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Liked = table.Column<int>(type: "int", nullable: true),
-                    Report = table.Column<int>(type: "int", nullable: true),
-                    isServiceActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
+                    ServiceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ServiceTitle = table.Column<string>(type: "nvarchar(600)", maxLength: 600, nullable: true),
+                    ServiceIntro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubCategoryId = table.Column<int>(type: "int", nullable: true),
+                    TotalStars = table.Column<int>(type: "int", nullable: true),
+                    TotalClients = table.Column<int>(type: "int", nullable: true),
+                    isServiceActive = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Service", x => x.ServiceId);
                     table.ForeignKey(
-                        name: "FK_Service_SubCategory_ServiceId",
-                        column: x => x.ServiceId,
+                        name: "FK_Service_SubCategory_SubCategoryId",
+                        column: x => x.SubCategoryId,
                         principalTable: "SubCategory",
-                        principalColumn: "SubCateId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "SubCateId");
                 });
 
             migrationBuilder.CreateTable(
@@ -158,7 +156,7 @@ namespace Data.Migrations
                     Stars = table.Column<int>(type: "int", nullable: true),
                     Comment = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     IsHelpfull = table.Column<bool>(type: "bit", nullable: true),
-                    ReviewTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 2, 4, 22, 51, 52, 3, DateTimeKind.Local).AddTicks(2924)),
+                    ReviewTime = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2023, 2, 5, 12, 49, 53, 954, DateTimeKind.Local).AddTicks(2295)),
                     ServiceId = table.Column<int>(type: "int", nullable: true),
                     Liked = table.Column<int>(type: "int", nullable: true),
                     Report = table.Column<int>(type: "int", nullable: true)
@@ -222,6 +220,11 @@ namespace Data.Migrations
                 name: "IX_Review_ServiceId",
                 table: "Review",
                 column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Service_SubCategoryId",
+                table: "Service",
+                column: "SubCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SubCategory_CategoryId",

@@ -1,4 +1,5 @@
 ﻿using Data.Confiuration;
+using Data.DataSample;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,7 +27,7 @@ namespace Data.EntityDbContext
             modelBuilder.ApplyConfiguration(new ServiceConfiguration());
             modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
 
-            //base.OnModelCreating(modelBuilder);
+            modelBuilder.Seed();
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<OrderRequest> OrderRequests { get; set; }
