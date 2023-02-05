@@ -11,6 +11,7 @@ namespace Data.Confiuration
 {
     public class ServiceConfiguration : IEntityTypeConfiguration<Service>
     {
+        private readonly bool ActiveService = true;
         public void Configure(EntityTypeBuilder<Service> builder)
         {
             // config table name Service
@@ -27,12 +28,12 @@ namespace Data.Confiuration
             // config default value for isActiveService
             builder.Property(x => x.isServiceActive)
                 .IsRequired()
-                .HasDefaultValue(true);
+                .HasDefaultValue(ActiveService);
 
             // Config reference key for SubCategoryId
             builder.HasOne(sub => sub.SubCategory)
                 .WithMany(ser => ser.Services)
-                .HasForeignKey(x => x.ServiceId);
+                .HasForeignKey(x => x.SubCategoryId);
         }
     }
 }
