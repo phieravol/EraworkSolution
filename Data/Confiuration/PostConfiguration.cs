@@ -40,6 +40,11 @@ namespace Data.Confiuration
             builder.HasOne(c => c.Category)
                 .WithMany(p => p.Posts)
                 .HasForeignKey(c => c.CategoryId);
+
+            //config reference key for user id
+            builder.HasOne(u => u.AppUser)
+                .WithMany(r => r.Posts)
+                .HasForeignKey(x => x.UserId);
         }
     }
 }

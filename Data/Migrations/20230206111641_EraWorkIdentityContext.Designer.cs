@@ -12,18 +12,124 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(EraWorkContext))]
-    [Migration("20230205060843_DataSeeding")]
-    partial class DataSeeding
+    [Migration("20230206111641_EraWorkIdentityContext")]
+    partial class EraWorkIdentityContext
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasAnnotation("ProductVersion", "6.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Data.Models.AppRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleDesc")
+                        .HasMaxLength(2000)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRole", (string)null);
+                });
+
+            modelBuilder.Entity("Data.Models.AppUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTime?>("MemberSince")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValue(new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local));
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserDesc")
+                        .HasMaxLength(2000)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<string>("UserLable")
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("UserLevel")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(1);
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUser", (string)null);
+                });
 
             modelBuilder.Entity("Data.Models.Category", b =>
                 {
@@ -31,7 +137,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
 
                     b.Property<string>("CategoryDescription")
                         .HasMaxLength(500)
@@ -54,29 +160,6 @@ namespace Data.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Category", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            CategoryDescription = "You think it. A programmer develops it.",
-                            CategoryName = "Programing",
-                            isCategoryActive = true
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            CategoryDescription = "You think it. A programmer develops it.Designs to make you stand out.",
-                            CategoryName = "Graphics & Design",
-                            isCategoryActive = true
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            CategoryDescription = "Bring your story to life with creative videos.",
-                            CategoryName = "Video & Animation",
-                            isCategoryActive = true
-                        });
                 });
 
             modelBuilder.Entity("Data.Models.OrderRequest", b =>
@@ -85,7 +168,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("OrderRequestId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("OrderRequestId"), 1L, 1);
 
                     b.Property<int?>("IsApprove")
                         .IsRequired()
@@ -105,14 +188,16 @@ namespace Data.Migrations
                     b.Property<int?>("ServiceId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("OrderRequestId");
 
                     b.HasIndex("PostId");
 
                     b.HasIndex("ServiceId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("OrderRequest", (string)null);
                 });
@@ -123,7 +208,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PakageId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PakageId"), 1L, 1);
 
                     b.Property<int?>("DeliveryDays")
                         .HasColumnType("int");
@@ -164,7 +249,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("PakageDetailId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("PakageDetailId"), 1L, 1);
 
                     b.Property<bool?>("IsDetailActive")
                         .IsRequired()
@@ -193,7 +278,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"), 1L, 1);
 
                     b.Property<decimal?>("Budget")
                         .HasColumnType("decimal(18,2)");
@@ -218,63 +303,18 @@ namespace Data.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local));
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PostId");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Post", (string)null);
+                    b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            PostId = 1,
-                            Budget = 1000m,
-                            CategoryId = 1,
-                            ExpirationDate = new DateTime(2023, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostDetails = "Thông thạo ASP.NET core, EntityFrameWork, Restful API",
-                            PostTitle = "Tôi cần tìm một c# backend developer để phát triển website",
-                            PostedDate = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local)
-                        },
-                        new
-                        {
-                            PostId = 2,
-                            Budget = 300m,
-                            CategoryId = 1,
-                            ExpirationDate = new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostDetails = "Có kỹ năng sử dụng CSS, JQuery, React & Bootstrap",
-                            PostTitle = "Tôi cần tìm một Wordpress dev để phát triển theme",
-                            PostedDate = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local)
-                        },
-                        new
-                        {
-                            PostId = 3,
-                            Budget = 3000m,
-                            CategoryId = 1,
-                            ExpirationDate = new DateTime(2023, 6, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostDetails = "Trang web của tôi đang bị lỗi giao diện, tôi có thể trả bạn số tiền phù hợp với những gì bạn đã đóng góp cho chúng tôi",
-                            PostTitle = "Tôi cần bảo trì giao diện cho trang web",
-                            PostedDate = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local)
-                        },
-                        new
-                        {
-                            PostId = 4,
-                            Budget = 200m,
-                            CategoryId = 2,
-                            ExpirationDate = new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostTitle = "Tôi cần designer có thể chỉnh sửa ảnh cưới cho chúng tôi",
-                            PostedDate = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local)
-                        },
-                        new
-                        {
-                            PostId = 5,
-                            Budget = 900m,
-                            CategoryId = 3,
-                            ExpirationDate = new DateTime(2023, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostTitle = "Tôi cần editor có thể chỉnh sửa video cho chúng tôi",
-                            PostedDate = new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local)
-                        });
+                    b.ToTable("Post", (string)null);
                 });
 
             modelBuilder.Entity("Data.Models.Review", b =>
@@ -283,7 +323,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReviewId"), 1L, 1);
 
                     b.Property<string>("Comment")
                         .HasMaxLength(1000)
@@ -303,7 +343,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 2, 5, 13, 8, 43, 182, DateTimeKind.Local).AddTicks(5700));
+                        .HasDefaultValue(new DateTime(2023, 2, 6, 18, 16, 41, 158, DateTimeKind.Local).AddTicks(6004));
 
                     b.Property<int?>("ServiceId")
                         .HasColumnType("int");
@@ -311,9 +351,14 @@ namespace Data.Migrations
                     b.Property<int?>("Stars")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("ReviewId");
 
                     b.HasIndex("ServiceId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Review", (string)null);
                 });
@@ -324,7 +369,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceId"), 1L, 1);
 
                     b.Property<string>("ServiceIntro")
                         .HasColumnType("nvarchar(max)");
@@ -343,8 +388,8 @@ namespace Data.Migrations
                     b.Property<int?>("TotalStars")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool?>("isServiceActive")
                         .IsRequired()
@@ -356,6 +401,8 @@ namespace Data.Migrations
 
                     b.HasIndex("SubCategoryId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Service", (string)null);
                 });
 
@@ -365,7 +412,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCateId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubCateId"), 1L, 1);
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
@@ -394,80 +441,101 @@ namespace Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("SubCategory", (string)null);
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            SubCateId = 1,
-                            CategoryId = 1,
-                            SubcateDesc = "Xây dựng website wordpress tại bất cứ đâu",
-                            SubcateName = "Wordpress",
-                            isSubCateActive = true
-                        },
-                        new
-                        {
-                            SubCateId = 2,
-                            CategoryId = 1,
-                            SubcateDesc = "Cùng đội ngũ freelancer xây dựng website của bạn.",
-                            SubcateName = "Website development",
-                            isSubCateActive = true
-                        },
-                        new
-                        {
-                            SubCateId = 3,
-                            CategoryId = 1,
-                            SubcateDesc = "Bảo trì hệ thống bằng đội ngũ freelancer.",
-                            SubcateName = "Website maintainance",
-                            isSubCateActive = true
-                        },
-                        new
-                        {
-                            SubCateId = 4,
-                            CategoryId = 2,
-                            SubcateDesc = "Chỉnh sửa những bức ảnh đẹp cùng đội ngũ chúng tôi.",
-                            SubcateName = "Photo Design",
-                            isSubCateActive = true
-                        },
-                        new
-                        {
-                            SubCateId = 5,
-                            CategoryId = 2,
-                            SubcateDesc = "Thiết kế đồ họa 2D theo yêu cầu của bạn",
-                            SubcateName = "Design 2D",
-                            isSubCateActive = true
-                        },
-                        new
-                        {
-                            SubCateId = 6,
-                            CategoryId = 2,
-                            SubcateDesc = "Thiết kế ý tưởng & đồ họa cho game ",
-                            SubcateName = "Graphics Game",
-                            isSubCateActive = false
-                        },
-                        new
-                        {
-                            SubCateId = 7,
-                            CategoryId = 3,
-                            SubcateDesc = "Edit video với chất lượng tuyệt vời",
-                            SubcateName = "Video Edition",
-                            isSubCateActive = true
-                        },
-                        new
-                        {
-                            SubCateId = 8,
-                            CategoryId = 3,
-                            SubcateDesc = "Làm ra thước phim hoạt hình vượt ngoài trí tưởng tượng.",
-                            SubcateName = "Animation Creating",
-                            isSubCateActive = true
-                        },
-                        new
-                        {
-                            SubCateId = 9,
-                            CategoryId = 3,
-                            SubcateDesc = "Hướng dẫn chỉnh sửa video một cách tận tình",
-                            SubcateName = "Video Teaching",
-                            isSubCateActive = false
-                        });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoleClaim", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AppUserClaim", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AppUserLogin", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.ToTable("AppUserRole", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AppUserToken", (string)null);
                 });
 
             modelBuilder.Entity("Data.Models.OrderRequest", b =>
@@ -479,6 +547,14 @@ namespace Data.Migrations
                     b.HasOne("Data.Models.Service", "Service")
                         .WithMany("OrderRequests")
                         .HasForeignKey("ServiceId");
+
+                    b.HasOne("Data.Models.AppUser", "AppUser")
+                        .WithMany("OrderRequests")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Post");
 
@@ -509,6 +585,14 @@ namespace Data.Migrations
                         .WithMany("Posts")
                         .HasForeignKey("CategoryId");
 
+                    b.HasOne("Data.Models.AppUser", "AppUser")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
                     b.Navigation("Category");
                 });
 
@@ -518,6 +602,14 @@ namespace Data.Migrations
                         .WithMany("Reviews")
                         .HasForeignKey("ServiceId");
 
+                    b.HasOne("Data.Models.AppUser", "AppUser")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
                     b.Navigation("Service");
                 });
 
@@ -526,6 +618,14 @@ namespace Data.Migrations
                     b.HasOne("Data.Models.SubCategory", "SubCategory")
                         .WithMany("Services")
                         .HasForeignKey("SubCategoryId");
+
+                    b.HasOne("Data.Models.AppUser", "AppUser")
+                        .WithMany("Services")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("SubCategory");
                 });
@@ -537,6 +637,17 @@ namespace Data.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Data.Models.AppUser", b =>
+                {
+                    b.Navigation("OrderRequests");
+
+                    b.Navigation("Posts");
+
+                    b.Navigation("Reviews");
+
+                    b.Navigation("Services");
                 });
 
             modelBuilder.Entity("Data.Models.Category", b =>

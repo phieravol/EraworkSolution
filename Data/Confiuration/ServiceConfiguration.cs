@@ -34,6 +34,11 @@ namespace Data.Confiuration
             builder.HasOne(sub => sub.SubCategory)
                 .WithMany(ser => ser.Services)
                 .HasForeignKey(x => x.SubCategoryId);
+
+            //config reference key for user id
+            builder.HasOne(u => u.AppUser)
+                .WithMany(r => r.Services)
+                .HasForeignKey(x => x.UserId);
         }
     }
 }

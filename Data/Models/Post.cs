@@ -15,8 +15,10 @@ namespace Data.Models
         public DateTime? ExpirationDate { get; set; }
         public DateTime? PostedDate { get; set; }
         public int? CategoryId { get; set; }
+        public Guid UserId { get; set; }
 
         public virtual Category? Category { get; set; }
+        public virtual AppUser? AppUser { get; set; }
         public virtual ICollection<OrderRequest>? OrderRequests { get; set; }
     }
 }

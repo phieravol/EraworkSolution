@@ -3,14 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace Data.Migrations
 {
-    /// <inheritdoc />
-    public partial class DataSeeding : Migration
+    public partial class AddBasicDataSameple : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<DateTime>(
@@ -18,31 +14,36 @@ namespace Data.Migrations
                 table: "Review",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 2, 5, 13, 8, 43, 182, DateTimeKind.Local).AddTicks(5700),
+                defaultValue: new DateTime(2023, 2, 6, 18, 39, 43, 154, DateTimeKind.Local).AddTicks(6416),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 2, 5, 12, 49, 53, 954, DateTimeKind.Local).AddTicks(2295));
+                oldDefaultValue: new DateTime(2023, 2, 6, 18, 16, 41, 158, DateTimeKind.Local).AddTicks(6004));
 
             migrationBuilder.InsertData(
                 table: "Category",
                 columns: new[] { "CategoryId", "CategoryDescription", "CategoryImage", "CategoryName", "isCategoryActive" },
-                values: new object[,]
-                {
-                    { 1, "You think it. A programmer develops it.", null, "Programing", true },
-                    { 2, "You think it. A programmer develops it.Designs to make you stand out.", null, "Graphics & Design", true },
-                    { 3, "Bring your story to life with creative videos.", null, "Video & Animation", true }
-                });
+                values: new object[] { 1, "You think it. A programmer develops it.", null, "Programing", true });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "CategoryId", "CategoryDescription", "CategoryImage", "CategoryName", "isCategoryActive" },
+                values: new object[] { 2, "You think it. A programmer develops it.Designs to make you stand out.", null, "Graphics & Design", true });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "CategoryId", "CategoryDescription", "CategoryImage", "CategoryName", "isCategoryActive" },
+                values: new object[] { 3, "Bring your story to life with creative videos.", null, "Video & Animation", true });
 
             migrationBuilder.InsertData(
                 table: "Post",
-                columns: new[] { "PostId", "Budget", "CategoryId", "ExpirationDate", "PostDetails", "PostTitle", "PostedDate" },
+                columns: new[] { "PostId", "Budget", "CategoryId", "ExpirationDate", "PostDetails", "PostTitle", "PostedDate", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1000m, 1, new DateTime(2023, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "Thông thạo ASP.NET core, EntityFrameWork, Restful API", "Tôi cần tìm một c# backend developer để phát triển website", new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local) },
-                    { 2, 300m, 1, new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Có kỹ năng sử dụng CSS, JQuery, React & Bootstrap", "Tôi cần tìm một Wordpress dev để phát triển theme", new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local) },
-                    { 3, 3000m, 1, new DateTime(2023, 6, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trang web của tôi đang bị lỗi giao diện, tôi có thể trả bạn số tiền phù hợp với những gì bạn đã đóng góp cho chúng tôi", "Tôi cần bảo trì giao diện cho trang web", new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local) },
-                    { 4, 200m, 2, new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Tôi cần designer có thể chỉnh sửa ảnh cưới cho chúng tôi", new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local) },
-                    { 5, 900m, 3, new DateTime(2023, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Tôi cần editor có thể chỉnh sửa video cho chúng tôi", new DateTime(2023, 2, 5, 0, 0, 0, 0, DateTimeKind.Local) }
+                    { 1, 1000m, 1, new DateTime(2023, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), "Thông thạo ASP.NET core, EntityFrameWork, Restful API", "Tôi cần tìm một c# backend developer để phát triển website", new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 2, 300m, 1, new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "Có kỹ năng sử dụng CSS, JQuery, React & Bootstrap", "Tôi cần tìm một Wordpress dev để phát triển theme", new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 3, 3000m, 1, new DateTime(2023, 6, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Trang web của tôi đang bị lỗi giao diện, tôi có thể trả bạn số tiền phù hợp với những gì bạn đã đóng góp cho chúng tôi", "Tôi cần bảo trì giao diện cho trang web", new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 4, 200m, 2, new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Tôi cần designer có thể chỉnh sửa ảnh cưới cho chúng tôi", new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") },
+                    { 5, 900m, 3, new DateTime(2023, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Tôi cần editor có thể chỉnh sửa video cho chúng tôi", new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local), new Guid("00000000-0000-0000-0000-000000000000") }
                 });
 
             migrationBuilder.InsertData(
@@ -62,7 +63,6 @@ namespace Data.Migrations
                 });
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
@@ -155,10 +155,10 @@ namespace Data.Migrations
                 table: "Review",
                 type: "datetime2",
                 nullable: false,
-                defaultValue: new DateTime(2023, 2, 5, 12, 49, 53, 954, DateTimeKind.Local).AddTicks(2295),
+                defaultValue: new DateTime(2023, 2, 6, 18, 16, 41, 158, DateTimeKind.Local).AddTicks(6004),
                 oldClrType: typeof(DateTime),
                 oldType: "datetime2",
-                oldDefaultValue: new DateTime(2023, 2, 5, 13, 8, 43, 182, DateTimeKind.Local).AddTicks(5700));
+                oldDefaultValue: new DateTime(2023, 2, 6, 18, 39, 43, 154, DateTimeKind.Local).AddTicks(6416));
         }
     }
 }

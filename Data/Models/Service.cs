@@ -15,9 +15,10 @@ namespace Data.Models
         public int? TotalStars { get; set; }
         public int? TotalClients { get; set; }
         public bool? isServiceActive { get; set; }
-        public int? UserId { get; set; }
+        public Guid UserId { get; set; }
 
         public virtual SubCategory? SubCategory { get; set; }
+        public virtual AppUser? AppUser { get; set; }
         public virtual ICollection<OrderRequest>? OrderRequests { get; set; }
 
         public virtual ICollection<Pakage>? Pakages { get; set; }
