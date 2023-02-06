@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(EraWorkContext))]
-    [Migration("20230206113943_AddBasicDataSameple")]
-    partial class AddBasicDataSameple
+    [Migration("20230206161732_DataSeedingContext")]
+    partial class DataSeedingContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,15 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRole", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f5e563f1-fbb8-4354-b5a7-a641936761dc"),
+                            ConcurrencyStamp = "058cb568-c11f-4f2d-be5d-c2b1773b5584",
+                            Name = "Admin",
+                            RoleDesc = "Can Custom system"
+                        });
                 });
 
             modelBuilder.Entity("Data.Models.AppUser", b =>
@@ -67,7 +76,12 @@ namespace Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FullName")
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(100)
+                        .IsUnicode(true)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
                         .HasMaxLength(100)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(100)");
@@ -129,6 +143,29 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppUser", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4e08f97b-9be3-4466-ae33-7d6d90f6924e"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "eea56a3a-9a6f-4b0d-be75-a4faa9da9cc2",
+                            Email = "phinqhe153034@fpt.edu.vn",
+                            EmailConfirmed = false,
+                            FirstName = "Nguyễn",
+                            LastName = "Quốc Phi",
+                            LockoutEnabled = false,
+                            MemberSince = new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local),
+                            PasswordHash = "AQAAAAEAACcQAAAAEKTcSu4kRaLsKukTgVKHS23czcG6PJT6/qvNxubhnCAjeJmnnJaCX1KmBa7d957Abg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserDesc = "Tôi là một Designer, chuyên design sự tương tư của bạn :))",
+                            UserLable = "",
+                            UserLevel = 1,
+                            UserName = "phiphongphanh",
+                            UserStatus = 1
+                        });
                 });
 
             modelBuilder.Entity("Data.Models.Category", b =>
@@ -338,61 +375,6 @@ namespace Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Post", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            PostId = 1,
-                            Budget = 1000m,
-                            CategoryId = 1,
-                            ExpirationDate = new DateTime(2023, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostDetails = "Thông thạo ASP.NET core, EntityFrameWork, Restful API",
-                            PostTitle = "Tôi cần tìm một c# backend developer để phát triển website",
-                            PostedDate = new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local),
-                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            PostId = 2,
-                            Budget = 300m,
-                            CategoryId = 1,
-                            ExpirationDate = new DateTime(2023, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostDetails = "Có kỹ năng sử dụng CSS, JQuery, React & Bootstrap",
-                            PostTitle = "Tôi cần tìm một Wordpress dev để phát triển theme",
-                            PostedDate = new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local),
-                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            PostId = 3,
-                            Budget = 3000m,
-                            CategoryId = 1,
-                            ExpirationDate = new DateTime(2023, 6, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostDetails = "Trang web của tôi đang bị lỗi giao diện, tôi có thể trả bạn số tiền phù hợp với những gì bạn đã đóng góp cho chúng tôi",
-                            PostTitle = "Tôi cần bảo trì giao diện cho trang web",
-                            PostedDate = new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local),
-                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            PostId = 4,
-                            Budget = 200m,
-                            CategoryId = 2,
-                            ExpirationDate = new DateTime(2023, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostTitle = "Tôi cần designer có thể chỉnh sửa ảnh cưới cho chúng tôi",
-                            PostedDate = new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local),
-                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
-                        },
-                        new
-                        {
-                            PostId = 5,
-                            Budget = 900m,
-                            CategoryId = 3,
-                            ExpirationDate = new DateTime(2023, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostTitle = "Tôi cần editor có thể chỉnh sửa video cho chúng tôi",
-                            PostedDate = new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local),
-                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
-                        });
                 });
 
             modelBuilder.Entity("Data.Models.Review", b =>
@@ -421,7 +403,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 2, 6, 18, 39, 43, 154, DateTimeKind.Local).AddTicks(6416));
+                        .HasDefaultValue(new DateTime(2023, 2, 6, 23, 17, 31, 630, DateTimeKind.Local).AddTicks(7012));
 
                     b.Property<int?>("ServiceId")
                         .HasColumnType("int");
@@ -668,6 +650,13 @@ namespace Data.Migrations
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("AppUserRole", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("4e08f97b-9be3-4466-ae33-7d6d90f6924e"),
+                            RoleId = new Guid("f5e563f1-fbb8-4354-b5a7-a641936761dc")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

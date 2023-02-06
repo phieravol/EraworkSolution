@@ -9,7 +9,8 @@ namespace Data.Models
 {
     public class AppUser : IdentityUser<Guid>
     {
-        public string? FullName { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
         public int? UserStatus { get; set; }
         public int? UserLevel { get; set; }
         public string? UserDesc { get; set; }

@@ -14,7 +14,10 @@ namespace Data.Confiuration
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.ToTable("AppUser");
-            builder.Property(x => x.FullName)
+            builder.Property(x => x.FirstName)
+                .IsUnicode(true)
+                .HasMaxLength(100);
+            builder.Property(x => x.LastName)
                 .IsUnicode(true)
                 .HasMaxLength(100);
             builder.Property(x=>x.UserLable)
