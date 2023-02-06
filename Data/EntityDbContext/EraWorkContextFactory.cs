@@ -11,6 +11,10 @@ namespace Data.EntityDbContext
 {
     public class EraWorkContextFactory : IDesignTimeDbContextFactory<EraWorkContext>
     {
+        public EraWorkContextFactory()
+        {
+        }
+
         public EraWorkContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
