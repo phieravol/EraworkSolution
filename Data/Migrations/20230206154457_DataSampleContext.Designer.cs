@@ -4,6 +4,7 @@ using Data.EntityDbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(EraWorkContext))]
-    partial class EraWorkContextModelSnapshot : ModelSnapshot
+    [Migration("20230206154457_DataSampleContext")]
+    partial class DataSampleContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRole", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f5e563f1-fbb8-4354-b5a7-a641936761dc"),
-                            ConcurrencyStamp = "058cb568-c11f-4f2d-be5d-c2b1773b5584",
-                            Name = "Admin",
-                            RoleDesc = "Can Custom system"
-                        });
                 });
 
             modelBuilder.Entity("Data.Models.AppUser", b =>
@@ -74,12 +67,7 @@ namespace Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .HasMaxLength(100)
-                        .IsUnicode(true)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("LastName")
+                    b.Property<string>("FullName")
                         .HasMaxLength(100)
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(100)");
@@ -141,29 +129,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppUser", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("4e08f97b-9be3-4466-ae33-7d6d90f6924e"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "eea56a3a-9a6f-4b0d-be75-a4faa9da9cc2",
-                            Email = "phinqhe153034@fpt.edu.vn",
-                            EmailConfirmed = false,
-                            FirstName = "Nguyễn",
-                            LastName = "Quốc Phi",
-                            LockoutEnabled = false,
-                            MemberSince = new DateTime(2023, 2, 6, 0, 0, 0, 0, DateTimeKind.Local),
-                            PasswordHash = "AQAAAAEAACcQAAAAEKTcSu4kRaLsKukTgVKHS23czcG6PJT6/qvNxubhnCAjeJmnnJaCX1KmBa7d957Abg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserDesc = "Tôi là một Designer, chuyên design sự tương tư của bạn :))",
-                            UserLable = "",
-                            UserLevel = 1,
-                            UserName = "phiphongphanh",
-                            UserStatus = 1
-                        });
                 });
 
             modelBuilder.Entity("Data.Models.Category", b =>
@@ -401,7 +366,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 2, 6, 23, 17, 31, 630, DateTimeKind.Local).AddTicks(7012));
+                        .HasDefaultValue(new DateTime(2023, 2, 6, 22, 44, 57, 377, DateTimeKind.Local).AddTicks(9258));
 
                     b.Property<int?>("ServiceId")
                         .HasColumnType("int");
@@ -648,13 +613,6 @@ namespace Data.Migrations
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("AppUserRole", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("4e08f97b-9be3-4466-ae33-7d6d90f6924e"),
-                            RoleId = new Guid("f5e563f1-fbb8-4354-b5a7-a641936761dc")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

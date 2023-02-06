@@ -35,6 +35,11 @@ namespace Data.Confiuration
             builder.HasOne(s => s.Service)
                 .WithMany(r => r.Reviews)
                 .HasForeignKey(s => s.ServiceId);
+
+            //config reference key for review configuration
+            builder.HasOne(u => u.AppUser)
+                .WithMany(r => r.Reviews)
+                .HasForeignKey(x => x.UserId);
         }
     }
 }
