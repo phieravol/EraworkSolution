@@ -33,12 +33,12 @@ namespace AppModules.Categories.Manage
             throw new NotImplementedException();
         }
 
-        public List<CategoryViewModel> GetAllCategories()
+        public async Task<List<CategoryViewModel>> GetAllCategories()
         {
             throw new NotImplementedException();
         }
 
-        public PageViewModel<CategoryViewModel> GetCategoryPagging(string Keyword, int PageIndex, int PageSize)
+        public async Task<PageViewModel<CategoryViewModel>> GetCategoryPagging(string Keyword, int PageIndex, int PageSize)
         {
             throw new NotImplementedException();
         }
