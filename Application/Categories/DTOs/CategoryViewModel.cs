@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AppModules.GeneralDTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,10 @@ namespace AppModules.Categories.DTOs
 {
     public class CategoryViewModel
     {
-
+        public int CategoryId { get; set; }
+        public string? CategoryName { get; set; }
+        public byte[]? CategoryImage { get; set; }
+        public bool? isCategoryActive { get; set; }
+        public string? CategoryDescription { get; set; }
     }
 }

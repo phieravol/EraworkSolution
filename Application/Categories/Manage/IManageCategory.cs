@@ -13,8 +13,7 @@ namespace AppModules.Categories.Manage
         Task<int> CreateCategory(CategoryCreateRequest request);
         Task<int> UpdateCategory(CategoryUpdateRequest request);
         Task<int> DeleteCategory(int CategoryId);
-        Task<List<CategoryViewModel>> GetAllCategories();
-        Task<PageViewModel<CategoryViewModel>> GetCategoryPagging(string Keyword, int PageIndex, int PageSize);
+        Task<PagedResultBase<CategoryViewModel>> GetCategoriesPagging(CategoryPagingRequest request);
 
     }
 }

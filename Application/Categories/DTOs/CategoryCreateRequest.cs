@@ -8,6 +8,9 @@ namespace AppModules.Categories.DTOs
 {
     public class CategoryCreateRequest
     {
-        public string Name { get; set; }
+        public string? CategoryName { get; set; }
+        public byte[]? CategoryImage { get; set; }
+        public bool? isCategoryActive { get; set; }
+        public string? CategoryDescription { get; set; }
     }
 }

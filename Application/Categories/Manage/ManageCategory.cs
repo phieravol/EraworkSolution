@@ -2,6 +2,8 @@
 using AppModules.GeneralDTOs;
 using Data.EntityDbContext;
 using Data.Models;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,25 +24,60 @@ namespace AppModules.Categories.Manage
         {
             var Category = new Category()
             {
-                CategoryName = request.Name,
+                CategoryName = request.CategoryName,
+                CategoryImage = request.CategoryImage,
+                isCategoryActive = request.isCategoryActive,
+                CategoryDescription = request.CategoryDescription
+
             };
-            _context.Categories.Add(Category);
+            _context.Categories.AddAsync(Category);
             return await _context.SaveChangesAsync();
         }
 
         public async Task<int> DeleteCategory(int CategoryId)
         {
-            throw new NotImplementedException();
+            var Category = await _context.Categories.FindAsync(CategoryId);
+            if (Category==null)
+            {
+                throw new Exception($"Can not find Category has Id = {CategoryId}");
+            }
+            _context.Categories.Remove(Category);
+            return await _context.SaveChangesAsync();
         }
 
-        public async Task<List<CategoryViewModel>> GetAllCategories()
+        public async Task<PagedResultBase<CategoryViewModel>> GetCategoriesPagging(CategoryPagingRequest request)
         {
-            throw new NotImplementedException();
-        }
+            //1. select join
+            var query = from c in _context.Categories
+                        select c;
+            //2. Filter
+            if (!string.IsNullOrEmpty(request.Keyword))
+            {
+                query = query.Where(x => x.CategoryName.Contains(request.Keyword));
+            }
 
-        public async Task<PageViewModel<CategoryViewModel>> GetCategoryPagging(string Keyword, int PageIndex, int PageSize)
-        {
-            throw new NotImplementedException();
+            //3. Paging
+            int totalRows = await query.CountAsync();
+            int recordsRange = (request.CurrentPage - 1) * request.PageSize;
+
+            var PageIndexData = await query.Skip(recordsRange)
+                .Take(request.PageSize)
+                .Select(x => new CategoryViewModel()
+                {
+                    CategoryId = x.CategoryId,
+                    CategoryName = x.CategoryName,
+                    isCategoryActive = x.isCategoryActive,
+                    CategoryImage = x.CategoryImage,
+                    CategoryDescription = x.CategoryDescription
+                }).ToListAsync();
+
+            var pageResult = new PagedResultBase<CategoryViewModel>()
+            {
+                TotalRecords = totalRows,
+                Items = PageIndexData
+            };
+
+            return pageResult;
         }
 
         public async Task<int> UpdateCategory(CategoryUpdateRequest request)

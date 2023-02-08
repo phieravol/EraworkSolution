@@ -10,7 +10,7 @@ namespace AppModules.Categories.Public
 {
     public interface IPublicCategory
     {
-        PageViewModel<CategoryViewModel> GetAllCategories();
-        PageViewModel<CategoryViewModel> GetCategoriesResult(string keyword);
+        PagedResultBase<CategoryViewModel> GetAllCategories();
+        PagedResultBase<CategoryViewModel> GetCategoriesResult(string keyword);
     }
 }
