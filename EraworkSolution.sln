@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Erawork", "Erawork\Erawork.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{925202E1-57E1-48FD-8728-C9157334FEC9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{26391A41-959A-485E-BA53-9EECA275B7AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppModules", "Application\AppModules.csproj", "{26391A41-959A-485E-BA53-9EECA275B7AA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckDb", "CheckDb\CheckDb.csproj", "{F22BC9E0-DE56-42E2-B4EB-7B2D46F00CD8}"
 EndProject
