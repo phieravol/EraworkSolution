@@ -1,5 +1,4 @@
-﻿using AppModules.Categories.DTOs;
-using AppModules.GeneralDTOs;
+﻿using AppModules.GeneralDTOs;
 using Data.EntityDbContext;
 using Data.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,69 +19,24 @@ namespace AppModules.Categories.Manage
             _context = context;
         }
 
-        public async Task<int> CreateCategory(CategoryCreateRequest request)
+        public async Task<int> GetCount()
         {
-            var Category = new Category()
-            {
-                CategoryName = request.CategoryName,
-                CategoryImage = request.CategoryImage,
-                isCategoryActive = request.isCategoryActive,
-                CategoryDescription = request.CategoryDescription
-
-            };
-            _context.Categories.AddAsync(Category);
-            return await _context.SaveChangesAsync();
+            var data = await GetData();
+            return data.Count;
         }
 
-        public async Task<int> DeleteCategory(int CategoryId)
+        public async Task<List<Category>> GetPaginatedResult(string CurrentKeyword, int currentPage, int pageSize = 3)
         {
-            var Category = await _context.Categories.FindAsync(CategoryId);
-            if (Category==null)
-            {
-                throw new Exception($"Can not find Category has Id = {CategoryId}");
-            }
-            _context.Categories.Remove(Category);
-            return await _context.SaveChangesAsync();
+            var data = await GetData();
+            return data.OrderBy(d => d.CategoryId).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
         }
 
-        public async Task<PagedResultBase<CategoryViewModel>> GetCategoriesPagging(CategoryPagingRequest request)
+        private async Task<List<Category>> GetData()
         {
-            //1. select join
             var query = from c in _context.Categories
                         select c;
-            //2. Filter
-            if (!string.IsNullOrEmpty(request.Keyword))
-            {
-                query = query.Where(x => x.CategoryName.Contains(request.Keyword));
-            }
 
-            //3. Paging
-            int totalRows = await query.CountAsync();
-            int recordsRange = (request.CurrentPage - 1) * request.PageSize;
-
-            var PageIndexData = await query.Skip(recordsRange)
-                .Take(request.PageSize)
-                .Select(x => new CategoryViewModel()
-                {
-                    CategoryId = x.CategoryId,
-                    CategoryName = x.CategoryName,
-                    isCategoryActive = x.isCategoryActive,
-                    CategoryImage = x.CategoryImage,
-                    CategoryDescription = x.CategoryDescription
-                }).ToListAsync();
-
-            var pageResult = new PagedResultBase<CategoryViewModel>()
-            {
-                TotalRecords = totalRows,
-                Items = PageIndexData
-            };
-
-            return pageResult;
-        }
-
-        public async Task<int> UpdateCategory(CategoryUpdateRequest request)
-        {
-            throw new NotImplementedException();
+            return await query.ToListAsync();
         }
     }
 }
