@@ -1,5 +1,5 @@
-﻿using AppModules.Categories.DTOs;
-using AppModules.GeneralDTOs;
+﻿using AppModules.GeneralDTOs;
+using Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,8 @@ namespace AppModules.Categories.Manage
 {
     public interface IManageCategory
     {
-        Task<int> CreateCategory(CategoryCreateRequest request);
-        Task<int> UpdateCategory(CategoryUpdateRequest request);
-        Task<int> DeleteCategory(int CategoryId);
-        Task<PagedResultBase<CategoryViewModel>> GetCategoriesPagging(CategoryPagingRequest request);
+        Task<List<Category>> GetPaginatedResult(string CurrentKeyword, int currentPage, int pageSize = 3);
+        Task<int> GetCount();
 
     }
 }
