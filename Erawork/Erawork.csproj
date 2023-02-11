@@ -21,7 +21,39 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont3e6e.svg" />
+    <None Include="wwwroot\assets\fonts\fontawesome-webfont3e6e.woff2" />
+    <None Include="wwwroot\assets\fonts\Linearicons-Free54e9.svg" />
+    <None Include="wwwroot\assets\fonts\Linearicons-Free54e9.woff2" />
+    <None Include="wwwroot\assets\fonts\themify9f24.svg" />
+    <None Include="wwwroot\assets\fonts\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\assets\fonts\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\assets\fonts\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\assets\fonts\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\assets\fonts\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\assets\fonts\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\assets\js\appear.js" />
+    <None Include="wwwroot\assets\js\chart.js" />
+    <None Include="wwwroot\assets\js\chosen.jquery.js" />
+    <None Include="wwwroot\assets\js\countTo.js" />
+    <None Include="wwwroot\assets\js\gmap3.js" />
+    <None Include="wwwroot\assets\js\jquery-ui.js" />
+    <None Include="wwwroot\assets\js\jquery.basictable.min.js" />
+    <None Include="wwwroot\assets\js\jquery.hoverdir.js" />
+    <None Include="wwwroot\assets\js\jquery.sortable.js" />
+    <None Include="wwwroot\assets\js\jRate.js" />
+    <None Include="wwwroot\assets\js\main.js" />
+    <None Include="wwwroot\assets\js\owl.carousel.min.js" />
+    <None Include="wwwroot\assets\js\prettyPhoto.js" />
+    <None Include="wwwroot\assets\js\readmore.js" />
+    <None Include="wwwroot\assets\js\scrollbar.min.js" />
+    <None Include="wwwroot\assets\js\tilt.jquery.js" />
+    <None Include="wwwroot\assets\js\tinymce\tinymce.min4bb5.js" />
+    <None Include="wwwroot\assets\js\tipso.js" />
+    <None Include="wwwroot\assets\js\vendor\bootstrap.min.js" />
+    <None Include="wwwroot\assets\js\vendor\jquery-3.3.1.js" />
+    <None Include="wwwroot\assets\js\vendor\jquery-library.js" />
+    <None Include="wwwroot\assets\js\vendor\modernizr-2.8.3-respond-1.4.2.min.js" />
   </ItemGroup>
 
 </Project>
