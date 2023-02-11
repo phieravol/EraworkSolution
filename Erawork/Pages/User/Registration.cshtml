@@ -1,0 +1,81 @@
+﻿@page
+@model Erawork.Pages.User.RegistrationModel
+@{
+    Layout = null;
+}
+<head>
+    <link rel="stylesheet" href="~/@(nameof(Erawork)).styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="wrapper rounded bg-white">
+
+        <div class="h3">Registration Form</div>
+
+        <form method="post" class="form">
+            <div class="row">
+                <div class="col-md-12 mt-md-0 mt-3">
+                    <label asp-for="registerRequest.UserName">User Name</label>
+                    <input asp-for="registerRequest.UserName" type="text" class="form-control" required>
+                    <span asp-validation-for="registerRequest.UserName" class="text-danger"></span>
+                </div>   
+            </div>
+            <div class="row">
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <label asp-for="registerRequest.FirstName">First Name</label>
+                    <input asp-for="registerRequest.FirstName" type="text" class="form-control" required>
+                    <span asp-validation-for="registerRequest.FirstName" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <label asp-for="registerRequest.LastName">Last Name</label>
+                    <input asp-for="registerRequest.LastName" type="text" class="form-control" required>
+                    <span asp-validation-for="registerRequest.LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-md-0 mt-3">
+                    <label asp-for="registerRequest.Email">Email</label>
+                    <input asp-for="registerRequest.Email" type="text" class="form-control" required>
+                    <span asp-validation-for="registerRequest.Email" class="text-danger"></span>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-md-0 mt-3">
+                    <label asp-for="registerRequest.PhoneNumber">Phone Number</label>
+                    <input asp-for="registerRequest.PhoneNumber" type="text" class="form-control" required>
+                    <span asp-validation-for="registerRequest.PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-md-0 mt-3">
+                    <label asp-for="registerRequest.Password">Password</label>
+                    <input asp-for="registerRequest.Password" type="password" class="form-control" required>
+                    <span asp-validation-for="registerRequest.Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-md-0 mt-3">
+                    <label asp-for="registerRequest.ConfirmPassword">Confirm Password</label>
+                    <input asp-for="registerRequest.ConfirmPassword" type="password" class="form-control" required>
+                    <span asp-validation-for="registerRequest.ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class=" my-md-2 my-3">
+                <label>Subject</label>
+                <select id="sub" required>
+                    <option value="" selected hidden>Choose Option</option>
+                    <option value="Maths">Maths</option>
+                    <option value="Science">Science</option>
+                    <option value="Social">Social</option>
+                    <option value="Hindi">Hindi</option>
+                </select>
+            </div>
+            <button type="submit" asp-page="./Registration" class="btn btn-primary mt-3">Submit</button>
+        </form>
+
+    </div>
+
+    
+</body>
