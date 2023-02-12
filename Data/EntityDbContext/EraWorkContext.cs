@@ -17,6 +17,7 @@ namespace Data.EntityDbContext
     {
         public EraWorkContext(DbContextOptions options) : base(options)
         {
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

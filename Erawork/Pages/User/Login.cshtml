@@ -1,4 +1,39 @@
 ﻿@page
 @model Erawork.Pages.User.LoginModel
 @{
+    Layout = null;
 }
+<head>
+    <link rel="stylesheet" href="~/@(nameof(Erawork)).styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="wrapper rounded bg-white">
+
+        <div class="h3">Login Form</div>
+
+        <form method="post" class="form">
+            <div class="row">
+                <div class="col-md-12 mt-md-0 mt-3">
+                    <label asp-for="loginRequest.UserName">Username / Email</label>
+                    <input asp-for="loginRequest.UserName" type="text" class="form-control" required>
+                    <span asp-validation-for="loginRequest.UserName" class="text-danger"></span>
+                </div>
+            </div>
+           
+            <div class="row">
+                <div class="col-md-12 mt-md-0 mt-3">
+                    <label asp-for="loginRequest.Password">Password</label>
+                    <input asp-for="loginRequest.Password" type="password" class="form-control" required>
+                    <span asp-validation-for="loginRequest.Password" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <button type="submit" asp-page="./Login" class="btn btn-primary mt-3">Submit</button>
+        </form>
+
+    </div>
+
+
+</body>

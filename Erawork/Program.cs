@@ -12,9 +12,16 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<EraWorkContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("EraWorkDb")
     ));
-builder.Services.AddIdentity<AppUser, AppRole>()
-                .AddEntityFrameworkStores<EraWorkContext>()
-                .AddDefaultTokenProviders();
+builder.Services.AddIdentity<AppUser, AppRole>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+}).AddEntityFrameworkStores<EraWorkContext>()
+  .AddDefaultTokenProviders();
+
+
 
 // Add services DIs
 builder.Services.AddTransient<IManageCategory, ManageCategory>();
