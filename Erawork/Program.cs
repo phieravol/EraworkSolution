@@ -1,4 +1,5 @@
 using AppModules.Categories.Manage;
+using AppModules.System.Role;
 using AppModules.Users.Public;
 using Data.EntityDbContext;
 using Data.Models;
@@ -12,13 +13,22 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<EraWorkContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("EraWorkDb")
     ));
-builder.Services.AddIdentity<AppUser, AppRole>()
-                .AddEntityFrameworkStores<EraWorkContext>()
-                .AddDefaultTokenProviders();
+builder.Services.AddIdentity<AppUser, AppRole>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+}).AddEntityFrameworkStores<EraWorkContext>()
+  .AddDefaultTokenProviders();
+
+
 
 // Add services DIs
 builder.Services.AddTransient<IManageCategory, ManageCategory>();
 builder.Services.AddTransient<IPublicUser, PublicUser>();
+builder.Services.AddTransient<IPublicRole, PublicRole>();
+
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();

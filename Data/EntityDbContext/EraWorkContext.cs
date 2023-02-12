@@ -17,6 +17,7 @@ namespace Data.EntityDbContext
     {
         public EraWorkContext(DbContextOptions options) : base(options)
         {
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -41,13 +42,21 @@ namespace Data.EntityDbContext
             modelBuilder.ApplyConfiguration(new ReviewConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceConfiguration());
             modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserRoleConfiguration());
+
+            //add modelbuilder for appuserrole
+            modelBuilder.ApplyConfiguration(new AppUserRoleConfiguration());
 
             //add modelbuilder for identity table
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaim").HasKey(x=>x.UserId);
-            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRole").HasKey(x => new {x.UserId, x.RoleId });
+
+            //config for AppUserRole
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRole").HasKey(x => new { x.UserId, x.RoleId });
+
+
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogin").HasKey(x=>x.UserId);
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaim");
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserToken").HasKey(x=>x.UserId);
@@ -62,6 +71,8 @@ namespace Data.EntityDbContext
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<AppUserRole> UserRoles { get; set; }
+        public DbSet<AppRole> AppRoles { get; set; }
 
     }
 }

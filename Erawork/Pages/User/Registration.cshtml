@@ -1,7 +1,9 @@
 ﻿@page
+@using Data.Models;
 @model Erawork.Pages.User.RegistrationModel
 @{
     Layout = null;
+    //List<AppRole> listRoles = Model.roles;
 }
 <head>
     <link rel="stylesheet" href="~/@(nameof(Erawork)).styles.css" />
@@ -63,13 +65,18 @@
                 </div>
             </div>
             <div class=" my-md-2 my-3">
-                <label>Subject</label>
-                <select id="sub" required>
-                    <option value="" selected hidden>Choose Option</option>
-                    <option value="Maths">Maths</option>
-                    <option value="Science">Science</option>
-                    <option value="Social">Social</option>
-                    <option value="Hindi">Hindi</option>
+                <label>Tell us who you are?</label>
+                <select asp-for="registerRequest.RoleName" required>
+                    @if(Model.roles != null)
+                    {
+                        foreach (var item in Model.roles)
+                        {
+                            if (item.Name != "Admin")
+                            {
+                                <option asp-for="registerRequest.RoleName">@item.Name</option>
+                            }
+                        }
+                    }
                 </select>
             </div>
             <button type="submit" asp-page="./Registration" class="btn btn-primary mt-3">Submit</button>

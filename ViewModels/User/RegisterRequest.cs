@@ -37,6 +37,7 @@ namespace ViewModels.User
         public string ConfirmPassword { get; set; }
 
         public string UserName { get; set; }
-        
+        public string RoleName { get; set; }
+
     }
 }

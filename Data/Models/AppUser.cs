@@ -21,6 +21,7 @@ namespace Data.Models
         public virtual ICollection<Post>? Posts { get; set; }
         public virtual ICollection<Service>? Services { get; set; }
         public virtual ICollection<OrderRequest>? OrderRequests { get; set; }
+        public virtual ICollection<AppUserRole>? AppUserRoles { get; set; }
         
     }
 }

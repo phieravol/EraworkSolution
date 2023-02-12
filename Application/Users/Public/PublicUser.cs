@@ -1,7 +1,6 @@
 ﻿using Data.EntityDbContext;
 using Data.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,7 @@ namespace AppModules.Users.Public
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly UserManager<AppUser> _userManager;
-
+        private readonly EraWorkContext _context;
         /// <summary>
         /// Constructor for user login & register
         /// </summary>
@@ -26,11 +25,13 @@ namespace AppModules.Users.Public
         public PublicUser(
             SignInManager<AppUser> signInManager,
             RoleManager<AppRole> roleManager,
-            UserManager<AppUser> userManager
+            UserManager<AppUser> userManager,
+            EraWorkContext context
         ) {
             _signInManager = signInManager;
             _roleManager = roleManager;
             _userManager = userManager;
+            _context = context;
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace AppModules.Users.Public
         /// <exception cref="NotImplementedException"></exception>
         public async Task<bool> Login(LoginRequest request)
         {
-            var user = _userManager.FindByNameAsync(request.Email);
+            var user = _userManager.FindByNameAsync(request.UserName);
             return true;
         }
 
@@ -58,11 +59,17 @@ namespace AppModules.Users.Public
                 LastName = request.LastName,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
+                UserName = request.UserName
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            return result.Succeeded;
+            if(result.Succeeded)
+            {
+                //result = await _userManager.AddToRoleAsync(user, request.RoleName);
+                return true;
+            }
+            return false;
         }
     }
 }
