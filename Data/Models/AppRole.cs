@@ -10,5 +10,7 @@ namespace Data.Models
     public class AppRole : IdentityRole<Guid>
     {
         public string? RoleDesc { get; set; }
+        public virtual ICollection<AppUserRole>? AppUserRoles { get; set; }
+
     }
 }

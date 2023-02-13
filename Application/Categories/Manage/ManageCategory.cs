@@ -1,7 +1,5 @@
-﻿using AppModules.GeneralDTOs;
-using Data.EntityDbContext;
+﻿using Data.EntityDbContext;
 using Data.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

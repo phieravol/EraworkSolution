@@ -33,16 +33,33 @@ namespace Data.DataSample
                 new SubCategory() { SubCateId = 9, SubcateName = "Video Teaching", isSubCateActive = false, SubcateDesc = "Hướng dẫn chỉnh sửa video một cách tận tình", CategoryId = 3 }
                 );
 
-            // data sameple AppUser (40ph)
+
+            
             var hasher = new PasswordHasher<AppUser>();
             var adminId = new Guid(Guid.NewGuid().ToString());
-            var roleId = new Guid(Guid.NewGuid().ToString());
+            var roleAdminId = new Guid(Guid.NewGuid().ToString());
+            var roleProviderId = new Guid(Guid.NewGuid().ToString());
+            var roleClientId = new Guid(Guid.NewGuid().ToString());
+
+            // data sameple AppUser (40ph)
+            modelBuilder.Entity<AppRole>().HasData(new AppRole()
+            {
+                Id = roleAdminId,
+                Name = "Admin",
+                RoleDesc = "Can Custom system"
+            });
 
             modelBuilder.Entity<AppRole>().HasData(new AppRole()
             {
-                Id = roleId,
-                Name = "Admin",
-                RoleDesc = "Can Custom system"
+                Id = roleProviderId,
+                Name = "Provider",
+                RoleDesc = "Provide service for client"
+            });
+            modelBuilder.Entity<AppRole>().HasData(new AppRole()
+            {
+                Id = roleClientId,
+                Name = "Client",
+                RoleDesc = "Can order services from provider"
             });
 
             modelBuilder.Entity<AppUser>().HasData(new AppUser()
@@ -64,7 +81,7 @@ namespace Data.DataSample
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
             {
-                RoleId= roleId,
+                RoleId= roleAdminId,
                 UserId= adminId,
             });
         }
