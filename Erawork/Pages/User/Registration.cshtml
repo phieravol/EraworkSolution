@@ -64,21 +64,6 @@
                     <span asp-validation-for="registerRequest.ConfirmPassword" class="text-danger"></span>
                 </div>
             </div>
-            @*<div class=" my-md-2 my-3">
-                <label>Tell us who you are?</label>
-                <select asp-for="registerRequest.RoleName" required>
-                    @if(Model.roles != null)
-                    {
-                        foreach (var item in Model.roles)
-                        {
-                            if (item.Name != "Admin")
-                            {
-                                <option asp-for="registerRequest.RoleName">@item.Name</option>
-                            }
-                        }
-                    }
-                </select>
-            </div>*@
             
             <div class=" my-md-2 my-3">
                 <label>Tell us who you are?</label>
