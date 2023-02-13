@@ -66,8 +66,26 @@ namespace AppModules.Users.Public
 
             if(result.Succeeded)
             {
-                //result = await _userManager.AddToRoleAsync(user, request.RoleName);
-                return true;
+                try
+                {
+                    Guid roleId = request.RoleId;
+                    
+                    var userByName = await _userManager.FindByNameAsync(user.UserName);
+
+                    var AppUserRole = new AppUserRole
+                    {
+                        RoleId = roleId,
+                        UserId = userByName.Id
+                    };
+
+                    await _context.AddAsync(AppUserRole);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
             return false;
         }

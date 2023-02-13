@@ -31,6 +31,7 @@ builder.Services.AddTransient<IPublicRole, PublicRole>();
 
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+//builder.Services.AddTransient<RoleManager<IdentityRole<Guid>>, RoleManager<IdentityRole<Guid>>>();
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 
 // Add Identity services
