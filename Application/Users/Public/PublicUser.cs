@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using ViewModels.User;
 
 namespace AppModules.Users.Public
@@ -40,10 +41,16 @@ namespace AppModules.Users.Public
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<bool> Login(LoginRequest request)
+        public async Task<string> UserLogin(LoginRequest request)
         {
+            var result = await _signInManager.PasswordSignInAsync(request.UserName, request.Password, isPersistent: false, lockoutOnFailure: false);
             var user = _userManager.FindByNameAsync(request.UserName);
-            return true;
+            if (result.Succeeded)
+            {
+				var roles = await _userManager.GetRolesAsync(await user);
+                return roles[0];
+			}
+            return null;
         }
 
         /// <summary>
@@ -89,5 +96,7 @@ namespace AppModules.Users.Public
             }
             return false;
         }
-    }
+
+        
+	}
 }

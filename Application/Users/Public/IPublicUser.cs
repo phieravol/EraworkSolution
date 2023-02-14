@@ -10,6 +10,6 @@ namespace AppModules.Users.Public
 	public interface IPublicUser
 	{
 		Task<bool> Register(RegisterRequest request);
-		Task<bool> Login(LoginRequest request);
+		Task<string> UserLogin(LoginRequest request);
 	}
 }
