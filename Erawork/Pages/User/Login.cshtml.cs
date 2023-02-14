@@ -28,21 +28,18 @@ namespace Erawork.Pages.User
         public LoginRequest loginRequest { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(loginRequest.UserName, loginRequest.Password, isPersistent: false, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    return RedirectToPage("/Index");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
-            }
+            string loginResult = await _publicUser.UserLogin(loginRequest);
 
-            return Page();
+			if (ModelState.IsValid && loginResult!= null)
+            {
+				return RedirectToPage($"/{loginResult}/Index");
+            }
+			else
+			{
+				ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+			}
+
+			return Page();
         }
     }
 }
