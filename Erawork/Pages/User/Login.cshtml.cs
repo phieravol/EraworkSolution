@@ -13,14 +13,12 @@ namespace Erawork.Pages.User
         // creating a private prop dbcontext
         private readonly EraWorkContext _context;
         private readonly IPublicUser _publicUser;
-        private readonly SignInManager<AppUser> _signInManager;
 
         // generating constructor
-        public LoginModel(EraWorkContext context, IPublicUser publicUser, SignInManager<AppUser> signInManager)
+        public LoginModel(EraWorkContext context, IPublicUser publicUser)
         {
             _context = context;
             _publicUser = publicUser;
-            _signInManager = signInManager;
         }
 
         //create data transfer object for register request
@@ -28,21 +26,26 @@ namespace Erawork.Pages.User
         public LoginRequest loginRequest { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(loginRequest.UserName, loginRequest.Password, isPersistent: false, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    return RedirectToPage("/Index");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
-            }
+			string loginResult = await _publicUser.UserLogin(loginRequest);
 
-            return Page();
+			if (ModelState.IsValid)
+			{
+                switch (loginResult)
+                {
+					case "Admin":
+						return RedirectToPage($"/Admin/Index");
+						break;
+					default:
+						return RedirectToPage($"/Index");
+						break;
+				}
+            }
+			else
+			{
+				ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+			}
+
+			return Page();
         }
     }
 }
