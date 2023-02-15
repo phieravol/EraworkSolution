@@ -27,37 +27,38 @@ namespace AppModules.Users.Public
             RoleManager<AppRole> roleManager,
             UserManager<AppUser> userManager,
             EraWorkContext context
-        ) {
+        )
+        {
             _signInManager = signInManager;
             _roleManager = roleManager;
             _userManager = userManager;
             _context = context;
         }
 
-		/// <summary>
-		/// User login with email or password
-		/// </summary>
-		/// <param name="request"></param>
-		/// <returns></returns>
-		/// <exception cref="NotImplementedException"></exception>
-		public async Task<string> UserLogin(LoginRequest request)
-		{
-			var result = await _signInManager.PasswordSignInAsync(request.UserName, request.Password, isPersistent: false, lockoutOnFailure: false);
-			var user = _userManager.FindByNameAsync(request.UserName);
-			if (result.Succeeded)
-			{
-				var roles = await _userManager.GetRolesAsync(await user);
-				return roles[0];
-			}
-			return null;
-		}
+        /// <summary>
+        /// User login with email or password
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async Task<string> UserLogin(LoginRequest request)
+        {
+            var result = await _signInManager.PasswordSignInAsync(request.UserName, request.Password, isPersistent: false, lockoutOnFailure: false);
+            var user = _userManager.FindByNameAsync(request.UserName);
+            if (result.Succeeded)
+            {
+                var roles = await _userManager.GetRolesAsync(await user);
+                return roles[0];
+            }
+            return null;
+        }
 
-		/// <summary>
-		/// Create user account by register info
-		/// </summary>
-		/// <param name="request"></param>
-		/// <returns>true/false if user register success/failed</returns>
-		public async Task<bool> Register(RegisterRequest request)
+        /// <summary>
+        /// Create user account by register info
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>true/false if user register success/failed</returns>
+        public async Task<bool> Register(RegisterRequest request)
         {
             var user = new AppUser()
             {
@@ -70,12 +71,12 @@ namespace AppModules.Users.Public
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            if(result.Succeeded)
+            if (result.Succeeded)
             {
                 try
                 {
                     Guid roleId = request.RoleId;
-                    
+
                     var userByName = await _userManager.FindByNameAsync(user.UserName);
 
                     var AppUserRole = new AppUserRole

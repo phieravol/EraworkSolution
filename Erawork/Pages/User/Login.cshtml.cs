@@ -26,26 +26,26 @@ namespace Erawork.Pages.User
         public LoginRequest loginRequest { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
-			string loginResult = await _publicUser.UserLogin(loginRequest);
+            string loginResult = await _publicUser.UserLogin(loginRequest);
 
-			if (ModelState.IsValid)
-			{
+            if (ModelState.IsValid)
+            {
                 switch (loginResult)
                 {
-					case "Admin":
-						return RedirectToPage($"/Admin/Index");
-						break;
-					default:
-						return RedirectToPage($"/Index");
-						break;
-				}
+                    case "Admin":
+                        return RedirectToPage($"/Admin/Index");
+                        break;
+                    default:
+                        return RedirectToPage($"/Index");
+                        break;
+                }
             }
-			else
-			{
-				ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-			}
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            }
 
-			return Page();
+            return Page();
         }
     }
 }

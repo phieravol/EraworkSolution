@@ -13,6 +13,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<EraWorkContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("EraWorkDb")
     ));
+
 builder.Services.AddIdentity<AppUser, AppRole>(options =>
 {
     options.Password.RequireDigit = false;
@@ -31,7 +32,6 @@ builder.Services.AddTransient<IPublicRole, PublicRole>();
 
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
-//builder.Services.AddTransient<RoleManager<IdentityRole<Guid>>, RoleManager<IdentityRole<Guid>>>();
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 
 // Add Identity services
