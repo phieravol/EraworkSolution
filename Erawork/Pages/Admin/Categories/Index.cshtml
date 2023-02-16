@@ -3,16 +3,11 @@
 @model Erawork.Pages.Admin.Categories.IndexModel
 @{
     Layout = null;
-    List<Category> categories = Model.ViewModel.categories;
 }
 
 <!doctype html>
-<!--[if lt IE 7]>		<html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>			<html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>			<html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="">
- <!--<![endif]-->
+
+<html>
 
 <head>
     <meta charset="utf-8">
@@ -44,15 +39,7 @@
     <script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 <body class="wt-login">
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <!-- Preloader Start -->
-    <div class="preloader-outer">
-        <div class="loader"></div>
-    </div>
-    <!-- Preloader End -->
-    <!-- Wrapper Start -->
+    
     <div id="wt-wrapper" class="wt-wrapper wt-haslayout">
         <!-- Content Wrapper Start -->
         <div class="wt-contentwrapper">
@@ -325,7 +312,6 @@
             <!--Main Start-->
             <main id="wt-main" class="wt-main wt-haslayout">
 
-
                 <!--Sidebar Start-->
                 <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
                     <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
@@ -460,49 +446,50 @@
                                     <h2>Add New Category</h2>
                                 </div>
                                 <div class="wt-dashboardboxcontent">
-                                    <form class="wt-formtheme wt-formprojectinfo wt-formcategory">
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <input type="text" name="Name" class="form-control" placeholder="Name">
-                                                <span class="form-group-description">Dolore magna aliqua enim adminim</span>
+                                    <form method="post" asp-page-handler="Create" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
+
+                                        <div class="form-group">
+                                            <span class="form-group-description">Enter Category Name</span>
+                                            <input type="text" asp-for="@Model.createCategoryVM.CategoryName" class="form-control" placeholder="Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <span class="form-group-description">Select Category Status</span>
+
+                                            <span class="wt-select">
+                                                <select asp-for="@Model.createCategoryVM.isCategoryActive">
+                                                    <option value="@true">Active</option>
+                                                    <option value="@false">Inactive</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="form-group">
+                                            <span class="form-group-description">Enter Category Description</span>
+                                            <textarea asp-for="@Model.createCategoryVM.CategoryDescription" class="form-control" placeholder="Description"></textarea>
+
+                                        </div>
+                                        <div class="form-group form-group-label">
+                                            <div class="wt-labelgroup">
+                                                <label>
+                                                    <span class="wt-btn">Select Files</span>
+                                                    <input asp-for="@Model.createCategoryVM.CategoryImage" type="file" accept=".jpg, .jpeg, .png" id="imageCategory" />
+                                                </label>
+                                                <span>Drop files here to upload</span>
+                                                <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
                                             </div>
-                                            <div class="form-group">
-                                                <span class="wt-select">
-                                                    <select>
-                                                        <option value="" disabled="">Select parent Category</option>
-                                                        <option value="">Category 1</option>
-                                                        <option value="">Category 2</option>
-                                                    </select>
-                                                </span>
-                                                <span class="form-group-description">Elit sed do eiusmod tempor incididunt ut labore</span>
-                                            </div>
-                                            <div class="form-group">
-                                                <textarea name="message" class="form-control" placeholder="Description"></textarea>
-                                                <span class="form-group-description">Veniam quis nostrud exercitation</span>
-                                            </div>
-                                            <div class="form-group form-group-label">
-                                                <div class="wt-labelgroup">
-                                                    <label for="file">
-                                                        <span class="wt-btn">Select Files</span>
-                                                        <input type="file" name="file" id="file">
-                                                    </label>
-                                                    <span>Drop files here to upload</span>
-                                                    <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <ul class="wt-attachfile">
-                                                    <li class="wt-uploading">
-                                                        <span class="uploadprogressbar"></span>
-                                                        <span>Category Icon.jpg</span>
-                                                        <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="form-group wt-btnarea">
-                                                <a href="javascript:void(0);" class="wt-btn">Add New Category</a>
-                                            </div>
-                                        </fieldset>
+                                        </div>
+                                        <div class="form-group">
+                                            <ul class="wt-attachfile">
+                                                <li class="wt-uploading">
+                                                    <span class="uploadprogressbar"></span>
+                                                    <span>Category Icon.jpg</span>
+                                                    <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="form-group wt-btnarea">
+                                            <button class="wt-btn">Add New Category</button>
+                                        </div>
+
                                     </form>
                                 </div>
                             </div>
@@ -540,33 +527,36 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-
-                                            @foreach(var item in categories)
+                                            @if (Model.ViewModel.categories != null)
                                             {
-                                                <tr>
-                                                    <td>
-                                                        <span class="wt-checkbox">
-                                                            <input id="wt-namea" type="checkbox" name="head">
-                                                            <label for="wt-namea"></label>
-                                                        </span>
-                                                    </td>
-                                                    <td>@item.CategoryName</td>
-                                                    <td>@item.CategoryDescription</td>
-                                                    <td>@item.isCategoryActive</td>
-                                                    <td><figure><img src="~/assets/images/categories/img-09.png" alt="img description"></figure></td>
+                                                foreach (var item in Model.ViewModel.categories)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <span class="wt-checkbox">
+                                                                <input id="wt-namea" type="checkbox" name="head">
+                                                                <label for="wt-namea"></label>
+                                                            </span>
+                                                        </td>
+                                                        <td>@item.CategoryName</td>
+                                                        <td>@item.CategoryDescription</td>
+                                                        <td>@item.isCategoryActive</td>
+                                                        <td><figure><img src="~/assets/images/categories/img-09.png" alt="img description"></figure></td>
 
-                                                    <td>
-                                                        <div class="wt-actionbtn">
-                                                            <a href="./Edit" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="wt-actionbtn">
-                                                            <a href="./Delete" href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                        <td>
+                                                            <div class="wt-actionbtn">
+                                                                <a href="./Edit" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="wt-actionbtn">
+                                                                <a href="./Delete" href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
                                             }
+                                            
                                             
                                         </tbody>
                                     </table>

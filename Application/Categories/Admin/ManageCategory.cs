@@ -1,5 +1,6 @@
 ﻿using Data.EntityDbContext;
 using Data.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,35 +22,51 @@ namespace AppModules.Categories.Manage
         /// <summary>
         /// Create a new category
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="createViewModel"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task CreateCategoryAsync(CreateCategoryRequest request)
+        public async Task CreateCategoryAsync(CreateCategoryViewModel createViewModel)
         {
-            if (request.isCategoryActive==null)
+            if (createViewModel.isCategoryActive==null)
             {
-                request.isCategoryActive = false;
+                createViewModel.isCategoryActive = false;
             }
             var NewCategory = new Category
             {
-                CategoryName = request.CategoryName,
-                CategoryDescription = request.CategoryDescription,
-                isCategoryActive = request.isCategoryActive,
-                CategoryImage = await SaveImageAsync(request.CategoryImage)
+                CategoryName = createViewModel.CategoryName,
+                CategoryDescription = createViewModel.CategoryDescription,
+                isCategoryActive = createViewModel.isCategoryActive,
+                CategoryImage = await SaveImageAsync(createViewModel.CategoryImage)
             };
+            createViewModel.category = NewCategory;
+            _context.Categories.Add(NewCategory);
+            await _context.SaveChangesAsync();
         }
 
-        private Task<byte[]> SaveImageAsync(object imageFile)
+        private async Task<string> SaveImageAsync(IFormFile? categoryImage)
         {
-            throw new NotImplementedException();
+            if (categoryImage != null && categoryImage.Length > 0)
+            {
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(categoryImage.FileName)}";
+                var filePath = Path.Combine("wwwroot", "assets/images", fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await categoryImage.CopyToAsync(fileStream);
+                }
+
+                return $"assets/images/{fileName}";
+            }
+            return null;
         }
+
+
 
         /// <summary>
         /// Get all categories
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<List<Category>> GetCategoriesAsync()
+        public async Task<List<Category>>? GetCategoriesAsync()
 		{
 			return await _context.Categories.ToListAsync();
 		}

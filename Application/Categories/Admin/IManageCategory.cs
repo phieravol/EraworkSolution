@@ -12,6 +12,6 @@ namespace AppModules.Categories.Manage
     {
 		Task<List<Category>> GetCategoriesByTermAsync(string searchTerm);
 		Task<List<Category>> GetCategoriesAsync();
-        Task CreateCategoryAsync(CreateCategoryRequest request);
+        Task CreateCategoryAsync(CreateCategoryViewModel request);
     }
 }

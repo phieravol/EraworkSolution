@@ -10,7 +10,7 @@ namespace Data.Models
     {
         public int SubCateId { get; set; }
         public string? SubcateName { get; set; }
-        public byte[]? SubcateImage { get; set; }
+        public string? SubcateImage { get; set; }
         public bool? isSubCateActive { get; set; }
         public string? SubcateDesc { get; set; }
         public int? CategoryId { get; set; }

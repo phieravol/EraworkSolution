@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Data.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ViewModels.CategoryVM.Admin
 {
-    public class CreateCategoryRequest
+    public class CreateCategoryViewModel
     {
         [Required]
         [Display(Name = "Category Name")]
@@ -22,5 +23,7 @@ namespace ViewModels.CategoryVM.Admin
 
         [Display(Name = "Category Description")]
         public string? CategoryDescription { get; set; }
+
+        public Category? category { get; set; }
     }
 }

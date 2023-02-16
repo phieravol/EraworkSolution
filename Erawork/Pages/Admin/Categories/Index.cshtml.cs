@@ -13,15 +13,19 @@ namespace Erawork.Pages.Admin.Categories
     {
         private readonly IManageCategory _categoryManage;
 		private readonly EraWorkContext _context;
-
-		public IndexModel(IManageCategory categorFactory, EraWorkContext context)
-		{
-			_context = context;
-			_categoryManage = categorFactory;
-		}
+        private readonly ILogger<IndexModel> _logger;
+        public IndexModel(IManageCategory categorFactory, EraWorkContext context, ILogger<IndexModel> logger)
+        {
+            _context = context;
+            _categoryManage = categorFactory;
+            _logger = logger;
+        }
 
         [BindProperty(SupportsGet = true)]
         public CategoryPagingVM ViewModel { get; set; }
+
+		[BindProperty]
+		public CreateCategoryViewModel? createCategoryVM { get; set; }
 
 		public int TotalPages { get; set; }
 
@@ -55,10 +59,20 @@ namespace Erawork.Pages.Admin.Categories
 				var categories = await _categoryManage.GetCategoriesAsync();
 				ViewModel.categories = categories;
 			}
-
+			
 			TotalPages = (int)Math.Ceiling(ViewModel.categories.Count() / (double)ViewModel.PageSize);
 
 			ViewModel.categories = ViewModel.categories.Skip((ViewModel.CurrentPage - 1) * ViewModel.PageSize).Take(ViewModel.PageSize).ToList();
+		}
+
+		/// <summary>
+		/// Create a new category with async
+		/// </summary>
+		/// <returns></returns>
+		public async Task<IActionResult> OnPostCreateAsync()
+		{
+            await _categoryManage.CreateCategoryAsync(createCategoryVM);
+			return new RedirectToPageResult("./Index");
 		}
 	}
 }

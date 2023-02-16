@@ -1,0 +1,49 @@
+﻿@page
+@model Erawork.Pages.Admin.Categories.CreateModel
+@{
+}
+<form method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <span class="form-group-description">Enter Category Name</span>
+        <input type="text"  class="form-control" placeholder="Name">
+
+    </div>
+    <div class="form-group">
+        <span class="form-group-description">Select Category Status</span>
+
+        <span class="wt-select">
+            <select>
+                <option value="@true">Active</option>
+                <option value="@false">Inactive</option>
+            </select>
+        </span>
+    </div>
+    <div class="form-group">
+        <span class="form-group-description">Enter Category Description</span>
+        <textarea class="form-control" placeholder="Description"></textarea>
+    </div>
+    <div class="form-group form-group-label">
+        <div class="wt-labelgroup">
+            <label>
+                <span class="wt-btn">Select Files</span>
+                <input type="file" accept=".jpg, .jpeg, .png" name="imageCategory" id="image" />
+            </label>
+            <span>Drop files here to upload</span>
+            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+        </div>
+    </div>
+    <div class="form-group">
+        <ul class="wt-attachfile">
+            <li class="wt-uploading">
+                <span class="uploadprogressbar"></span>
+                <span>Category Icon.jpg</span>
+                <em>File size: 300 kb</em>
+            </li>
+        </ul>
+    </div>
+    <div class="form-group wt-btnarea">
+        <button class="wt-btn">Add New Category</button>
+    </div>
+
+</form>
