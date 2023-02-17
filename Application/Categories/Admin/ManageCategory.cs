@@ -98,6 +98,11 @@ namespace AppModules.Categories.Manage
             return category;
         }
 
-       
+        public async Task UpdateCategoryAsync(Category NewCategory)
+        {
+            Category category = await GetCategoryByIdAsync(NewCategory.CategoryId);
+            _context.Categories.Update(NewCategory);
+            await _context.SaveChangesAsync();
+        }
     }
 }

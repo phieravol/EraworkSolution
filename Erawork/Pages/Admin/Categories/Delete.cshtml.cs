@@ -16,7 +16,7 @@ namespace Erawork.Pages.Admin.Categories
         }
 
         [BindProperty (SupportsGet =true)]
-        public DeleteCategoryViewModel DelViewModel { get; set; }
+        public DelViewModel DelViewModel { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {

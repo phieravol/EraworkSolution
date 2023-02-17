@@ -548,12 +548,12 @@
 
                                                         <td>
                                                             <div class="wt-actionbtn">
-                                                                <a href="./Edit" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                                <a asp-page="./Update" asp-route-id="@item.CategoryId" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="wt-actionbtn">
-                                                                <a a asp-page="./Delete" asp-route-id="@item.CategoryId" asp-page-handler="Delete" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                                <a asp-page="./Delete" asp-route-id="@item.CategoryId" asp-page-handler="Delete" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
                                                             </div>
                                                         </td>
                                                     </tr>

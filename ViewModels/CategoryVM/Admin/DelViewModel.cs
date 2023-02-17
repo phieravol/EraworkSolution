@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ViewModels.CategoryVM.Admin
 {
-    public class DeleteCategoryViewModel
+    public class DelViewModel
     {
         public int Id { get; set; }
         public Category Category { get; set; }

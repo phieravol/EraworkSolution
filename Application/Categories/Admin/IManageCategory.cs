@@ -16,6 +16,6 @@ namespace AppModules.Categories.Manage
 
         Task DelCategoryAsync(int? id);
         Task<Category> GetCategoryByIdAsync(int? id);
-        
+        Task UpdateCategoryAsync(Category category);
     }
 }
