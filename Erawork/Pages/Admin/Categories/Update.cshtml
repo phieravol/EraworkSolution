@@ -18,7 +18,7 @@
         <div class="wt-dashboardboxcontent">
             <form method="post" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
 
-                <input type="text" asp-for="@Model.Id" class="form-control" placeholder="Name">
+                <input type="text" asp-for="@Model.Id" class="form-control" hidden placeholder="Name">
 
                 <div class="form-group">
                     <span class="form-group-description">Enter Category Name</span>
@@ -29,8 +29,8 @@
 
                     <span class="wt-select">
                         <select asp-for="@Model.UpdateVM.isCategoryActive">
-                            <option >Active</option>
-                            <option >Inactive</option>
+                            <option value="@true">Active</option>
+                            <option value="@false">Inactive</option>
                         </select>
                     </span>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="wt-labelgroup">
                         <label>
                             <span class="wt-btn">Select Files</span>
-                            <input asp-for="@Model.UpdateVM.CategoryImage" value="~/@(Model.UpdateVM.CategoryImage==null ? defaultCateImg : Model.UpdateVM.CategoryImage)" type="file" accept=".jpg, .jpeg, .png" />
+                            <input asp-for="@Model.UpdateVM.CategoryImage" type="file" accept=".jpg, .jpeg, .png" />
                         </label>
                         <span>Drop files here to upload</span>
                         
@@ -54,7 +54,6 @@
                         <li class="wt-uploading">
                             <span class="uploadprogressbar"></span>
                             <span>Category Icon.jpg</span>
-                            <figure><img src="~/@(Model.UpdateVM.CategoryImage==null ? defaultCateImg : Model.UpdateVM.CategoryImage)" alt="img description"></figure>
                         </li>
                     </ul>
                 </div>

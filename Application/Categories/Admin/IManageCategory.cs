@@ -1,4 +1,5 @@
 ﻿using Data.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace AppModules.Categories.Manage
 
         Task DelCategoryAsync(int? id);
         Task<Category> GetCategoryByIdAsync(int? id);
-        Task UpdateCategoryAsync(Category category);
+        Task<string> SaveImageAsync(IFormFile? categoryImage);
+        Task UpdateCategoryAsync(Category currentCategory);
     }
 }

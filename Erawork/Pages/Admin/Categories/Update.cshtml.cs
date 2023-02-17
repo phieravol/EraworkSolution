@@ -22,6 +22,10 @@ namespace Erawork.Pages.Admin.Categories
         
         [BindProperty]
         public UpdateCategoryViewModel UpdateVM { get; set; }
+
+        [BindProperty]
+        public IFormFile? Image { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
             var currentCategory = await _manageCategory.GetCategoryByIdAsync(Id);
@@ -33,17 +37,18 @@ namespace Erawork.Pages.Admin.Categories
 
             UpdateVM = new UpdateCategoryViewModel
             {
+                CategoryId = Id,
                 CategoryName = currentCategory.CategoryName,
                 CategoryDescription = currentCategory.CategoryDescription,
-                isCategoryActive = currentCategory.isCategoryActive,
-                CategoryImage = currentCategory.CategoryImage,
+                isCategoryActive = currentCategory.isCategoryActive
             };
+            
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var currentCategory = await _manageCategory.GetCategoryByIdAsync(Id);
+            Category currentCategory = await _manageCategory.GetCategoryByIdAsync(Id);
 
             if (currentCategory == null)
             {
@@ -53,7 +58,7 @@ namespace Erawork.Pages.Admin.Categories
             currentCategory.CategoryName = UpdateVM.CategoryName;
             currentCategory.CategoryDescription = UpdateVM.CategoryDescription;
             currentCategory.isCategoryActive = UpdateVM.isCategoryActive;
-            currentCategory.CategoryImage = UpdateVM.CategoryImage;
+            currentCategory.CategoryImage = await _manageCategory.SaveImageAsync(UpdateVM.CategoryImage);
 
             await _manageCategory.UpdateCategoryAsync(currentCategory);
 

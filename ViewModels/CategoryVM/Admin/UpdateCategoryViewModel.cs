@@ -11,13 +11,13 @@ namespace ViewModels.CategoryVM.Admin
 {
     public class UpdateCategoryViewModel
     {
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         [Display(Name = "Category Name")]
         public string? CategoryName { get; set; }
 
-        public string? CategoryImage { get; set; }
+        public IFormFile? CategoryImage { get; set; }
 
         [Display(Name = "Is Active")]
         public bool? isCategoryActive { get; set; }
