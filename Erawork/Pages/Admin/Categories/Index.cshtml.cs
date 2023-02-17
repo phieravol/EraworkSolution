@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Printing;
 using ViewModels.CategoryVM.Admin;
-
+using Microsoft.AspNetCore.Http;
 namespace Erawork.Pages.Admin.Categories
 {
     public class IndexModel : PageModel
@@ -31,7 +31,8 @@ namespace Erawork.Pages.Admin.Categories
 
         [BindProperty(SupportsGet = true)]
         public int? pageNumber { get; set; }
-		public bool HasPreviousPage
+
+        public bool HasPreviousPage
 		{
 			get
 			{

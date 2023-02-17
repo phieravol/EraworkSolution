@@ -48,13 +48,13 @@ namespace AppModules.Categories.Manage
             if (categoryImage != null && categoryImage.Length > 0)
             {
                 var fileName = $"{Guid.NewGuid()}{Path.GetExtension(categoryImage.FileName)}";
-                var filePath = Path.Combine("wwwroot", "assets/images", fileName);
+                var filePath = Path.Combine("wwwroot", "assets/images/categories", fileName);
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     await categoryImage.CopyToAsync(fileStream);
                 }
 
-                return $"assets/images/{fileName}";
+                return $"assets/images/categories/{fileName}";
             }
             return null;
         }
@@ -81,5 +81,23 @@ namespace AppModules.Categories.Manage
 		{
 			return await _context.Categories.Where(c => c.CategoryName.Contains(searchTerm)).ToListAsync();
 		}
-	}
+
+        public async Task DelCategoryAsync(int? id)
+        {
+            Category category = await GetCategoryByIdAsync(id);
+            _context.Categories.Remove(category);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Category> GetCategoryByIdAsync(int? id)
+        {
+            var Category = from c in _context.Categories
+                           where c.CategoryId == id
+                           select c;
+            Category? category = Category.FirstOrDefault();
+            return category;
+        }
+
+       
+    }
 }
