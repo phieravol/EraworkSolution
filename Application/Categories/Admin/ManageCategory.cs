@@ -43,7 +43,7 @@ namespace AppModules.Categories.Manage
             await _context.SaveChangesAsync();
         }
 
-        public async Task<string> SaveImageAsync(IFormFile? categoryImage)
+        public async Task<string?> SaveImageAsync(IFormFile? categoryImage)
         {
             if (categoryImage != null && categoryImage.Length > 0)
             {

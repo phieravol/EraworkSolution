@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace AppModules.Categories.Public
 {
     public interface IPublicCategory
     {
-        //PagedResultBase<CategoryViewModel> GetAllCategories();
-        //PagedResultBase<CategoryViewModel> GetCategoriesResult(string keyword);
+        Task<List<Category>> GetActiveCategoriesAsync();
     }
 }
