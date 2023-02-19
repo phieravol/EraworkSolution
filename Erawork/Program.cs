@@ -1,9 +1,12 @@
 using AppModules.Categories.Manage;
+using AppModules.Categories.Public;
 using AppModules.System.Role;
 using AppModules.Users.Public;
 using Data.EntityDbContext;
 using Data.Models;
+using Erawork.Pages.Shared.Components.PublicCategories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +30,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
 
 // Add services DIs
 builder.Services.AddTransient<IManageCategory, ManageCategory>();
+builder.Services.AddTransient<IPublicCategory, PublicCategory>();
 builder.Services.AddTransient<IPublicUser, PublicUser>();
 builder.Services.AddTransient<IPublicRole, PublicRole>();
 
@@ -34,7 +38,9 @@ builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
 builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 
-// Add Identity services
+
+
+builder.Services.AddScoped<CategoriesMenuComponent>();
 
 
 var app = builder.Build();
