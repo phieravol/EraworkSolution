@@ -1,5 +1,6 @@
 using AppModules.Categories.Manage;
 using AppModules.Categories.Public;
+using AppModules.SubCategories.Admin;
 using AppModules.System.Role;
 using AppModules.Users.Public;
 using Data.EntityDbContext;
@@ -31,8 +32,11 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
 // Add services DIs
 builder.Services.AddTransient<IManageCategory, ManageCategory>();
 builder.Services.AddTransient<IPublicCategory, PublicCategory>();
+
 builder.Services.AddTransient<IPublicUser, PublicUser>();
 builder.Services.AddTransient<IPublicRole, PublicRole>();
+
+builder.Services.AddTransient<IManageSubcates, ManageSubcates>();
 
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
