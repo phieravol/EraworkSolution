@@ -1,0 +1,340 @@
+﻿@page
+@model Erawork.Pages.Admin.SubCategories.IndexModel
+@{
+    string defaultSubCateImg = "assets/images/subcates/empty-box.png";
+}
+
+<head>
+    <link rel="apple-touch-icon" href="~/assets/apple-touch-icon.png">
+    <link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/normalize.css">
+    <link rel="stylesheet" href="~/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="~/assets/css/fontawesome/fontawesome-all.css">
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/assets/css/linearicons.css">
+    <link rel="stylesheet" href="~/assets/css/tipso.css">
+    <link rel="stylesheet" href="~/assets/css/chosen.css">
+    <link rel="stylesheet" href="~/assets/css/prettyPhoto.css">
+    <link rel="stylesheet" href="~/assets/css/main.css">
+    <link rel="stylesheet" href="~/assets/css/basictable.css">
+    <link rel="stylesheet" href="~/assets/css/dashboard.css">
+    <link rel="stylesheet" href="~/assets/css/color.css">
+    <link rel="stylesheet" href="~/assets/css/transitions.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link rel="stylesheet" href="~/assets/css/dbresponsive.css">
+    <script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<main id="wt-main" class="wt-main wt-haslayout">
+
+    <!--Sidebar Start-->
+    <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
+        <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
+            <span class="menu-icon">
+                <em></em>
+                <em></em>
+                <em></em>
+            </span>
+        </div>
+        <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
+            <div class="wt-companysdetails wt-usersidebar">
+                <figure class="wt-companysimg">
+                    <img src="~/assets/images/sidebar/img-01.jpg" alt="img description">
+                </figure>
+                <div class="wt-companysinfo">
+                    <figure><img src="~/assets/images/sidebar/img-02.html" alt="img description"></figure>
+                    <div class="wt-title">
+                        <h2><a href="javascript:void(0);"> Louanne Mattioli</a></h2>
+                        <span>Amento Tech</span>
+                    </div>
+                    <div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div>
+                </div>
+            </div>
+            <nav id="wt-navdashboard" class="wt-navdashboard">
+                <ul>
+                    <li class="menu-item-has-children">
+                        <a href="javascript:void(0);">
+                            <i class="ti-dashboard"></i>
+                            <span>Insights</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><hr><a href="dashboard-insights.html">Insights</a></li>
+                            <li><hr><a href="dashboard-insightsuser.html">Insights User</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="dashboard-profile.html">
+                            <i class="ti-briefcase"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="javascript:void(0);">
+                            <i class="ti-package"></i>
+                            <span>All Jobs</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><hr><a href="dashboard-completejobs.html">Completed Jobs</a></li>
+                            <li><hr><a href="dashboard-canceljobs.html">Cancelled Jobs</a></li>
+                            <li><hr><a href="dashboard-ongoingjob.html">Ongoing Jobs</a></li>
+                            <li><hr><a href="dashboard-ongoingsingle.html">Ongoing Single</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="dashboard-managejobs.html">
+                            <i class="ti-announcement"></i>
+                            <span>Manage Jobs</span>
+                        </a>
+                    </li>
+                    <li class="wt-notificationicon menu-item-has-children">
+                        <a href="javascript:void(0);">
+                            <i class="ti-pencil-alt"></i>
+                            <span>Messages</span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li><hr><a href="dashboard-messages.html">Messages</a></li>
+                            <li><hr><a href="dashboard-messages2.html">Messages V 2</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="dashboard-saveitems.html">
+                            <i class="ti-heart"></i>
+                            <span>My Saved Items</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dashboard-invocies.html">
+                            <i class="ti-file"></i>
+                            <span>Invoices</span>
+                        </a>
+                    </li>
+                    <li class="wt-active">
+                        <a href="dashboard-category.html">
+                            <i class="ti-layers"></i>
+                            <span>Category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dashboard-packages.html">
+                            <i class="ti-money"></i>
+                            <span>Packages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dashboard-proposals.html">
+                            <i class="ti-bookmark-alt"></i>
+                            <span>Proposals</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dashboard-accountsettings.html">
+                            <i class="ti-anchor"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="dashboard-helpsupport.html">
+                            <i class="ti-tag"></i>
+                            <span>Help &amp; Support</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index-2.html">
+                            <i class="ti-shift-right"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="wt-navdashboard-footer">
+                <span>Worktern. © 2019 All Rights Reserved.</span>
+            </div>
+        </div>
+    </div>
+    <!--Sidebar Start-->
+    <!--Register Form Start-->
+    <section class="wt-haslayout wt-dbsectionspace">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 float-left">
+                <div class="wt-dashboardbox">
+                    <div class="wt-dashboardboxtitle">
+                        <h2>Add New Category</h2>
+                    </div>
+                    <div class="wt-dashboardboxcontent">
+                        <form method="post" asp-page-handler="Create" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
+
+                            <div class="form-group">
+                                <span class="form-group-description">Enter SubCategory Name</span>
+                                <input type="text" asp-for="@Model.createRequest.SubcateName" class="form-control" placeholder="Name">
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-group-description">Select SubCategory Status</span>
+
+                                <span class="wt-select">
+                                    <select asp-for="@Model.createRequest.isSubCateActive">
+                                        <option value="@true">Active</option>
+                                        <option value="@false">Inactive</option>
+                                    </select>
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-group-description">Enter SubCategory Description</span>
+                                <textarea asp-for="@Model.createRequest.SubcateDesc" class="form-control" placeholder="Description"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <span class="form-group-description">Select Root Category</span>
+                                <span class="wt-select">
+                                    <select asp-for="@Model.createRequest.CategoryId">
+                                        <option value="">Pick one</option>
+                                        @foreach (var item in Model.categories)
+                                        {
+                                            <option value="@item.CategoryId">@item.CategoryName</option>
+                                        }
+                                    </select>
+                                </span>
+                            </div>
+
+                            <div class="form-group form-group-label">
+                                <div class="wt-labelgroup">
+                                    <label>
+                                        <span class="wt-btn">Select Files</span>
+                                        <input asp-for="@Model.createRequest.SubcateImage" type="file" accept=".jpg, .jpeg, .png" id="imageCategory" />
+                                    </label>
+                                    <span>Drop files here to upload</span>
+                                    <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <ul class="wt-attachfile">
+                                    <li class="wt-uploading">
+                                        <span class="uploadprogressbar"></span>
+                                        <span>SubCategory Icon.jpg</span>
+                                        <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group wt-btnarea">
+                                <button class="wt-btn">Add New SubCategory</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 float-right">
+                <div class="wt-dashboardbox wt-categorys">
+                    <div class="wt-dashboardboxtitle wt-titlewithsearch">
+                        <h2>Category</h2>
+                        <form class="wt-formtheme wt-formsearch">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input type="text" asp-for="@Model.pagingRequest.searchTerm" class="form-control" placeholder="Search SubCategory">
+                                    <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="wt-dashboardboxcontent wt-categoriescontentholder">
+
+                        <table class="wt-tablecategories">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span class="wt-checkbox">
+                                            <input id="wt-name" type="checkbox" name="head">
+                                            <label for="wt-name"></label>
+                                        </span>
+                                    </th>
+                                    <th>SubCategory</th>
+                                    <th>Description</th>
+                                    <th>Is Active</th>
+                                    <th>Root Category</th>
+                                    <th>Image</th>
+                                    <th colspan="2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.subcates != null)
+                                {
+                                    @foreach (var item in Model.subcates)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <span class="wt-checkbox">
+                                                    <input id="wt-namea" type="checkbox" name="head">
+                                                    <label for="wt-namea"></label>
+                                                </span>
+                                            </td>
+
+                                            <td>@item.SubcateName</td>
+                                            <td>@item.SubcateDesc</td>
+                                            <td>@item.isSubCateActive</td>
+                                            <td>
+                                                <figure><img src="~/@(item.SubcateImage==null ? defaultSubCateImg : item.SubcateImage)" alt="img description"></figure>
+                                            </td>
+                                            <td>@item.CategoryName</td>
+                                            <td>
+                                                <div class="wt-actionbtn">
+                                                    <a asp-page="./update" asp-route-id="@item.SubCateId" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wt-actionbtn">
+                                                    <a asp-page="./delete" asp-route-id="@item.SubCateId" asp-page-handler="delete" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+
+                        @if (Model.HasPreviousPage || Model.HasNextPage)
+                        {
+                            <nav class="wt-pagination">
+                                <ul>
+                                    <li class="wt-prevpage">
+                                        <a asp-page="./Index" asp-route-CurrentPage="@((Model.pagingRequest.CurrentPage-1)==0?Model.TotalPages:(Model.pagingRequest.CurrentPage-1))" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">
+                                            <i class="lnr lnr-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    @if (Model.TotalPages <= 3)
+                                    {
+                                        for (int i = 1; i <= Model.TotalPages; i++)
+                                        {
+                                            <li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">@i</a></li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int i = 1; i <= Model.TotalPages; i++)
+                                        {
+                                            <li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">@i</a></li>
+                                        }
+                                        <li><a href="javascrip:void(0);">...</a></li>
+                                        <li><a asp-route-CurrentPage="@Model.TotalPages" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">Last Page</a></li>
+                                    }
+                                    <li class="wt-nextpage">
+                                        <a asp-page="./Index" asp-route-CurrentPage="@((Model.pagingRequest.CurrentPage+1)>Model.TotalPages?1:(Model.pagingRequest.CurrentPage+1))" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">
+                                            <i class="lnr lnr-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Register Form End-->
+</main>
