@@ -1,4 +1,5 @@
-﻿using Data.EntityDbContext;
+﻿using AppModules.SubCategories.Public;
+using Data.EntityDbContext;
 using Data.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,11 +12,12 @@ namespace AppModules.Categories.Public
 {
     public class PublicCategory : IPublicCategory
     {
-        private readonly EraWorkContext _context;
-
-        public PublicCategory(EraWorkContext context)
+        private readonly EraWorkContext context;
+        private readonly IPublicSubcate publicSubcate;
+        public PublicCategory(EraWorkContext context, IPublicSubcate publicSubcate)
         {
-            _context = context;
+            this.context = context;
+            this.publicSubcate = publicSubcate;
         }
 
         /// <summary>
@@ -24,11 +26,16 @@ namespace AppModules.Categories.Public
         /// <returns></returns>
         public async Task<List<Category>> GetActiveCategoriesAsync()
         {
-            var query = from c in _context.Categories
+            var query = from c in context.Categories
                         where c.isCategoryActive == true
                         select c;
             List<Category> categories = await query.ToListAsync();
-            return categories;
+			foreach (var cate in categories)
+            {
+                List<SubCategory>? subCates = await publicSubcate.ActiveSubCatesById(cate.CategoryId);
+                cate.SubCategories = subCates;
+			}
+			return categories;
         }
     }
 }

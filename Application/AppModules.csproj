@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="SubCategories\Public\" />
     <Folder Include="Users\Manage\" />
   </ItemGroup>
 

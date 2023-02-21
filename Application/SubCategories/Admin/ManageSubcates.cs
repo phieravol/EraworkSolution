@@ -1,6 +1,7 @@
 ﻿using AppModules.Categories.Manage;
 using Data.EntityDbContext;
 using Data.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -43,12 +44,38 @@ namespace AppModules.SubCategories.Admin
                 SubcateName = request.SubcateName,
                 isSubCateActive = request.isSubCateActive,
                 SubcateDesc = request.SubcateDesc,
-                SubcateImage = request.SubcateImage,
+                SubcateImage = await SaveSubcateImageAsync(request.SubcateImage),
                 Category = cate
             };
 
             await context.SubCategories.AddAsync(subCategory);
             await context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Delete SubCategory by SubCategory Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task DelSubcateAsync(int id)
+        {
+            SubCategory Subcategory = await GetSubCateByIdAsync(id);
+            context.SubCategories.Remove(Subcategory);
+            await context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Get subcategory by Subcategory Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<SubCategory> GetSubCateByIdAsync(int id)
+        {
+            var Subcate = from c in context.SubCategories
+                           where c.SubCateId == id
+                           select c;
+            SubCategory? Subcategory = Subcate.FirstOrDefault();
+            return Subcategory;
         }
 
         /// <summary>
@@ -59,7 +86,6 @@ namespace AppModules.SubCategories.Admin
         {
             return await context.SubCategories.ToListAsync();
         }
-
 
         /// <summary>
         /// Listing category with search and paging
@@ -94,6 +120,40 @@ namespace AppModules.SubCategories.Admin
                     CategoryName = x.cate.CategoryName
                 });
             return await data.ToListAsync();
+        }
+
+        /// <summary>
+        /// Add Subcategory Image
+        /// </summary>
+        /// <param name="subCateImage"></param>
+        /// <returns></returns>
+        public async Task<string> SaveSubcateImageAsync(IFormFile? subCateImage)
+        {
+            if (subCateImage != null && subCateImage.Length > 0)
+            {
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(subCateImage.FileName)}";
+                var filePath = Path.Combine("wwwroot", "assets/images/subcates", fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await subCateImage.CopyToAsync(fileStream);
+                }
+
+                return $"assets/images/subcates/{fileName}";
+            }
+            return null;
+        }
+
+
+        /// <summary>
+        /// Update Subcategory
+        /// </summary>
+        /// <param name="NewSub"></param>
+        /// <returns></returns>
+        public async Task UpdateSubcateAsync(SubCategory NewSub)
+        {
+            SubCategory Subcategory = await GetSubCateByIdAsync(NewSub.SubCateId);
+            context.SubCategories.Update(Subcategory);
+            await context.SaveChangesAsync();
         }
     }
 }

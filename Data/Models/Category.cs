@@ -14,7 +14,7 @@ namespace Data.Models
         public bool? isCategoryActive { get; set; }
         public string? CategoryDescription { get; set; }
 
-        public virtual ICollection<SubCategory> SubCategories { get; set; }
-        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<SubCategory>? SubCategories { get; set; }
+        public virtual ICollection<Post>? Posts { get; set; }
     }
 }
