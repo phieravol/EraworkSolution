@@ -5,11 +5,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ViewModels.SubCatesViewModel.Admin
 {
-    public class SubcateCreateRequest
+    public class SubcateUpdateRequest
     {
+        [Required]
+        [Display(Name ="Subcategory Id")]
+        public int SubcateId { get; set; }
+
         [Required]
         [Display(Name = "SubCategory Name")]
         [StringLength(30, MinimumLength = 3)]
