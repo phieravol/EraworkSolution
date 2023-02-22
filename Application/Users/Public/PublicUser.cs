@@ -1,6 +1,8 @@
 ﻿using Data.EntityDbContext;
 using Data.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,11 +46,13 @@ namespace AppModules.Users.Public
         public async Task<string> UserLogin(LoginRequest request)
         {
             var result = await _signInManager.PasswordSignInAsync(request.UserName, request.Password, isPersistent: false, lockoutOnFailure: false);
-            var user = _userManager.FindByNameAsync(request.UserName);
+            
             if (result.Succeeded)
             {
+                var user = _userManager.FindByNameAsync(request.UserName);
                 var roles = await _userManager.GetRolesAsync(await user);
-                return roles[0];
+                
+				return roles[0];
             }
             return null;
         }

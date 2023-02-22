@@ -1,4 +1,4 @@
-﻿@*@page
+﻿@page
 @model Erawork.Pages.User.LoginModel
 @{
     Layout = null;
@@ -11,12 +11,12 @@
 <body>
     <div class="wrapper rounded bg-white">
 
-        <div class="h3">Login Form</div>
+        <div class="h3">login form</div>
 
         <form method="post" class="form">
             <div class="row">
                 <div class="col-md-12 mt-md-0 mt-3">
-                    <label asp-for="loginRequest.UserName">Username / Email</label>
+                    <label asp-for="loginRequest.UserName">username / email</label>
                     <input asp-for="loginRequest.UserName" type="text" class="form-control" required>
                     <span asp-validation-for="loginRequest.UserName" class="text-danger"></span>
                 </div>
@@ -24,16 +24,16 @@
            
             <div class="row">
                 <div class="col-md-12 mt-md-0 mt-3">
-                    <label asp-for="loginRequest.Password">Password</label>
+                    <label asp-for="loginRequest.Password">password</label>
                     <input asp-for="loginRequest.Password" type="password" class="form-control" required>
                     <span asp-validation-for="loginRequest.Password" class="text-danger"></span>
                 </div>
             </div>
             
-            <button type="submit" asp-page="./Login" class="btn btn-primary mt-3">Submit</button>
+            <button type="submit" asp-page="./login" class="btn btn-primary mt-3">submit</button>
         </form>
 
     </div>
 
 
-</body>*@
+</body>

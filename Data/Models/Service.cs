@@ -15,6 +15,7 @@ namespace Data.Models
         public int? TotalStars { get; set; }
         public int? TotalClients { get; set; }
         public bool? isServiceActive { get; set; }
+        public string? ServiceImage { get; set; }
         public Guid UserId { get; set; }
 
         public virtual SubCategory? SubCategory { get; set; }
