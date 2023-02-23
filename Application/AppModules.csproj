@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\Public\" />
     <Folder Include="Users\Manage\" />
   </ItemGroup>
 

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ViewModels.ServiceViewModel.Admin
 {
-    public class PagingServiceRequest
+    public class ServicePagingRequest : PagingRequestBase
     {
+        public string? searchTerm { get; set; }
+
     }
 }

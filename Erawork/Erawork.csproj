@@ -60,8 +60,4 @@
     <None Include="wwwroot\assets\js\vendor\modernizr-2.8.3-respond-1.4.2.min.js" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
 </Project>

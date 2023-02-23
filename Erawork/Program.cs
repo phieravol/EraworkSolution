@@ -1,5 +1,7 @@
 using AppModules.Categories.Manage;
 using AppModules.Categories.Public;
+using AppModules.GeneralModule;
+using AppModules.Services.Admin;
 using AppModules.SubCategories.Admin;
 using AppModules.SubCategories.Public;
 using AppModules.System.Role;
@@ -39,6 +41,10 @@ builder.Services.AddTransient<IPublicRole, PublicRole>();
 
 builder.Services.AddTransient<IManageSubcates, ManageSubcates>();
 builder.Services.AddTransient<IPublicSubcate, PublicSubcate>();
+
+builder.Services.AddTransient<IManageServices, ManageServices>();
+builder.Services.AddTransient<ISaveImage, SaveImage>();
+
 
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
 builder.Services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();

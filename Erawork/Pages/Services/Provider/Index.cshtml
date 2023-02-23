@@ -1,6 +1,7 @@
 ﻿@page
 @model Erawork.Pages.Services.Admin.IndexModel
 @{
+    string defaultImage = "assets/images/services/default_service.png";
 }
 <head>
     <link rel="apple-touch-icon" href="~/assets/apple-touch-icon.png">
@@ -25,6 +26,7 @@
     <link rel="stylesheet" href="~/assets/css/responsive.css">
     <link rel="stylesheet" href="~/assets/css/dbresponsive.css">
     <script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <main id="wt-main" class="wt-main wt-haslayout">
@@ -160,42 +162,42 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 float-left">
                 <div class="wt-dashboardbox">
                     <div class="wt-dashboardboxtitle">
-                        <h2>Add New Category</h2>
+                        <h2>Add New Service</h2>
                     </div>
                     <div class="wt-dashboardboxcontent">
                         <form method="post" asp-page-handler="Create" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
 
                             <div class="form-group">
-                                <span class="form-group-description">Enter SubCategory Name</span>
-                                @*<input type="text" asp-for="@Model.createRequest.SubcateName" class="form-control" placeholder="Name">*@
+                                <span class="form-group-description">Enter Service Title</span>
+                                <input type="text" asp-for="@Model.createRequest.ServiceTitle" class="form-control" placeholder="Name">
                             </div>
 
                             <div class="form-group">
-                                <span class="form-group-description">Select SubCategory Status</span>
+                                <span class="form-group-description">Select Services Status</span>
 
                                 <span class="wt-select">
-                                    @*<select asp-for="@Model.createRequest.isSubCateActive">
+                                    <select asp-for="@Model.createRequest.isServiceActive">
                                         <option value="@true">Active</option>
                                         <option value="@false">Inactive</option>
-                                    </select>*@
+                                    </select>
                                 </span>
                             </div>
 
                             <div class="form-group">
-                                <span class="form-group-description">Enter SubCategory Description</span>
-                                @*<textarea asp-for="@Model.createRequest.SubcateDesc" class="form-control" placeholder="Description"></textarea>*@
+                                <span class="form-group-description">Enter Service Description</span>
+                                <textarea asp-for="@Model.createRequest.ServiceIntro" class="form-control" placeholder="Description"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <span class="form-group-description">Select Root Category</span>
+                                <span class="form-group-description">Select SubCategory</span>
                                 <span class="wt-select">
-                                    @*<select asp-for="@Model.createRequest.CategoryId">
+                                    <select asp-for="@Model.createRequest.SubCategoryId">
                                         <option value="">Pick one</option>
-                                        @foreach (var item in Model.categories)
+                                        @foreach (var item in Model.subCategories)
                                         {
-                                            <option value="@item.CategoryId">@item.CategoryName</option>
+                                            <option value="@item.SubCateId">@item.SubcateName</option>
                                         }
-                                    </select>*@
+                                    </select>
                                 </span>
                             </div>
 
@@ -203,7 +205,7 @@
                                 <div class="wt-labelgroup">
                                     <label>
                                         <span class="wt-btn">Select Files</span>
-                                        @*<input asp-for="@Model.createRequest.SubcateImage" type="file" accept=".jpg, .jpeg, .png" id="imageCategory" />*@
+                                        <input asp-for="@Model.createRequest.ServiceImage" type="file" accept=".jpg, .jpeg, .png" id="imageCategory" />
                                     </label>
                                     <span>Drop files here to upload</span>
                                     <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
@@ -233,7 +235,7 @@
                         <form class="wt-formtheme wt-formsearch">
                             <fieldset>
                                 <div class="form-group">
-                                    @*<input type="text" asp-for="@Model.pagingRequest.searchTerm" class="form-control" placeholder="Search SubCategory">*@
+                                    <input type="text" asp-for="@Model.pagingRequest.searchTerm" class="form-control" placeholder="Search SubCategory">
                                     <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
                                 </div>
                             </fieldset>
@@ -249,18 +251,20 @@
                                             <label for="wt-name"></label>
                                         </span>
                                     </th>
-                                    <th>SubCategory</th>
+                                    <th>Title</th>
                                     <th>Description</th>
-                                    <th>Is Active</th>
-                                    <th>Root Category</th>
-                                    <th>Image</th>
-                                    <th colspan="2">Action</th>
+                                    <th>Status</th>
+                                    <th>Stars</th>
+                                    <th>Clients</th>
+                                    <th>SubCategory</th>
+                                    <th>Images</th>
+                                    <th colspan="3">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @*@if (Model.subcates != null)
+                                @if (Model.servicesPaging != null)
                                 {
-                                    @foreach (var item in Model.subcates)
+                                    @foreach (var item in Model.servicesPaging)
                                     {
                                         <tr>
                                             <td>
@@ -270,31 +274,31 @@
                                                 </span>
                                             </td>
 
-                                            <td>@item.SubcateName</td>
-                                            <td>@item.SubcateDesc</td>
-                                            <td>@item.isSubCateActive</td>
+                                            <td>@item.ServiceTitle</td>
+                                            <td>@item.ServiceIntro</td>
+                                            <td>@item.isServiceActive</td>
+                                            <td>@item.TotalStars</td>
+                                            <td>@item.TotalClients</td>
+                                            <td>@item.SubCateName</td>
                                             <td>
-                                                <figure><img src="~/@(item.SubcateImage==null ? defaultSubCateImg : item.SubcateImage)" alt="img description"></figure>
+                                                <figure><img src="~/@(item.ServiceImage==null ? defaultImage : item.ServiceImage)" alt="img description"></figure>
                                             </td>
-                                            <td>@item.CategoryName</td>
                                             <td>
-                                                <div class="wt-actionbtn">
-                                                    <a asp-page="./update" asp-route-id="@item.SubCateId" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                <div class="wt-actionbtn d-flex p-2">
+                                                    <a asp-page="./update" asp-route-id="@item.ServiceId" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                    <a asp-page="./delete" asp-route-id="@item.ServiceId" asp-page-handler="delete" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                    <a asp-page="/services/detail" asp-route-id="@item.ServiceId" class="wt-addinfo"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <div class="wt-actionbtn">
-                                                    <a asp-page="./delete" asp-route-id="@item.SubCateId" asp-page-handler="delete" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
-                                                </div>
-                                            </td>
+                                            
                                         </tr>
                                     }
-                                }*@
+                                }
 
                             </tbody>
                         </table>
 
-                       @* @if (Model.HasPreviousPage || Model.HasNextPage)
+                        @if (Model.HasPreviousPage || Model.HasNextPage)
                         {
                             <nav class="wt-pagination">
                                 <ul>
@@ -326,7 +330,7 @@
                                     </li>
                                 </ul>
                             </nav>
-                        }*@
+                        }
 
                     </div>
                 </div>

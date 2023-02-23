@@ -73,6 +73,7 @@ namespace Data.EntityDbContext
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<AppUserRole> UserRoles { get; set; }
         public DbSet<AppRole> AppRoles { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
     }
 }
