@@ -1,0 +1,68 @@
+﻿@page
+@model Erawork.Pages.Services.Provider.UpdateModel
+@{
+}
+<div class="container container-table">
+    <div class="row vertical-center-row">
+        <div class="wt-dashboardboxtitle">
+            <h2>Update Service</h2>
+        </div>
+        <div class="wt-dashboardboxcontent">
+            <form method="post" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
+
+                <input type="text" asp-for="@Model.Id" class="form-control" hidden placeholder="Name">
+
+                <div class="form-group">
+                    <span class="form-group-description">Enter Service Name</span>
+                    <input type="text" asp-for="@Model.UpdateRequest.ServiceTitle" class="form-control" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <span class="form-group-description">Select Service Status</span>
+
+                    <span class="wt-select">
+                        <select asp-for="@Model.UpdateRequest.isServiceActive">
+                            <option value="@true" selected="@(Model.UpdateRequest.isServiceActive==true ? "selected": "")">Active</option>
+                            <option value="@false" selected="@(Model.UpdateRequest.isServiceActive==false ? "selected": "")">Inactive</option>
+                        </select>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <span class="form-group-description">Enter Service Description</span>
+                    <textarea asp-for="@Model.UpdateRequest.ServiceIntro" class="form-control" placeholder="Description">@Model.UpdateRequest.ServiceIntro</textarea>
+                </div>
+                <div class="form-group">
+                    <span class="form-group-description">Select SubCategory</span>
+                    <span class="wt-select">
+                        <select asp-for="@Model.UpdateRequest.SubCategoryId">
+                            <option value="">Pick one</option>
+                            @foreach (var item in Model.subCates)
+                            {
+                                <option value="@item.SubCateId" selected="@(item.SubCateId == Model.UpdateRequest.SubCategoryId?"selected":"")">@item.SubcateName</option>
+                            }
+                        </select>
+                    </span>
+                </div>
+                <div class="form-group form-group-label">
+                    <div class="wt-labelgroup">
+                        <label>
+                            <span class="wt-btn">Select Files</span>
+                            <input asp-for="@Model.UpdateRequest.ServiceImage" type="file" accept=".jpg, .jpeg, .png" />
+                        </label>
+                        <span>Drop files here to upload</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <ul class="wt-attachfile">
+                        <li class="wt-uploading">
+                            <span class="uploadprogressbar"></span>
+                            <span>Service Image</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group wt-btnarea">
+                    <button class="wt-btn">Update Service</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

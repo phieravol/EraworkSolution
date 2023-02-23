@@ -4,6 +4,7 @@ using Data.EntityDbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(EraWorkContext))]
-    partial class EraWorkContextModelSnapshot : ModelSnapshot
+    [Migration("20230222040102_AddServiceImageContext")]
+    partial class AddServiceImageContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,22 +51,22 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c42ea7d8-71f0-45b2-87b4-4659eea685fe"),
-                            ConcurrencyStamp = "1cef1669-3bef-451e-b671-e044b7bfb1d8",
+                            Id = new Guid("4f79f5c1-aaba-4076-bfd3-84797d709112"),
+                            ConcurrencyStamp = "97e592fd-7942-4729-a600-ef1b47717809",
                             Name = "Admin",
                             RoleDesc = "Can Custom system"
                         },
                         new
                         {
-                            Id = new Guid("aba59b2f-094c-4238-ac82-95c5ac187048"),
-                            ConcurrencyStamp = "654b14b2-a485-4154-82c7-5b0e24e05c89",
+                            Id = new Guid("86ec40d3-60db-42b7-b6c6-0094c4e10374"),
+                            ConcurrencyStamp = "b84a80cb-ada4-42b4-b95c-718227a93dc9",
                             Name = "Provider",
                             RoleDesc = "Provide service for client"
                         },
                         new
                         {
-                            Id = new Guid("b098f2aa-00ed-4441-bf08-7a185fdcf223"),
-                            ConcurrencyStamp = "25587c23-0edd-485a-b414-beb12b8dd7cd",
+                            Id = new Guid("cd9528c6-30e3-4306-a27b-0501f7559aa6"),
+                            ConcurrencyStamp = "122adb3e-6e3e-4023-9bdf-053dd6f570ab",
                             Name = "Client",
                             RoleDesc = "Can order services from provider"
                         });
@@ -159,16 +161,16 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("479f2d36-0a8f-4d41-a4aa-95576ea55c06"),
+                            Id = new Guid("68d38997-9112-42be-b228-97f2faef0785"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4cb866ec-4637-4396-bf23-972668e5eb5b",
+                            ConcurrencyStamp = "8379e509-10c2-44cb-98de-e24f3186ab92",
                             Email = "phinqhe153034@fpt.edu.vn",
                             EmailConfirmed = false,
                             FirstName = "Nguyễn",
                             LastName = "Quốc Phi",
                             LockoutEnabled = false,
                             MemberSince = new DateTime(2023, 2, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            PasswordHash = "AQAAAAEAACcQAAAAEBXWY+hSEpT2Fou7ks1k+9OvSGrHi5XW7bnvHvfpf/oY+RGpMsDYzwMHjN/hmpyOeA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGn64mkvm/7KoBu8ttnjqxM2c5lco+33Ud5qOydCklOkjz2+0nKeZDC+AgA6ySHUxA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -415,7 +417,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 2, 22, 21, 48, 48, 661, DateTimeKind.Local).AddTicks(9330));
+                        .HasDefaultValue(new DateTime(2023, 2, 22, 11, 1, 1, 569, DateTimeKind.Local).AddTicks(1759));
 
                     b.Property<int?>("ServiceId")
                         .HasColumnType("int");
@@ -675,8 +677,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("479f2d36-0a8f-4d41-a4aa-95576ea55c06"),
-                            RoleId = new Guid("c42ea7d8-71f0-45b2-87b4-4659eea685fe")
+                            UserId = new Guid("68d38997-9112-42be-b228-97f2faef0785"),
+                            RoleId = new Guid("4f79f5c1-aaba-4076-bfd3-84797d709112")
                         });
                 });
 

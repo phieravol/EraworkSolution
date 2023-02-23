@@ -12,11 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\Public\" />
     <Folder Include="Users\Manage\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  
   </ItemGroup>
 
