@@ -12,7 +12,7 @@ namespace Data.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public int? UserStatus { get; set; }
-        public int? UserLevel { get; set; }
+        public string? UserLevel { get; set; }
         public string? UserDesc { get; set; }
         public string? UserLable { get; set; }
         public DateTime? MemberSince { get; set; }
