@@ -1,6 +1,8 @@
 using AppModules.Categories.Manage;
 using AppModules.Categories.Public;
 using AppModules.GeneralModule;
+using AppModules.Posts.Admin;
+using AppModules.Posts.Public;
 using AppModules.Services.Admin;
 using AppModules.SubCategories.Admin;
 using AppModules.SubCategories.Public;
@@ -44,6 +46,9 @@ builder.Services.AddTransient<IPublicSubcate, PublicSubcate>();
 
 builder.Services.AddTransient<IManageServices, ManageServices>();
 builder.Services.AddTransient<ISaveImage, SaveImage>();
+
+builder.Services.AddTransient<IManagePosts, ManagePosts>();
+builder.Services.AddTransient<IPublicPost, PublicPost>();
 
 
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();

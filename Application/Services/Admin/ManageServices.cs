@@ -47,9 +47,6 @@ namespace AppModules.Services.Admin
 
         public async Task DeleteServiceAsync(int Id)
         {
-            //SubCategory Subcategory = await GetSubCateByIdAsync(NewSub.SubCateId);
-            //context.SubCategories.Update(Subcategory);
-            //await context.SaveChangesAsync();
 
 			Service service = await GetServiceByIdAsync(Id);
 			context.Services.Remove(service);

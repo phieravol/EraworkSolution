@@ -32,44 +32,39 @@ namespace Data.DataSample
                 new SubCategory() { SubCateId = 8, SubcateName = "Animation Creating", isSubCateActive = true, SubcateDesc = "Làm ra thước phim hoạt hình vượt ngoài trí tưởng tượng.", CategoryId = 3 },
                 new SubCategory() { SubCateId = 9, SubcateName = "Video Teaching", isSubCateActive = false, SubcateDesc = "Hướng dẫn chỉnh sửa video một cách tận tình", CategoryId = 3 }
                 );
-
-
-            
+     
             var hasher = new PasswordHasher<AppUser>();
-            var adminId = new Guid(Guid.NewGuid().ToString());
-            var roleAdminId = new Guid(Guid.NewGuid().ToString());
-            var roleProviderId = new Guid(Guid.NewGuid().ToString());
-            var roleClientId = new Guid(Guid.NewGuid().ToString());
 
             // data sameple AppUser (40ph)
             modelBuilder.Entity<AppRole>().HasData(new AppRole()
             {
-                Id = roleAdminId,
+                Id = new Guid("1DEE62EE-AE2C-4417-A65C-74E992B1CA32"),
                 Name = "Admin",
                 RoleDesc = "Can Custom system"
             });
 
             modelBuilder.Entity<AppRole>().HasData(new AppRole()
             {
-                Id = roleProviderId,
-                Name = "Provider",
+                Id = new Guid("BD839B07-BEAC-492E-8688-E3522A60476E"),
+
+				Name = "Provider",
                 RoleDesc = "Provide service for client"
             });
             modelBuilder.Entity<AppRole>().HasData(new AppRole()
             {
-                Id = roleClientId,
+                Id = new Guid("6859DC0F-5F7D-47E1-B35D-BD45ACF3F3C8"),
                 Name = "Client",
                 RoleDesc = "Can order services from provider"
             });
 
             modelBuilder.Entity<AppUser>().HasData(new AppUser()
             {
-                Id = adminId,
+                Id = new Guid("A27ED6DA-8F70-4A41-82CD-2FB50DABEB18"),
                 FirstName = "Nguyễn",
                 LastName = "Quốc Phi",
-                UserName = "phiphongphanh",
+                UserName = "phinq",
                 UserStatus = 1,
-                UserLevel = 1,
+                UserLevel = "Other",
                 UserDesc = "Tôi là một Designer, chuyên design sự tương tư của bạn :))",
                 UserLable = "",
                 MemberSince = DateTime.Today,
@@ -81,8 +76,8 @@ namespace Data.DataSample
 
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
             {
-                RoleId= roleAdminId,
-                UserId= adminId,
+                RoleId= new Guid("1DEE62EE-AE2C-4417-A65C-74E992B1CA32"),
+                UserId= new Guid("A27ED6DA-8F70-4A41-82CD-2FB50DABEB18"),
             });
         }
     }

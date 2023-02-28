@@ -26,6 +26,11 @@ namespace Data.Confiuration
                 .IsUnicode(true)
                 .HasMaxLength(500);
 
+            //config unicode for ShortDesc
+            builder.Property(x => x.SortDesc)
+                .IsUnicode(true)
+                .HasMaxLength(2000);
+
             // post detail nvarchar(4000)
             builder.Property(x => x.PostDetails)
                 .IsUnicode(true)
@@ -45,6 +50,9 @@ namespace Data.Confiuration
             builder.HasOne(u => u.AppUser)
                 .WithMany(r => r.Posts)
                 .HasForeignKey(x => x.UserId);
+
+            builder.Property(x => x.IsPostPublic)
+                .HasDefaultValue(false);
         }
     }
 }
