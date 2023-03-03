@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using ViewModels.PostViewModel;
-using ViewModels.SubCatesViewModel.Public;
+using ViewModels.PostViewModel.Public;
 
 namespace Erawork.Pages.Posts
 {
-    public class IndexModel : PageModel
-    {
-        private readonly IPublicPost publicPost;
-        private readonly IPublicCategory publicCategory;
+	public class IndexModel : PageModel
+	{
+		private readonly IPublicPost publicPost;
+		private readonly IPublicCategory publicCategory;
 
 		public IndexModel(IPublicPost publicPost, IPublicCategory publicCategory)
 		{
@@ -24,10 +24,10 @@ namespace Erawork.Pages.Posts
 			this.publicCategory = publicCategory;
 		}
 
-        List<Category> Categories { get; set; }
-		List<PostVM> PostList { get; set; }
-        [BindProperty] PublicPostPagingRequest pagingRequest { get; set; }
-
+		public List<Category> Categories { get; set; }
+		public List<PostVM>? PostList { get; set; }
+		[BindProperty (SupportsGet = true)] public PublicPostPagingRequest pagingRequest { get; set; }
+		public int CountPosts { get; set; }
 		public int TotalPages { get; set; }
 		public bool HasPreviousPage
 		{
@@ -46,7 +46,7 @@ namespace Erawork.Pages.Posts
 		}
 
 		public async Task<IActionResult> OnGetAsync()
-        {
+		{
 			Categories = await publicCategory.GetActiveCategoriesAsync();
 			//get user session
 			string? rawUser = HttpContext.Session.GetString("User");
@@ -55,20 +55,15 @@ namespace Erawork.Pages.Posts
 			{
 				user = JsonConvert.DeserializeObject<AppUser>(rawUser);
 			}
-			if (user == null)
-			{
-				HttpContext.Response.Clear();
-				HttpContext.Response.StatusCode = 404;
 
-				HttpContext.Response.Redirect("/Errors/Error404");
-			}
-			else if (ModelState.IsValid)
+			if (ModelState.IsValid)
+			
 			{
-				PostList = await publicPost.GetPostFilterPaging(pagingRequest, user);
-				//subCategories = await manageSubcates.GetSubCatesAsync();
-				//TotalPages = (int)Math.Ceiling(servicesPaging.Count() / (double)pagingRequest.PageSize);
+				PostList = await publicPost.GetPostFilterPaging(pagingRequest);
+				TotalPages = (int)Math.Ceiling(PostList.Count() / (double)pagingRequest.PageSize);
 			}
 			return Page();
-        }
-    }
+		}
+
+	}
 }

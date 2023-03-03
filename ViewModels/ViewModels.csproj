@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <Folder Include="CategoryVM\Public\" />
-    <Folder Include="PostViewModel\Public\" />
     <Folder Include="ServiceViewModel\Public\" />
+    <Folder Include="SubCatesViewModel\Public\" />
     <Folder Include="System\" />
   </ItemGroup>
 
