@@ -31,9 +31,12 @@ namespace ViewModels.PostViewModel
 
 		//[Required]
 		[Display(Name = "Expire Date")]
+		[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+
 		public DateTime? ExpirationDate { get; set; }
 
 		[Display(Name = "Post Date")]
+		[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
 		public DateTime? PostedDate { get; set; } = DateTime.Now;
 
 		//[Required]
