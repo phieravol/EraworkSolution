@@ -14,7 +14,7 @@ namespace Data.Models
         public string? RevisionLimit { get; set; }
         public int? DeliveryDays { get; set; }
         public bool? isPakageAcive { get; set; }
-        public int? ServiceId { get; set; }
+        public int ServiceId { get; set; }
 
         public virtual Service? Service { get; set; }
         public virtual ICollection<PakageDetail>? PakageDetails { get; set; }

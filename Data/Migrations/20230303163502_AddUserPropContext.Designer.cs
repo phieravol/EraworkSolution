@@ -4,6 +4,7 @@ using Data.EntityDbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(EraWorkContext))]
-    partial class EraWorkContextModelSnapshot : ModelSnapshot
+    [Migration("20230303163502_AddUserPropContext")]
+    partial class AddUserPropContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,21 +52,21 @@ namespace Data.Migrations
                         new
                         {
                             Id = new Guid("1dee62ee-ae2c-4417-a65c-74e992b1ca32"),
-                            ConcurrencyStamp = "7af5f774-a157-466a-b7af-3f6d12e552c6",
+                            ConcurrencyStamp = "e0f20dbb-df7a-4304-874c-a533bf33f442",
                             Name = "Admin",
                             RoleDesc = "Can Custom system"
                         },
                         new
                         {
                             Id = new Guid("bd839b07-beac-492e-8688-e3522a60476e"),
-                            ConcurrencyStamp = "c6109c68-7065-4d29-aad0-55f71900ed41",
+                            ConcurrencyStamp = "bc38e530-ce39-43b6-b877-d2b4c20c9b5f",
                             Name = "Provider",
                             RoleDesc = "Provide service for client"
                         },
                         new
                         {
                             Id = new Guid("6859dc0f-5f7d-47e1-b35d-bd45acf3f3c8"),
-                            ConcurrencyStamp = "c3e348b5-d774-47ba-a934-3714befeb212",
+                            ConcurrencyStamp = "08da7c30-4e8f-4ab9-bffe-a0736d4ec103",
                             Name = "Client",
                             RoleDesc = "Can order services from provider"
                         });
@@ -111,7 +113,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 6, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2023, 3, 3, 0, 0, 0, 0, DateTimeKind.Local));
 
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(max)");
@@ -136,9 +138,6 @@ namespace Data.Migrations
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
-
-                    b.Property<string>("UserAvatar")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserDesc")
                         .HasMaxLength(2000)
@@ -170,14 +169,14 @@ namespace Data.Migrations
                         {
                             Id = new Guid("a27ed6da-8f70-4a41-82cd-2fb50dabeb18"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "70d5ce57-76a7-4dd5-ae94-efc493b81a15",
+                            ConcurrencyStamp = "ad9ba386-f392-42aa-a181-fe30ae826b6d",
                             Email = "phinqhe153034@fpt.edu.vn",
                             EmailConfirmed = false,
                             FirstName = "Nguyễn",
                             LastName = "Quốc Phi",
                             LockoutEnabled = false,
-                            MemberSince = new DateTime(2023, 3, 6, 0, 0, 0, 0, DateTimeKind.Local),
-                            PasswordHash = "AQAAAAEAACcQAAAAEAQBf4tkViQqoJdr5xXWoQb/G1VuEuMuk5AUD2bBTqrN7mW0AF7RPvosNeDqKe7Gqw==",
+                            MemberSince = new DateTime(2023, 3, 3, 0, 0, 0, 0, DateTimeKind.Local),
+                            PasswordHash = "AQAAAAEAACcQAAAAENgbgGHPAqAZqw/FTnJ8B2+O/G/uJPg/ReDC+1fnXInMuLmBw8Qo9nbDGF40hYJEzg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -308,7 +307,7 @@ namespace Data.Migrations
                         .IsUnicode(true)
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int>("ServiceId")
+                    b.Property<int?>("ServiceId")
                         .HasColumnType("int");
 
                     b.Property<bool?>("isPakageAcive")
@@ -395,7 +394,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 6, 0, 0, 0, 0, DateTimeKind.Local));
+                        .HasDefaultValue(new DateTime(2023, 3, 3, 0, 0, 0, 0, DateTimeKind.Local));
 
                     b.Property<string>("SortDesc")
                         .HasMaxLength(2000)
@@ -440,7 +439,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 3, 6, 18, 48, 2, 900, DateTimeKind.Local).AddTicks(2742));
+                        .HasDefaultValue(new DateTime(2023, 3, 3, 23, 35, 2, 201, DateTimeKind.Local).AddTicks(1225));
 
                     b.Property<int?>("ServiceId")
                         .HasColumnType("int");
@@ -763,9 +762,7 @@ namespace Data.Migrations
                 {
                     b.HasOne("Data.Models.Service", "Service")
                         .WithMany("Pakages")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ServiceId");
 
                     b.Navigation("Service");
                 });

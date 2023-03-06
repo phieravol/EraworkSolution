@@ -16,6 +16,9 @@ namespace Data.Models
         public string? UserDesc { get; set; }
         public string? UserLable { get; set; }
         public DateTime? MemberSince { get; set; }
+        public string? Gender { get; set; }
+        public string? Slogan { get; set; }
+        public string? UserAvatar { set; get; }
 
         public virtual ICollection<Review>? Reviews { get; set; }
         public virtual ICollection<Post>? Posts { get; set; }

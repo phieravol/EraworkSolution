@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace ViewModels.ServiceViewModel
 		public string? ServiceImage { get; set; }
 		public string? ProviderFirstName { get; set; }
 		public string? ProviderLastName { get; set; }
+		public List<Pakage>? Pakages { get; set; }
 		
 	}
 }

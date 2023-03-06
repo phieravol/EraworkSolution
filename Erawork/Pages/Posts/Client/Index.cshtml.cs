@@ -57,7 +57,6 @@ namespace Erawork.Pages.Posts.Client
 			{
 				HttpContext.Response.Clear();
 				HttpContext.Response.StatusCode = 404;
-
 				HttpContext.Response.Redirect("/Errors/Error404");
 			}
 			else if (ModelState.IsValid)

@@ -162,8 +162,16 @@
 											<div class="wt-viewjobholder">
 												<ul>
 													<li><span>@item.Budget <i class="fa fa-dollar-sign wt-viewjobdollar"></i></span></li>
-													<li><span><i class="far fa-folder wt-viewjobfolder"></i>@item.Category.CategoryName</span></li>
-													<li><span><i class="far fa-clock wt-viewjobclock"></i>Expire: @item.ExpirationDate.Value.ToString("dd/MM/yyyy")</span></li>
+													@if (item.Category != null)
+													{
+														<li><span><i class="far fa-folder wt-viewjobfolder"></i>@item.Category.CategoryName</span></li>
+													}
+
+													@if (item.ExpirationDate != null)
+													{
+														<li><span><i class="far fa-clock wt-viewjobclock"></i>Expire: @item.ExpirationDate.Value.ToString("dd/MM/yyyy")</span></li>
+													}
+													
 													@*<li><span><i class="fa fa-tag wt-viewjobtag"></i>Job ID: gy3yV2Vm5u</span></li>*@
 													<li><a href="javascript:void(0);" class="wt-clicklike wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
 													<li class="wt-btnarea"><a asp-page="./Details" asp-route-Id="@item.PostId" class="wt-btn">View Job</a></li>
