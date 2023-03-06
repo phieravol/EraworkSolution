@@ -36,12 +36,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 mt-md-0 mt-3">
+                <div class="col-md-6 mt-md-0 mt-3">
                     <label asp-for="registerRequest.Email">Email</label>
                     <input asp-for="registerRequest.Email" type="text" class="form-control" required>
                     <span asp-validation-for="registerRequest.Email" class="text-danger"></span>
                 </div>
-                
+                <div class="col-md-6 mt-md-0 mt-3">
+                    <label asp-for="registerRequest.Gender"></label>
+                    <select asp-for="registerRequest.Gender" class="form-control" required>
+                        <option value="" disabled="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <span asp-validation-for="registerRequest.Email" class="text-danger"></span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12 mt-md-0 mt-3">
@@ -67,7 +76,7 @@
             
             <div class=" my-md-2 my-3">
                 <label>Tell us who you are?</label>
-                <select asp-for="registerRequest.RoleId" required>
+                <select asp-for="registerRequest.RoleId" class="form-control" required>
                     @if(Model.roles != null)
                     {
                         foreach (var item in Model.roles)

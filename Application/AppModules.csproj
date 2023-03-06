@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pakages\Public\" />
     <Folder Include="Services\Public\" />
-    <Folder Include="Users\Manage\" />
   </ItemGroup>
 
   <ItemGroup>

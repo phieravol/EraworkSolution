@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Pages\Pakages\Provider\Index.cshtml~RF143259.TMP" />
     <None Remove="Pages\Posts\Client\Create.cshtml~RF10cdd77.TMP" />
   </ItemGroup>
 
@@ -62,6 +63,11 @@
     <None Include="wwwroot\assets\js\vendor\jquery-3.3.1.js" />
     <None Include="wwwroot\assets\js\vendor\jquery-library.js" />
     <None Include="wwwroot\assets\js\vendor\modernizr-2.8.3-respond-1.4.2.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\Pakages\Public\" />
+    <Folder Include="wwwroot\assets\images\user\avatar\" />
   </ItemGroup>
 
 </Project>

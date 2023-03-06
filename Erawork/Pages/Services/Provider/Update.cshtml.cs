@@ -17,7 +17,7 @@ namespace Erawork.Pages.Services.Provider
         private readonly IManageSubcates manageSubcates;
         private readonly ISaveImage ImageSaver;
 
-        public UpdateModel(IManageServices manageServices, ISaveImage saveImage, ManageSubcates manageSubcates)
+        public UpdateModel(IManageServices manageServices, ISaveImage saveImage, IManageSubcates manageSubcates)
         {
             this.manageServices = manageServices;
             this.ImageSaver = saveImage;

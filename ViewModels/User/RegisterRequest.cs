@@ -36,6 +36,11 @@ namespace ViewModels.User
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
+        [Display(Name = "Select Gender")]
+
+        public string? Gender { get; set; }
+
         public string UserName { get; set; }
         public string RoleName { get; set; }
         public Guid RoleId { get; set; }

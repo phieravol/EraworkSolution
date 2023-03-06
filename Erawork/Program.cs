@@ -1,12 +1,14 @@
 using AppModules.Categories.Manage;
 using AppModules.Categories.Public;
 using AppModules.GeneralModule;
+using AppModules.Pakages.Provider;
 using AppModules.Posts.Admin;
 using AppModules.Posts.Public;
 using AppModules.Services.Admin;
 using AppModules.SubCategories.Admin;
 using AppModules.SubCategories.Public;
 using AppModules.System.Role;
+using AppModules.Users.Manage;
 using AppModules.Users.Public;
 using Data.EntityDbContext;
 using Data.Models;
@@ -39,6 +41,8 @@ builder.Services.AddTransient<IManageCategory, ManageCategory>();
 builder.Services.AddTransient<IPublicCategory, PublicCategory>();
 
 builder.Services.AddTransient<IPublicUser, PublicUser>();
+builder.Services.AddTransient<IManageAccount, ManageAccount>();
+
 builder.Services.AddTransient<IPublicRole, PublicRole>();
 
 builder.Services.AddTransient<IManageSubcates, ManageSubcates>();
@@ -49,6 +53,8 @@ builder.Services.AddTransient<ISaveImage, SaveImage>();
 
 builder.Services.AddTransient<IManagePosts, ManagePosts>();
 builder.Services.AddTransient<IPublicPost, PublicPost>();
+
+builder.Services.AddTransient<IManagePakages, ManagePakages>();
 
 
 builder.Services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();

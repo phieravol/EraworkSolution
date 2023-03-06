@@ -70,7 +70,8 @@ namespace AppModules.Users.Public
                 LastName = request.LastName,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
-                UserName = request.UserName
+                UserName = request.UserName,
+                Gender = request.Gender
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);

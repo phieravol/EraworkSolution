@@ -47,7 +47,6 @@ namespace AppModules.Services.Admin
 
         public async Task DeleteServiceAsync(int Id)
         {
-
 			Service service = await GetServiceByIdAsync(Id);
 			context.Services.Remove(service);
 			await context.SaveChangesAsync();
@@ -55,7 +54,6 @@ namespace AppModules.Services.Admin
 
         public async Task<Service> GetServiceByIdAsync(int Id)
         {
-
             var query = from s in context.Services
                         where s.ServiceId == Id
                         select s;
