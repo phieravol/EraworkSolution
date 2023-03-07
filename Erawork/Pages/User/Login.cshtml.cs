@@ -25,8 +25,7 @@ namespace Erawork.Pages.User
         }
 
         //create data transfer object for register request
-        [BindProperty]
-        public LoginRequest loginRequest { get; set; }
+        [BindProperty] public LoginRequest loginRequest { get; set; }
         public async Task<IActionResult> OnPostAsync()
         {
             string loginResult = await publicUser.UserLogin(loginRequest);

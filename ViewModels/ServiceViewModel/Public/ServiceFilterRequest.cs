@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace ViewModels.ServiceViewModel.Public
 {
-	public class ServiceFilterRequest
+	public class ServiceFilterRequest: PagingRequestBase
 	{
-		public int[]? CategoryIds { get; set; }
-		public int[]? PriceOptions { get; set; }
-		public int[]? ProviderLevels { get; set; }
+		public List<int>? CategoryIds { get; set; }
+		public string? budgetRange { get; set; }
+		public List<string>? RequiredLevels { get; set; }
 		public string? SearchTerm { get; set; }
+		public bool isAnyFilter { get; set; }
+		public int PageSize { get; set; } = 9;
+		
 	}
 }

@@ -31,7 +31,7 @@ namespace Data.Confiuration
                 .HasDefaultValue(DateTime.Today);
             builder.Property(x => x.UserLevel)
                 .IsRequired(false)
-                .HasDefaultValue(1);
+                .HasDefaultValue("beginer");
             
         }
     }
