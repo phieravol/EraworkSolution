@@ -5,6 +5,7 @@ using AppModules.Pakages.Provider;
 using AppModules.Posts.Admin;
 using AppModules.Posts.Public;
 using AppModules.Services.Admin;
+using AppModules.Services.Public;
 using AppModules.SubCategories.Admin;
 using AppModules.SubCategories.Public;
 using AppModules.System.Role;
@@ -49,6 +50,8 @@ builder.Services.AddTransient<IManageSubcates, ManageSubcates>();
 builder.Services.AddTransient<IPublicSubcate, PublicSubcate>();
 
 builder.Services.AddTransient<IManageServices, ManageServices>();
+builder.Services.AddTransient<IPublicServices, PublicServices>();
+
 builder.Services.AddTransient<ISaveImage, SaveImage>();
 
 builder.Services.AddTransient<IManagePosts, ManagePosts>();

@@ -57,7 +57,6 @@ namespace Erawork.Pages.Posts
 			}
 
 			if (ModelState.IsValid)
-			
 			{
 				PostList = await publicPost.GetPostFilterPaging(pagingRequest);
 				TotalPages = (int)Math.Ceiling(PostList.Count() / (double)pagingRequest.PageSize);
