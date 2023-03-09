@@ -21,6 +21,9 @@ namespace ViewModels.ServiceViewModel
 		public string? ProviderFirstName { get; set; }
 		public string? ProviderLastName { get; set; }
 		public string? Avatar { get; set; }
+		public DateTime? MemberSince { get; set; }
+		public string UserName { get; set; }
+		public string CategoryName { get; set; }
 		public List<Pakage>? Pakages { get; set; }
 		
 	}

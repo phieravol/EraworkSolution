@@ -12,5 +12,6 @@ namespace AppModules.Services.Public
 	public interface IPublicServices
 	{
 		Task<List<ServicesVM>> GetPublicServicesAsync(ServiceFilterRequest pagingRequest);
+		Task<ServicesVM> GetServiceDetailAsync(int detailId);
 	}
 }
