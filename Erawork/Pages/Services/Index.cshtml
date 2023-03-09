@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/scrollbar.css">
-	<link rel="stylesheet" href="css/fontawesome/fontawesome-all.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/jquery-ui.css">
@@ -61,7 +61,6 @@
                                             <h2>Search Services</h2>
                                         </div>
                                         <div class="wt-widgetcontent">
-
                                             <fieldset>
                                                 <div class="form-group">
                                                     <input type="text" asp-for="@Model.PagingRequest.SearchTerm" class="form-control" placeholder="Search service">
@@ -86,10 +85,8 @@
 															<label for="wt-description-@item.CategoryId"> @item.CategoryName</label>
 														</span>
 													}
-                                                    
                                                 </div>
                                             </fieldset>
-
                                         </div>
                                     </div>
                                     
@@ -181,18 +178,22 @@
 														</div>
 														<ul class="wt-postarticlemeta d-flex">
 															<li>
-																<a href="javascript:void(0);">
-																	<span>Open Jobs</span>
+																<a asp-page="./Detail" asp-route-DetailId="@item.ServiceId">
+																	<span>Detail</span>
+																	<span><i class="fa-solid fa-eye"></i></span>
 																</a>
 															</li>
 															<li>
 																<a href="javascript:void(0);">
-																	<span>Full Profile</span>
+																	<span>Stars</span>
+																	<span>@(item.TotalStars == null ? 0 : item.TotalStars) <i class="fa-solid fa-star"></i></span>
+
 																</a>
 															</li>
 															<li class="wt-following">
 																<a href="javascript:void(0);">
-																	<span>Following</span>
+																	<span>clients</span>
+																	<span>@(item.TotalClients == null ? 0 : item.TotalClients) <i class="fa-solid fa-users"></i></span>
 																</a>
 															</li>
 														</ul>
