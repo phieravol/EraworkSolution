@@ -13,5 +13,6 @@ namespace AppModules.Services.Public
 	{
 		Task<List<ServicesVM>> GetPublicServicesAsync(ServiceFilterRequest pagingRequest);
 		Task<ServicesVM> GetServiceDetailAsync(int detailId);
-	}
+        Task<List<ServicesVM>> getTopRateService();
+    }
 }

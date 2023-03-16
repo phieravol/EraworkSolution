@@ -11,6 +11,8 @@ namespace AppModules.Posts.Public
 {
     public interface IPublicPost
 	{
+		Task<List<PostVM>> GetNewPostAsync();
 		Task<List<PostVM>> GetPostFilterPaging(PublicPostPagingRequest pagingRequest);
+		Task<List<PostVM>> GetTopPosts();
 	}
 }

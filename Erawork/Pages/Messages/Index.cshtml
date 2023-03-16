@@ -1,0 +1,50 @@
+﻿@page
+@model Erawork.Pages.Messages.IndexModel
+@{
+}
+
+<h1>Chat Room</h1>
+
+<input type="text" id="userInput" placeholder="Your Name" />
+<input type="text" id="messageInput" placeholder="Type your message here" />
+<button type="button" id="sendButton">Send</button>
+
+@*<ol>
+    @foreach (var user in Model.myConnectedUsers)
+    {
+        <li>@user</li>
+    }
+</ol>*@
+
+<ul id="messagesList"></ul>
+
+@section Scripts {
+    <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <a href="~/microsoft/signalr/dist/browser/signalr.js.map">~/microsoft/signalr/dist/browser/signalr.js.map</a>
+    <a href="~/microsoft/signalr/dist/browser/signalr.min.js.map">~/microsoft/signalr/dist/browser/signalr.min.js.map</a>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+        connection.on("ReceiveMessage", (user, message) => {
+            const encodedUser = user && user.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            const encodedMessage = message && message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            const li = document.createElement("li");
+            li.innerHTML = `${encodedUser}: ${encodedMessage}`;
+            document.getElementById("messagesList").appendChild(li);
+        });
+
+        connection.start().catch(err => console.error(err.toString()));
+
+        document.getElementById("sendButton").addEventListener("click", event => {
+            const user = document.getElementById("userInput").value;
+            const message = document.getElementById("messageInput").value;
+            connection.invoke("SendMessage", user, message).catch(err => console.error(err.toString()));
+            event.preventDefault();
+        });
+
+        
+    </script>
+}

@@ -94,5 +94,43 @@ namespace AppModules.Services.Public
 
 			return await services.FirstOrDefaultAsync();
 		}
-	}
+
+        
+        private async Task<List<ServicesVM>> GetRawActiveServicesAsync()
+        {
+            var query = from s in context.Services
+                            //join p in context.Pakages on s.ServiceId equals p.ServiceId
+                        join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId
+                        join c in context.Categories on sub.CategoryId equals c.CategoryId
+                        join u in context.AppUsers on s.UserId equals u.Id
+                        where s.isServiceActive == true
+                        select new { s, sub, c, u };
+            var data = query.Take(6).Select(x => new ServicesVM()
+            {
+                ServiceId = x.s.ServiceId,
+                ServiceTitle = x.s.ServiceTitle,
+                ServiceIntro = x.s.ServiceIntro,
+                ServiceImage = x.s.ServiceImage,
+                isServiceActive = x.s.isServiceActive,
+                ProviderFirstName = x.u.FirstName,
+                ProviderLastName = x.u.LastName,
+                Avatar = x.u.UserAvatar,
+                TotalStars = x.s.TotalStars,
+                TotalClients = x.s.TotalClients,
+                SubCategoryId = x.s.SubCategoryId,
+                SubCateName = x.sub.SubcateName,
+                MemberSince = x.u.MemberSince,
+                CategoryName = x.c.CategoryName
+            });
+            List<ServicesVM> list = await data.ToListAsync();
+            return list;
+        }
+
+        public async Task<List<ServicesVM>> getTopRateService()
+        {
+            List<ServicesVM> Services = await GetRawActiveServicesAsync();
+            Services.OrderByDescending(x => x.TotalStars);
+            return Services;
+        }
+    }
 }
