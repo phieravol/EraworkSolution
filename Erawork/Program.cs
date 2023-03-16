@@ -17,6 +17,8 @@ using Erawork.Pages.Shared.Components.PublicCategories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Erawork.Hubs;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,7 @@ builder.Services.AddDbContext<EraWorkContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("EraWorkDb")
     ));
 
+//config for identity
 builder.Services.AddIdentity<AppUser, AppRole>(options =>
 {
     options.Password.RequireDigit = false;
@@ -35,6 +38,18 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
 }).AddEntityFrameworkStores<EraWorkContext>()
   .AddDefaultTokenProviders();
 
+builder.Services.ConfigureApplicationCookie(op =>
+{
+    op.LoginPath = "/Users/Login";
+    op.AccessDeniedPath = "/Admin/AccessDenied";
+});
+
+//Config for authen author
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("admin"));
+    options.AddPolicy("RequireUserRole", policy => policy.RequireRole("user"));
+});
 
 
 // Add services DIs
@@ -66,6 +81,7 @@ builder.Services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
 
 // Add cache service register
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSignalR();
 
 // Add session service
 builder.Services.AddSession(options =>
@@ -94,7 +110,7 @@ app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.MapHub<ChatHub>("/chatHub");
 app.MapRazorPages();
 
 app.Run();
