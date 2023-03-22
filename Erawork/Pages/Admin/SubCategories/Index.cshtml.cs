@@ -22,6 +22,9 @@ namespace Erawork.Pages.Admin.SubCategories
 
         [BindProperty (SupportsGet = true)]
         public SubcatePagingRequest pagingRequest { get; set; }
+        
+        [BindProperty (SupportsGet = true)]
+        public int? id { get; set; }
 
         [BindProperty]
         public SubcateCreateRequest createRequest { get; set; }
@@ -48,19 +51,19 @@ namespace Erawork.Pages.Admin.SubCategories
 
         public async Task OnGetAsync()
         {
-            if (ModelState.IsValid)
-            {
-                categories = await manageCategory.GetCategoriesAsync();
-                subcates = await manageSubcates.PagingSubcategoriesAsync(pagingRequest);
-                List<SubCategory> listSubCate = await manageSubcates.GetSubCatesAsync();
-                TotalPages = (int)Math.Ceiling(listSubCate.Count() / (double)pagingRequest.PageSize);
-            }
+            categories = await manageCategory.GetCategoriesAsync();
+            subcates = await manageSubcates.PagingSubcategoriesAsync(pagingRequest, id);
+            List<SubCategory> listSubCate = await manageSubcates.GetSubCatesAsync();
+            TotalPages = (int)Math.Ceiling(subcates.Count() / (double)pagingRequest.PageSize);
+          
         }
 
-        public async Task<IActionResult> OnPostCreateAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
+            categories = await manageCategory.GetCategoriesAsync();
             await manageSubcates.CreateSubcateAsync(createRequest);
-            return new RedirectToPageResult("./Index");
+            
+            return Page();
         }
     }
 }
