@@ -57,7 +57,7 @@ namespace AppModules.SubCategories.Admin
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task DelSubcateAsync(int id)
+        public async Task DelSubcateAsync(int? id)
         {
             SubCategory Subcategory = await GetSubCateByIdAsync(id);
             context.SubCategories.Remove(Subcategory);
@@ -69,7 +69,7 @@ namespace AppModules.SubCategories.Admin
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<SubCategory> GetSubCateByIdAsync(int id)
+        public async Task<SubCategory> GetSubCateByIdAsync(int? id)
         {
             var Subcate = from c in context.SubCategories
                            where c.SubCateId == id
@@ -92,7 +92,7 @@ namespace AppModules.SubCategories.Admin
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<List<SubCateVM>> PagingSubcategoriesAsync(SubcatePagingRequest request)
+        public async Task<List<SubCateVM>> PagingSubcategoriesAsync(SubcatePagingRequest request, int? id)
         {
             //1. get all
             var query = from sub in context.SubCategories
@@ -104,6 +104,12 @@ namespace AppModules.SubCategories.Admin
             {
                 query = query.Where(x => x.sub.SubcateName.Contains(request.searchTerm));
             }
+            if (id is not null)
+            {
+                query = query.Where(x => x.cate.CategoryId == id);
+
+            }
+
 
             //4. paging
             int totalRow = await query.CountAsync();

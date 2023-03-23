@@ -12,6 +12,5 @@ namespace ViewModels.CategoryVM.Admin
 	{
 		public string? searchTerm { get; set; }
 
-		public List<Category> categories { get; set; }
 	}
 }

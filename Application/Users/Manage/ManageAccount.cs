@@ -1,7 +1,9 @@
 ﻿using AppModules.GeneralModule;
+using Data.EntityDbContext;
 using Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +17,23 @@ namespace AppModules.Users.Manage
 		private readonly UserManager<AppUser> userManager;
 		private readonly RoleManager<AppRole> roleManager;
 		private readonly ISaveImage saveImage;
+		private readonly EraWorkContext context;
 
-		public ManageAccount(UserManager<AppUser> userManager, ISaveImage saveImage, RoleManager<AppRole> roleManager)
+		public ManageAccount(UserManager<AppUser> userManager, ISaveImage saveImage, RoleManager<AppRole> roleManager, EraWorkContext context)
 		{
 			this.userManager = userManager;
 			this.saveImage = saveImage;
 			this.roleManager = roleManager;
+			this.context = context;
 		}
 		public string? roleName { get; set; }
 
-		public async Task UpdateProfile(AppUser user, IFormFile Avatar)
+        public async Task<AppUser> GetUserByUsername(string userName)
+        {
+            return await context.AppUsers.FirstOrDefaultAsync(x=> x.UserName == userName);
+        }
+
+        public async Task UpdateProfile(AppUser user, IFormFile Avatar)
 		{
 			string folderPath = "assets/images/user/avatar";
 

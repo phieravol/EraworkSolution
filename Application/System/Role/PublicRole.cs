@@ -11,16 +11,16 @@ namespace AppModules.System.Role
 {
     public class PublicRole : IPublicRole
     {
-        private readonly EraWorkContext _context;
+        private readonly EraWorkContext context;
 
         public PublicRole(EraWorkContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         List<AppRole> IPublicRole.listRoles()
         {
-            return _context.AppRoles.ToList();
+            return context.AppRoles.ToList();
         }
     }
 }

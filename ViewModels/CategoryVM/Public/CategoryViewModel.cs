@@ -14,6 +14,7 @@ namespace ViewModels.CategoryVM.Public
 		public string? CategoryImage { get; set; }
 		public bool? isCategoryActive { get; set; }
 		public string? CategoryDescription { get; set; }
+		public int TotalSubs { get; set; }
 		List<SubCategory>? subCategories { get; set; }
 	}
 }

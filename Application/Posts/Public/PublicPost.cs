@@ -42,6 +42,7 @@ namespace AppModules.Posts.Public
 					PostTitle = x.p.PostTitle,
 					PostDetails = x.p.PostDetails,
 					PostedDate = x.p.PostedDate,
+
 					PostStatus = x.p.PostStatus,
 					isPostPublic = x.p.IsPostPublic,
 					Budget = x.p.Budget,

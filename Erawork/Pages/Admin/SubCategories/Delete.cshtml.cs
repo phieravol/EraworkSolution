@@ -15,8 +15,8 @@ namespace Erawork.Pages.Admin.SubCategories
             this.manageSub = manageSub;
         }
 
-        [BindProperty(SupportsGet = true)]
-        public int Id { get; set; }
+        [BindProperty(SupportsGet = true)] public int Id { get; set; }
+        [BindProperty(SupportsGet = true)] public int CateId { get; set; }
         public SubCategory subCategory { get; set; }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Erawork.Pages.Admin.SubCategories
         /// Delete a subcategory by Id
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> OnPostDeleteAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             await manageSub.DelSubcateAsync(Id);
             return RedirectToPage("./Index");

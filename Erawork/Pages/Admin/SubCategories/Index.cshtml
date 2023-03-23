@@ -165,10 +165,11 @@
                         <h2>Add New Category</h2>
                     </div>
                     <div class="wt-dashboardboxcontent">
-                        <form method="post" asp-page-handler="Create" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
+                        <form method="post" asp-page="./Index" asp-route-id="@Model.id" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
 
                             <div class="form-group">
                                 <span class="form-group-description">Enter SubCategory Name</span>
+                                <input type="hidden" asp-for="@Model.id" />
                                 <input type="text" asp-for="@Model.createRequest.SubcateName" class="form-control" placeholder="Name">
                             </div>
 
@@ -267,8 +268,8 @@
                                         <tr>
                                             <td>
                                                 <span class="wt-checkbox">
-                                                    <input id="wt-namea" type="checkbox" name="head">
-                                                    <label for="wt-namea"></label>
+                                                    <input id="wt-namea-@item.SubCateId" type="checkbox" name="head">
+                                                    <label for="wt-namea-@item.SubCateId"></label>
                                                 </span>
                                             </td>
 
@@ -281,12 +282,12 @@
                                             <td>@item.CategoryName</td>
                                             <td>
                                                 <div class="wt-actionbtn">
-                                                    <a asp-page="./update" asp-route-id="@item.SubCateId" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                    <a asp-page="./update" asp-route-id="@item.SubCateId" asp-route-CateId="@Model.id" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="wt-actionbtn">
-                                                    <a asp-page="./delete" asp-route-id="@item.SubCateId" asp-page-handler="delete" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                    <a asp-page="./delete" asp-route-id="@item.SubCateId" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -301,7 +302,7 @@
                             <nav class="wt-pagination">
                                 <ul>
                                     <li class="wt-prevpage">
-                                        <a asp-page="./Index" asp-route-CurrentPage="@((Model.pagingRequest.CurrentPage-1)==0?Model.TotalPages:(Model.pagingRequest.CurrentPage-1))" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">
+                                        <a asp-page="./Index" asp-route-id="@Model.id" asp-route-CurrentPage="@((Model.pagingRequest.CurrentPage-1)==0?Model.TotalPages:(Model.pagingRequest.CurrentPage-1))" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">
                                             <i class="lnr lnr-chevron-left"></i>
                                         </a>
                                     </li>
@@ -309,20 +310,20 @@
                                     {
                                         for (int i = 1; i <= Model.TotalPages; i++)
                                         {
-                                            <li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">@i</a></li>
+                                            <li><a asp-route-id="@Model.id" asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">@i</a></li>
                                         }
                                     }
                                     else
                                     {
                                         for (int i = 1; i <= Model.TotalPages; i++)
                                         {
-                                            <li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">@i</a></li>
+                                            <li><a asp-route-id="@Model.id" asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">@i</a></li>
                                         }
                                         <li><a href="javascrip:void(0);">...</a></li>
-                                        <li><a asp-route-CurrentPage="@Model.TotalPages" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">Last Page</a></li>
+                                        <li><a asp-route-id="@Model.id" asp-route-CurrentPage="@Model.TotalPages" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">Last Page</a></li>
                                     }
                                     <li class="wt-nextpage">
-                                        <a asp-page="./Index" asp-route-CurrentPage="@((Model.pagingRequest.CurrentPage+1)>Model.TotalPages?1:(Model.pagingRequest.CurrentPage+1))" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">
+                                        <a asp-page="./Index" asp-route-id="@Model.id" asp-route-CurrentPage="@((Model.pagingRequest.CurrentPage+1)>Model.TotalPages?1:(Model.pagingRequest.CurrentPage+1))" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">
                                             <i class="lnr lnr-chevron-right"></i>
                                         </a>
                                     </li>

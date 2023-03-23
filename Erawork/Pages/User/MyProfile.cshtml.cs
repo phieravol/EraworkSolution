@@ -26,7 +26,8 @@ namespace Erawork.Pages.User
 			string? rawUser = HttpContext.Session.GetString("User");
 			if (rawUser != null)
 			{
-				user = JsonConvert.DeserializeObject<AppUser>(rawUser);
+				AppUser userFromSession = JsonConvert.DeserializeObject<AppUser>(rawUser);
+				user = await manageAccount.GetUserByUsername(userFromSession.UserName);
 				
 			}
 			if (user == null)
@@ -45,7 +46,7 @@ namespace Erawork.Pages.User
 			{
 				await manageAccount.UpdateProfile(user, Avatar);
 			}
-			return Page();
+			return RedirectToPage("/User/MyProfile");
 		}
 	}
 }

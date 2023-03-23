@@ -10,6 +10,7 @@ namespace AppModules.Users.Manage
 {
 	public interface IManageAccount
 	{
-		Task UpdateProfile(AppUser user, IFormFile avatar);
+        Task<AppUser> GetUserByUsername(string userName);
+        Task UpdateProfile(AppUser user, IFormFile avatar);
 	}
 }

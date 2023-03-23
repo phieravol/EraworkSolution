@@ -6,17 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ViewModels.CategoryVM.Admin;
+using ViewModels.CategoryVM.Public;
 
 namespace AppModules.Categories.Manage
 {
     public class ManageCategory : IManageCategory
     {
-        private readonly EraWorkContext _context;
+        private readonly EraWorkContext context;
         public ManageCategory(EraWorkContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         /// <summary>
@@ -39,8 +41,8 @@ namespace AppModules.Categories.Manage
                 CategoryImage = await SaveImageAsync(createViewModel.CategoryImage)
             };
             createViewModel.category = NewCategory;
-            _context.Categories.Add(NewCategory);
-            await _context.SaveChangesAsync();
+            context.Categories.Add(NewCategory);
+            await context.SaveChangesAsync();
         }
 
         public async Task<string?> SaveImageAsync(IFormFile? categoryImage)
@@ -68,7 +70,7 @@ namespace AppModules.Categories.Manage
         /// <exception cref="NotImplementedException"></exception>
         public async Task<List<Category>>? GetCategoriesAsync()
 		{
-			return await _context.Categories.ToListAsync();
+			return await context.Categories.ToListAsync();
 		}
 
 		/// <summary>
@@ -77,21 +79,44 @@ namespace AppModules.Categories.Manage
 		/// <param name="searchTerm"></param>
 		/// <returns></returns>
 		/// <exception cref="NotImplementedException"></exception>
-		public async Task<List<Category>> GetCategoriesByTermAsync(string searchTerm)
+		public async Task<List<CategoryViewModel>> GetCategoriesByTermAsync(string searchTerm)
 		{
-			return await _context.Categories.Where(c => c.CategoryName.Contains(searchTerm)).ToListAsync();
+            var query = from c in context.Categories
+                        join sub in context.SubCategories
+                        on c.CategoryId equals sub.CategoryId into subJoined
+                        from cateJoined in subJoined.DefaultIfEmpty()
+                        group cateJoined by new { 
+                            c.CategoryId, 
+                            c.CategoryName,
+                            c.CategoryDescription,
+                            c.CategoryImage,
+                            c.isCategoryActive
+                        } into joinedGroup
+                        select new CategoryViewModel() {
+                            CategoryId = joinedGroup.Key.CategoryId,
+                            CategoryName = joinedGroup.Key.CategoryName,
+                            CategoryDescription= joinedGroup.Key.CategoryDescription,
+                            CategoryImage = joinedGroup.Key.CategoryImage,
+                            isCategoryActive = joinedGroup.Key.isCategoryActive,
+                            TotalSubs = joinedGroup.Count(cateJoin => cateJoin!= null),
+                        };
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(x => x.CategoryName.Contains(searchTerm));
+            }
+            return await query.ToListAsync();
 		}
 
         public async Task DelCategoryAsync(int? id)
         {
             Category category = await GetCategoryByIdAsync(id);
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            context.Categories.Remove(category);
+            await context.SaveChangesAsync();
         }
 
         public async Task<Category> GetCategoryByIdAsync(int? id)
         {
-            var Category = from c in _context.Categories
+            var Category = from c in context.Categories
                            where c.CategoryId == id
                            select c;
             Category? category = Category.FirstOrDefault();
@@ -101,8 +126,8 @@ namespace AppModules.Categories.Manage
         public async Task UpdateCategoryAsync(Category NewCategory)
         {
             Category category = await GetCategoryByIdAsync(NewCategory.CategoryId);
-            _context.Categories.Update(NewCategory);
-            await _context.SaveChangesAsync();
+            context.Categories.Update(NewCategory);
+            await context.SaveChangesAsync();
         }
     }
 }
