@@ -25,11 +25,13 @@ namespace AppModules.Services.Public
 		{
 			var query = from s in context.Services
 						//join p in context.Pakages on s.ServiceId equals p.ServiceId
-						join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId
-						join c in context.Categories on sub.CategoryId equals c.CategoryId
+						join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId into groupsub
+                        from groupservice in groupsub.DefaultIfEmpty()
+                        join c in context.Categories on groupservice.CategoryId equals c.CategoryId into groupcate
+						from gj2 in groupcate.DefaultIfEmpty()
 						join u in context.AppUsers on s.UserId equals u.Id
 						where s.isServiceActive == true
-						select new {s, sub, c, u};
+						select new {s, groupservice, gj2, u};
 
 			// 2. Search
 			if (!string.IsNullOrEmpty(pagingRequest.SearchTerm))
@@ -39,7 +41,7 @@ namespace AppModules.Services.Public
 			}
 			if (pagingRequest.CategoryIds != null && pagingRequest.CategoryIds.Count > 0)
 			{
-				query = query.Where(x => pagingRequest.CategoryIds.Contains((int)x.c.CategoryId));
+				query = query.Where(x => pagingRequest.CategoryIds.Contains((int)x.gj2.CategoryId));
 			}
 			if (pagingRequest.RequiredLevels != null && pagingRequest.RequiredLevels.Count > 0)
 			{
@@ -56,8 +58,8 @@ namespace AppModules.Services.Public
 					ProviderFirstName = x.u.FirstName,
 					ProviderLastName = x.u.LastName,
 					UserName = x.u.UserName,
-					SubCategoryId = x.sub.SubCateId,
-					SubCateName = x.sub.SubcateName,
+					SubCategoryId = x.groupservice.SubCateId,
+					SubCateName = x.groupservice.SubcateName,
 					TotalClients = x.s.TotalClients,
 					TotalStars = x.s.TotalStars,
 					Avatar = x.u.UserAvatar,

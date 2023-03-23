@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Erawork.Hubs;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,15 @@ builder.Services.ConfigureApplicationCookie(op =>
     op.LoginPath = "/Users/Login";
     op.AccessDeniedPath = "/Admin/AccessDenied";
 });
+
+//config authentication cookies
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        .AddCookie(options =>
+        {
+            options.LoginPath = "/user/Login";
+            options.LogoutPath = "/user/Logout";
+            options.AccessDeniedPath = "/user/AccessDenied";
+        });
 
 //Config for authen author
 builder.Services.AddAuthorization(options =>

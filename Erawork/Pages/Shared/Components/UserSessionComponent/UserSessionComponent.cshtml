@@ -65,7 +65,7 @@ else
 		</figure>
 		<div class="wt-username">
 			<h3>@Model.FirstName @Model.LastName</h3>
-			<span>@Model.UserDesc</span>
+			<span>@Model.Slogan</span>
 		</div>
 		<nav class="wt-usernav">
 			<ul>
@@ -130,9 +130,9 @@ else
 					</a>
 				</li>
 				<li>
-					<a href="index-2.html">
-						<span>Logout</span>
-					</a>
+					<form asp-page="/User/Logout" method="post">
+						<span><button type="submit">Logout</button></span>
+					</form>
 				</li>
 			</ul>
 		</nav>
