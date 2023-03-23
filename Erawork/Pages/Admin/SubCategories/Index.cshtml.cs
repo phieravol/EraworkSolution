@@ -3,6 +3,7 @@ using AppModules.SubCategories.Admin;
 using Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ViewModels.SubCatesViewModel;
 using ViewModels.SubCatesViewModel.Admin;
@@ -54,16 +55,18 @@ namespace Erawork.Pages.Admin.SubCategories
             categories = await manageCategory.GetCategoriesAsync();
             subcates = await manageSubcates.PagingSubcategoriesAsync(pagingRequest, id);
             List<SubCategory> listSubCate = await manageSubcates.GetSubCatesAsync();
-            TotalPages = (int)Math.Ceiling(subcates.Count() / (double)pagingRequest.PageSize);
+            TotalPages = (int)Math.Ceiling(listSubCate.Count() / (double)pagingRequest.PageSize);
           
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
+            subcates = await manageSubcates.PagingSubcategoriesAsync(pagingRequest, id);
             categories = await manageCategory.GetCategoriesAsync();
             await manageSubcates.CreateSubcateAsync(createRequest);
-            
-            return Page();
+            List<SubCategory> listSubCate = await manageSubcates.GetSubCatesAsync();
+            TotalPages = (int)Math.Ceiling(listSubCate.Count() / (double)pagingRequest.PageSize);
+            return RedirectToPage("./Index");
         }
     }
 }

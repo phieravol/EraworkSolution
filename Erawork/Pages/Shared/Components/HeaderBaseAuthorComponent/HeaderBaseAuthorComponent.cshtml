@@ -1,0 +1,124 @@
+﻿@model string
+
+@if (Model == "Admin")
+{
+    <li class="nav-item">
+        <a href="howitworks.html">Manage User</a>
+    </li>
+    <li class="menu-item-has-children page_item_has_children">
+        <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+        <a href="javascript:void(0);">Manages</a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Admin/Categories"> Categories </a>
+            </li>
+            <li class="current-menu-item">
+                <a href="/Admin/SubCategories"> SubCategories </a>
+            </li>
+            @*<li>
+        <a href="jobproposal.html">Job Proposal</a>
+        </li>*@
+        </ul>
+    </li>
+    <li class="menu-item-has-children page_item_has_children">
+        <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+        <a href="javascript:void(0);">View Report</a>
+        <ul class="sub-menu">
+            <li>
+                <a href="userlisting.html"> Current Services </a>
+            </li>
+            <li class="current-menu-item">
+                <a href="usersingle.html"> Current Posted </a>
+            </li>
+        </ul>
+    </li>
+}
+
+@if (Model == "Provider")
+{
+    <li class="nav-item">
+        <a href="howitworks.html">How It Works</a>
+    </li>
+    <li class="menu-item-has-children page_item_has_children">
+        <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+        <a href="javascript:void(0);">Manage My Work</a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Services/Provider">My Services</a>
+            </li>
+            <li class="current-menu-item">
+                <a href="/Pakages/Provider">My Package</a>
+            </li>
+            <li>
+                <a href="javascript:void(0);">Clients Offer</a>
+            </li>
+        </ul>
+    </li>
+    <li class="menu-item-has-children page_item_has_children">
+        <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+        <a href="javascript:void(0);">Browser Jobs</a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Posts">View Posted</a>
+            </li>
+            @*<li class="current-menu-item">
+                <a href="javascript:void(0);">User Single</a>
+            </li>*@
+        </ul>
+    </li>
+}
+
+@if (Model == "Client")
+{
+    <li class="nav-item">
+        <a href="howitworks.html">How It Works</a>
+    </li>
+    <li class="menu-item-has-children page_item_has_children">
+        <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+        <a href="javascript:void(0);">Manage Jobs</a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Posts">My Posts</a>
+            </li>
+            @*<li class="current-menu-item">
+                <a href="jobsingle.html">Job Single</a>
+            </li>
+            <li>
+                <a href="jobproposal.html">Job Proposal</a>
+            </li>*@
+        </ul>
+    </li>
+    <li class="menu-item-has-children page_item_has_children">
+        <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+        <a href="javascript:void(0);">View Freelancers</a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/services">Services Listing</a>
+            </li>
+            @*<li class="current-menu-item">
+                <a href="usersingle.html">User Single</a>
+            </li>*@
+        </ul>
+    </li>
+}
+
+@if (Model is null)
+{
+    <li class="nav-item">
+        <a href="howitworks.html">How It Works</a>
+    </li>
+    <li class="menu-item-has-children page_item_has_children">
+        <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+        <a href="javascript:void(0);">Browse Jobs</a>
+        <ul class="sub-menu">
+            <li>
+                <a href="/Posts">Post Listing</a>
+            </li>
+            <li class="current-menu-item">
+                <a href="/Services">Services Listing</a>
+            </li>
+        </ul>
+    </li>
+    
+}
+

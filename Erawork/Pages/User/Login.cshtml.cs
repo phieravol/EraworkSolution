@@ -16,7 +16,6 @@ namespace Erawork.Pages.User
         private readonly IPublicUser publicUser;
         private readonly UserManager<AppUser> userManager;
 
-        // generating constructor
         public LoginModel(EraWorkContext context, IPublicUser publicUser, UserManager<AppUser> userManager)
         {
             this.context = context;

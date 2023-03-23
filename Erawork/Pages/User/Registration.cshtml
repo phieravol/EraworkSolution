@@ -81,10 +81,10 @@
                     {
                         foreach (var item in Model.roles)
                         {
-                            if (item.Name != "Admin")
-                            {
+                            @*if (item.Name != "Admin")
+                            {*@
                                 <option asp-for="registerRequest.RoleId" value="@item.Id">@item.Name</option>
-                            }
+                            @*}*@
                         }
                     }
                 </select>

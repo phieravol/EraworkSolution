@@ -37,7 +37,7 @@
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<strong class="wt-logo"><a href="index-2.html"><img src="~/assets/images/logo.png" alt="company logo here"></a></strong>
+								<strong class="wt-logo"><a href="/Index"><img src="~/assets/images/logo.png" alt="company logo here"></a></strong>
 								<div class="wt-rightarea">
 									<nav id="wt-nav" class="wt-nav navbar-expand-lg">
 										<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,34 +51,8 @@
 													@await Component.InvokeAsync("CategoriesMenuComponent")
 												</li>
 
-												<li class="nav-item">
-													<a href="howitworks.html">How It Works</a>
-												</li>
-												<li class="menu-item-has-children page_item_has_children"><span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-													<a href="javascript:void(0);">Browse Jobs</a>
-													<ul class="sub-menu">
-														<li>
-															<a href="joblisting.html">Job Listing</a>
-														</li>
-														<li class="current-menu-item">
-															<a href="jobsingle.html">Job Single</a>
-														</li>
-														<li>
-															<a href="jobproposal.html">Job Proposal</a>
-														</li>
-													</ul>
-												</li>
-												<li class="menu-item-has-children page_item_has_children"><span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-													<a href="javascript:void(0);">View Freelancers</a>
-													<ul class="sub-menu">
-														<li>
-															<a href="userlisting.html">User Listing</a>
-														</li>
-														<li class="current-menu-item">
-															<a href="usersingle.html">User Single</a>
-														</li>
-													</ul>
-												</li>
+                                                @await Component.InvokeAsync("HeaderBaseAuthorComponent")
+												
 											</ul>
 										</div>
 									</nav>
@@ -102,7 +76,7 @@
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                                 <div class="wt-footerlogohold">
-                                    <strong class="wt-logo"><a href="index-2.html"><img src="~/assets/images/flogo.png" alt="company logo here"></a></strong>
+                                    <strong class="wt-logo"><a href="/Index"><img src="~/assets/images/flogo.png" alt="company logo here"></a></strong>
                                     <div class="wt-description">
                                         <p>Dotem eiusmod tempor incune utnaem labore etdolore maigna aliqua enim poskina ilukita ylokem lokateise ination voluptate velit esse cillum dolore eu fugiat nulla pariatur lokaim urianewce <a href="javascript:void(0);">more...</a></p>
                                     </div>

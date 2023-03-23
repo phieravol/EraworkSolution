@@ -42,7 +42,7 @@ namespace Erawork.Pages.Admin.SubCategories
         public async Task<IActionResult> OnPostAsync()
         {
             await manageSub.DelSubcateAsync(Id);
-            return RedirectToPage($"https://localhost:7039/Admin/SubCategories?id={CateId}");
+            return RedirectToPage("./Index");
         }
     }
 }
