@@ -33,6 +33,7 @@ namespace AppModules.Services.Admin
 			{
 				ServiceTitle = request.ServiceTitle,
 				ServiceIntro = request.ServiceIntro,
+				ServiceDetails = request.ServiceDetails,
 				ServiceImage = await saveImage.SaveImageAsync(request.ServiceImage, folderPath),
 				SubCategoryId = request.SubCategoryId,
 				isServiceActive = request.isServiceActive,

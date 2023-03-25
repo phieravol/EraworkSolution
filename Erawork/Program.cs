@@ -41,7 +41,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
 
 builder.Services.ConfigureApplicationCookie(op =>
 {
-    op.LoginPath = "/Users/Login";
+    op.LoginPath = "/User/Login";
     op.AccessDeniedPath = "/Admin/AccessDenied";
 });
 
@@ -57,8 +57,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 //Config for authen author
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("admin"));
-    options.AddPolicy("RequireUserRole", policy => policy.RequireRole("user"));
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("ProviderOnly", policy => policy.RequireRole("Provider"));
+    options.AddPolicy("ClientOnly", policy => policy.RequireRole("Client"));
 });
 
 

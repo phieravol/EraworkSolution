@@ -51,6 +51,7 @@ namespace Erawork.Pages.Services.Provider
                 ServiceId = currentService.ServiceId,
                 ServiceTitle = currentService.ServiceTitle,
                 ServiceIntro = currentService.ServiceIntro,
+                ServiceDetails = currentService.ServiceDetails,
                 isServiceActive = currentService.isServiceActive,
                 SubCategoryId = currentService.SubCategoryId,
                 TotalClients = currentService.TotalClients,
@@ -76,6 +77,7 @@ namespace Erawork.Pages.Services.Provider
             currentService.SubCategoryId = UpdateRequest.SubCategoryId;
             currentService.TotalStars = UpdateRequest.TotalStars;
             currentService.TotalClients = UpdateRequest.TotalClients;
+            currentService.ServiceDetails = UpdateRequest.ServiceDetails;
             currentService.UserId = user.Id;
 
             await manageServices.UpdateServiceAsync(currentService);

@@ -55,7 +55,7 @@
 							<div class="row">
 								<div class="wt-userprofile">
 									<figure>
-										<img src="~/@Model.Services.ServiceImage" alt="img description">
+										<img src="~/@Model.Services.Avatar" alt="img description">
 										<div class="wt-userdropdown wt-online">
 										</div>
 									</figure>
@@ -96,7 +96,21 @@
 						</div>
 
 					</div>
-					
+					<div class="wt-articlesingle-holder wt-bgwhite">
+						<div class="wt-articlesingle-content">
+							<figure class="wt-singleimg-one">
+								<img src="~/@Model.Services.ServiceImage" alt="img description">
+							</figure>
+							<div class="wt-title">
+								<h2>Service Details</h2>
+							</div>
+							
+							<div class="wt-description">
+								@Html.Raw(Model.Services.ServiceDetails)
+							</div>
+							
+						</div>
+					</div>
 				</div>
 				<!--Register Form Start-->
 				<section class="wt-haslayout wt-dbsectionspace">
@@ -115,69 +129,36 @@
 												<li class="wt-packageprices"><span>Price</span></li>
 												<li><span>Revision Limit</span></li>
 												<li><span>Delivery Days</span></li>
-												<li><span>Package Duration</span></li>
-												<li><span>Best Freelancer Search</span></li>
-												<li><span>Professional Offer Template</span></li>
-												<li><span>Free 07 Days Extension</span></li>
 											</ul>
 										</div>
 									</div>
-									<div class="wt-package wt-baiscpackage">
-										<div class="wt-packagehead">
-											<h3>Baisc Plan</h3>
-											<span>Starter Plan For Newbie</span>
-										</div>
-										<div class="wt-packagecontent">
-											<ul class="wt-packageinfo">
-												<li class="wt-packageprice"><span><sup>$</sup>37<sub>\ Month</sub></span></li>
-												<li><span>10</span></li>
-												<li><span><i class="ti-na"></i></span></li>
-												<li><span>30 Days</span></li>
-												<li><span><i class="ti-check"></i></span></li>
-												<li><span><i class="ti-na"></i></span></li>
-												<li><span><i class="ti-na"></i></span></li>
-											</ul>
-											<a class="wt-btn" href="javascript:void(0);"><span>Buy Now</span></a>
-										</div>
-									</div>
-									<div class="wt-package wt-standardpackage">
-										<div class="wt-packagehead">
-											<span class="wt-featuredtag"><i class="fa fa-star"></i></span>
-											<h3>Standard</h3>
-											<span>Populor Plan For Professionals</span>
-											<em>24 Days Left</em>
-										</div>
-										<div class="wt-packagecontent">
-											<ul class="wt-packageinfo">
-												<li class="wt-packageprice"><span><sup>$</sup>79<sub>\ Month</sub></span></li>
-												<li><span>30</span></li>
-												<li><span><i class="ti-check"></i></span></li>
-												<li><span>30 Days</span></li>
-												<li><span><i class="ti-check"></i></span></li>
-												<li><span><i class="ti-na"></i></span></li>
-												<li><span><i class="ti-na"></i></span></li>
-											</ul>
-											<a class="wt-btn" href="javascript:void(0);"><span>Buy Now</span></a>
-										</div>
-									</div>
-									<div class="wt-package wt-extendedpackage">
-										<div class="wt-packagehead">
-											<h3>Extended</h3>
-											<span>Extended Plan For Managerial</span>
-										</div>
-										<div class="wt-packagecontent">
-											<ul class="wt-packageinfo">
-												<li class="wt-packageprice"><span><sup>$</sup>199<sub>\ Month</sub></span></li>
-												<li><span>Unlimited</span></li>
-												<li><span><i class="ti-check"></i></span></li>
-												<li><span>30 Days</span></li>
-												<li><span><i class="ti-check"></i></span></li>
-												<li><span><i class="ti-check"></i></span></li>
-												<li><span><i class="ti-check"></i></span></li>
-											</ul>
-											<a class="wt-btn" href="javascript:void(0);"><span>Buy Now</span></a>
-										</div>
-									</div>
+
+									@if (Model.PakagesByService is null)
+									{
+										<h2>No packages have been created yet</h2>
+									}
+									else
+									{
+										@foreach (var item in Model.PakagesByService)
+										{
+											<div class="wt-package wt-baiscpackage">
+												<div class="wt-packagehead">
+													<h3>@item.PakageName</h3>
+												</div>
+												<div class="wt-packagecontent">
+													<ul class="wt-packageinfo">
+														<li class="wt-packageprice"><span><sup>$</sup>@item.Price<sub>\ Month</sub></span></li>
+														<li><span>@item.RevisionLimit</span></li>
+
+														<li><span>@item.DeliveryDays</span></li>
+
+													</ul>
+													<a class="wt-btn" href="javascript:void(0);"><span>Buy Now</span></a>
+												</div>
+											</div>
+										}
+									}
+									
 								</div>
 							</div>
 						</div>
@@ -294,7 +275,7 @@
 				<div class="wt-projectdropdown-hold">
 					<div class="wt-projectdropdown">
 						<div class="wt-projectselect">
-							<figure><img src="images/thumbnail/img-07.jpg" alt="img description"></figure>
+							<figure><img src="~/assets/images/thumbnail/img-07.jpg" alt="img description"></figure>
 							<div class="wt-projectselect-content">
 								<h3>Project Title Here</h3>
 								<span><i class="lnr lnr-calendar-full"></i> Project Deadline: May 27, 2019</span>
@@ -303,7 +284,7 @@
 					</div>
 					<div class="wt-projectdropdown-option">
 						<div class="wt-projectselect">
-							<figure><img src="images/thumbnail/img-07.jpg" alt="img description"></figure>
+							<figure><img src="~/assets/images/thumbnail/img-07.jpg" alt="img description"></figure>
 							<div class="wt-projectselect-content">
 								<h3>Project Title Here</h3>
 								<span><i class="lnr lnr-calendar-full"></i> Project Deadline: May 27, 2019</span>

@@ -17,6 +17,9 @@ namespace ViewModels.ServiceViewModel.Admin
 
         [Display(Name ="Service Description")]
         public string? ServiceIntro { get; set; }
+        
+        [Display(Name ="Service Details")]
+        public string? ServiceDetails { get; set; }
 
         [Required]
         [Display(Name ="Select Category")]
@@ -30,7 +33,7 @@ namespace ViewModels.ServiceViewModel.Admin
 
         [Required]
         [Display(Name = "Service status")]
-        public bool? isServiceActive { get; set; }
+        public bool isServiceActive { get; set; }
 
         [Display(Name ="Service Image")]
         public IFormFile? ServiceImage { get; set; }
