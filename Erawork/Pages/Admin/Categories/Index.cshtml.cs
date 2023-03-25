@@ -8,10 +8,12 @@ using System.Drawing.Printing;
 using ViewModels.CategoryVM.Admin;
 using Microsoft.AspNetCore.Http;
 using ViewModels.CategoryVM.Public;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Erawork.Pages.Admin.Categories
 {
-    public class IndexModel : PageModel
+	[Authorize(Roles = "Admin")]
+	public class IndexModel : PageModel
     {
         private readonly IManageCategory _categoryManage;
         private readonly EraWorkContext _context;

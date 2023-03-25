@@ -22,6 +22,8 @@ namespace ViewModels.ServiceViewModel.Admin
 
         [Display(Name = "Service Description")]
         public string? ServiceIntro { get; set; }
+        [Display(Name = "Service Details")]
+        public string? ServiceDetails { get; set; }
 
         [Required]
         [Display(Name = "Select Category")]

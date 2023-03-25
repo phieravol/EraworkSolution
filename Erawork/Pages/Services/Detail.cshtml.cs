@@ -17,21 +17,20 @@ namespace Erawork.Pages.Services
 			this.managePakages = managePakages;
 		}
 
-        [BindProperty(SupportsGet = true)] public int DetailId { get; set; }
+        [BindProperty(SupportsGet = true)] public int id { get; set; }
         public ServicesVM Services { get; set; }
+		public List<Pakage> PakagesByService { get; set; }
 		public async Task<IActionResult> OnGetAsync()
         {
-            Services = await publicServices.GetServiceDetailAsync(DetailId);
-			Services.Pakages = managePakages.GetPakagesService(Services.ServiceId);
-			if (Services == null)
+            Services = await publicServices.GetServiceDetailAsync(id);
+
+            PakagesByService = managePakages.GetPakagesService(Services.ServiceId);
+
+            if (PakagesByService!= null)
 			{
-				HttpContext.Response.Clear();
-				HttpContext.Response.StatusCode = 404;
-
-				HttpContext.Response.Redirect("/Errors/Error404");
-			}
-
-			return Page();
+                Services.Pakages = PakagesByService;
+            }
+            return Page();
         }
     }
 }

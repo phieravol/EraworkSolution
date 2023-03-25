@@ -33,6 +33,7 @@ namespace AppModules.Services.Admin
 			{
 				ServiceTitle = request.ServiceTitle,
 				ServiceIntro = request.ServiceIntro,
+				ServiceDetails = request.ServiceDetails,
 				ServiceImage = await saveImage.SaveImageAsync(request.ServiceImage, folderPath),
 				SubCategoryId = request.SubCategoryId,
 				isServiceActive = request.isServiceActive,
@@ -71,12 +72,13 @@ namespace AppModules.Services.Admin
 		{
 			// 1. Select all service of current user
 			var query = from s in context.Services
+						join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId into groupsub
+						from groupservice in groupsub.DefaultIfEmpty()
 						join u in context.AppUsers on s.UserId equals u.Id
-						join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId
 						join ur in context.UserRoles on u.Id equals ur.UserId
 						join ro in context.AppRoles on ur.RoleId equals ro.Id
 						where u.UserName.Equals(UserName)
-						select new { s, sub, u, ro };
+						select new { s, groupservice, u, ro };
 
 			// 2. search
 			if (!string.IsNullOrEmpty(request.searchTerm))
@@ -96,7 +98,7 @@ namespace AppModules.Services.Admin
 					ProviderFirstName = x.u.FirstName,
 					ProviderLastName= x.u.LastName,
 					SubCategoryId = x.s.SubCategoryId,
-					SubCateName = x.sub.SubcateName,
+					SubCateName = x.groupservice.SubcateName,
 					TotalClients= (x.s.TotalClients == null)?0:x.s.TotalClients,
 					TotalStars= (x.s.TotalStars == null)?0:x.s.TotalStars
 				});

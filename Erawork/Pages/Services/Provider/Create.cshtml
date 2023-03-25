@@ -1,7 +1,6 @@
 ﻿@page
-@model Erawork.Pages.Posts.Client.CreateModel
+@model Erawork.Pages.Services.Provider.CreateModel
 @{
-    
 }
 
 <head>
@@ -35,108 +34,98 @@
 
 <!--Main Start-->
 <main id="wt-main" class="wt-main wt-haslayout d-flex">
-    
+
     <!--Register Form Start-->
     <section class="wt-haslayout wt-dbsectionspace">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 float-left">
                 <div class="wt-dashboardbox">
                     <div class="wt-dashboardboxtitle">
-                        <h2>Post a Job</h2>
+                        <h2>Create my Services</h2>
                     </div>
                     <div class="wt-dashboardboxcontent">
                         <div class="wt-jobdescription wt-tabsinfo">
                             <div class="wt-tabscontenttitle">
-                                <h2>Job Description</h2>
+                                <h2>Service Description</h2>
                             </div>
-                            <form method="POST" class="wt-formtheme wt-userform wt-userformvtwo">
+                            <form method="POST" enctype="multipart/form-data" class="wt-formtheme wt-userform wt-userformvtwo">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input asp-for="@Model.createRequest.PostTitle" type="text" class="form-control" placeholder="Job Title" required />
-                                    </div>
-                                    <div class="form-group form-group-half wt-formwithlabel">
-                                        <span class="wt-select">
-                                            <label for="selectoption">Require Level:</label>
-                                            <select asp-for="@Model.createRequest.LevelRequired">
-                                                <option value="Beginer">Beginer</option>
-                                                <option value="Intermediate">Intermediate</option>
-                                                <option value="Profesional">Professional</option>
-                                                <option value="Expert">Expert</option>
-                                                <option value="Enterprise">Enterprise</option>
-                                            </select>
-                                        </span>
+                                        <input type="text" asp-for="@Model.createRequest.ServiceTitle" class="form-control" placeholder="Service Title" required />
                                     </div>
                                     
-                                    <div class="form-group form-group-half wt-formwithlabel">
-                                        <input type="date" asp-for="@Model.createRequest.ExpirationDate" class="form-control" required />
-                                    </div>
-                                    <div class="form-group form-group-half wt-formwithlabel">
-                                        <input type="text" asp-for="@Model.createRequest.Budget" class="form-control" placeholder="Budget" required />
-                                    </div>
-                                    
-                                    <div class="form-group form-group-half wt-formwithlabel">
+                                    <div class="form-group wt-formwithlabel">
                                         <span class="wt-select">
                                             <label for="selectoption">Category: </label>
-                                            <select asp-for="@Model.createRequest.CategoryId" required>
-                                                @foreach (var item in Model.Categories)
+                                            <select asp-for="@Model.createRequest.SubCategoryId" required>
+                                                @foreach (var item in Model.subCategories)
                                                 {
-                                                    <option value="@item.CategoryId">@item.CategoryName</option>
+                                                    <option value="@item.SubCateId">@item.SubcateName</option>
                                                 }
                                             </select>
                                         </span>
                                     </div>
                                 </fieldset>
-                                <div class="wt-jobdetails wt-tabsinfo">
+
+                                <div class="wt-jobdetails wt-tabsinfo mt-3">
 
                                     <div class="wt-tabscontenttitle">
-                                        <h2>Job Overview Description</h2>
+                                        <h2>Services Overview Description</h2>
                                     </div>
                                     <fieldset class="mb-3">
                                         <div class="form-group">
-                                            <textarea class="form-control" asp-for="@Model.createRequest.SortDesc" rows="5" placeholder="Enter Job Sort Description"></textarea>
+                                            <textarea class="form-control" asp-for="@Model.createRequest.ServiceIntro" rows="5" placeholder="Enter Job Sort Description"></textarea>
                                         </div>
                                     </fieldset>
 
                                     <div class="wt-tabscontenttitle">
-                                        <h2>Job Details</h2>
+                                        <h2>Service Details</h2>
                                     </div>
-                                    
+
                                     <fieldset>
                                         <div class="form-group">
-                                            <textarea asp-for="@Model.createRequest.PostDetails" id="wt-ckeditor" rows="20" class="wt-tinymceeditor" placeholder="Add Job Detail Here"></textarea>
+                                            <textarea  id="wt-ckeditor" asp-for="@Model.createRequest.ServiceDetails" rows="20" class="wt-tinymceeditor" placeholder="Add Service Detail Here"></textarea>
                                         </div>
                                     </fieldset>
-                                    
+
+                                </div>
+                                <div class="form-group form-group-label">
+                                    <div class="wt-labelgroup">
+                                        <label>
+                                            <span class="wt-btn">Select Files</span>
+                                            <input type="file" accept=".jpg, .jpeg, .png" id="imageCategory" asp-for="@Model.createRequest.ServiceImage">
+                                        </label>
+                                        <span>Drop Service Thumbnail here to upload</span>
+                                        <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+                                    </div>
                                 </div>
                                 <div class="wt-tabscontenttitle">
                                     <h2>Make it public after Post?</h2>
                                     <div class="wt-rightarea">
                                         <span></span>
                                         <div class="wt-on-off float-right">
-                                            <input type="checkbox" id="hide-on" asp-for="@Model.createRequest.isPostPublic" />
+                                            <input type="checkbox" asp-for="@Model.createRequest.isServiceActive" id="hide-on"  />
                                             <label for="hide-on"><i></i></label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="wt-jobdetails wt-tabsinfo">
                                     <div class="d-flex justify-content-between">
-                                        <input type="submit" value="Post Job Now" class="wt-btn" />
+                                        <input type="submit" value="Create Service Now" class="wt-btn" />
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        
+
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </section>
     <!--Register Form End-->
 </main>
 <!--Main End-->
-
-
 @section scripts{
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

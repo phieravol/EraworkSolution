@@ -25,11 +25,13 @@ namespace AppModules.Services.Public
 		{
 			var query = from s in context.Services
 						//join p in context.Pakages on s.ServiceId equals p.ServiceId
-						join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId
-						join c in context.Categories on sub.CategoryId equals c.CategoryId
+						join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId into groupsub
+                        from groupservice in groupsub.DefaultIfEmpty()
+                        join c in context.Categories on groupservice.CategoryId equals c.CategoryId into groupcate
+						from gj2 in groupcate.DefaultIfEmpty()
 						join u in context.AppUsers on s.UserId equals u.Id
 						where s.isServiceActive == true
-						select new {s, sub, c, u};
+						select new {s, groupservice, gj2, u};
 
 			// 2. Search
 			if (!string.IsNullOrEmpty(pagingRequest.SearchTerm))
@@ -39,7 +41,7 @@ namespace AppModules.Services.Public
 			}
 			if (pagingRequest.CategoryIds != null && pagingRequest.CategoryIds.Count > 0)
 			{
-				query = query.Where(x => pagingRequest.CategoryIds.Contains((int)x.c.CategoryId));
+				query = query.Where(x => pagingRequest.CategoryIds.Contains((int)x.gj2.CategoryId));
 			}
 			if (pagingRequest.RequiredLevels != null && pagingRequest.RequiredLevels.Count > 0)
 			{
@@ -56,8 +58,8 @@ namespace AppModules.Services.Public
 					ProviderFirstName = x.u.FirstName,
 					ProviderLastName = x.u.LastName,
 					UserName = x.u.UserName,
-					SubCategoryId = x.sub.SubCateId,
-					SubCateName = x.sub.SubcateName,
+					SubCategoryId = x.groupservice.SubCateId,
+					SubCateName = x.groupservice.SubcateName,
 					TotalClients = x.s.TotalClients,
 					TotalStars = x.s.TotalStars,
 					Avatar = x.u.UserAvatar,
@@ -68,32 +70,35 @@ namespace AppModules.Services.Public
 		public async Task<ServicesVM> GetServiceDetailAsync(int detailId)
 		{
 			var query = from s in context.Services
-						join u in context.AppUsers on s.UserId equals u.Id
-						join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId
-						join c in context.Categories on sub.CategoryId equals c.CategoryId
-						where s.ServiceId == detailId
-						select new { s, u, sub, c };
-			//var services = query.FirstOrDefaultAsync();
-			var services = query.Select(x => new ServicesVM()
-			{
-				ServiceId = x.s.ServiceId,
-				ServiceTitle = x.s.ServiceTitle,
-				ServiceIntro = x.s.ServiceIntro,
-				ServiceImage = x.s.ServiceImage,
-				isServiceActive = x.s.isServiceActive,
-				ProviderFirstName = x.u.FirstName,
-				ProviderLastName = x.u.LastName,
-				Avatar= x.u.UserAvatar,
-				TotalStars= x.s.TotalStars,
-				TotalClients= x.s.TotalClients,
-				SubCategoryId = x.s.SubCategoryId,
+						join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId into subGroup
+						from sub in subGroup.DefaultIfEmpty()
+						join cate in context.Categories on sub.CategoryId equals cate.CategoryId into cateGroup
+						from cate in cateGroup.DefaultIfEmpty()
+                        where s.ServiceId == detailId
+                        select new { 
+							s,sub,cate
+						};
+            var services = query.Select(x => new ServicesVM()
+            {
+                ServiceId = x.s.ServiceId,
+                ServiceTitle = x.s.ServiceTitle,
+                ServiceIntro = x.s.ServiceIntro,
+				ServiceDetails = x.s.ServiceDetails,
+                ServiceImage = x.s.ServiceImage,
+                isServiceActive = x.s.isServiceActive,
+				//ProviderFirstName = x.u.FirstName,
+				//ProviderLastName = x.u.LastName,
+				//Avatar = x.u.UserAvatar,
+				//MemberSince = x.u.MemberSince,
+				TotalStars = x.s.TotalStars,
+                TotalClients = x.s.TotalClients,
+                SubCategoryId = x.s.SubCategoryId,
 				SubCateName = x.sub.SubcateName,
-				MemberSince = x.u.MemberSince,
-				CategoryName = x.c.CategoryName
+				
+				CategoryName = x.cate.CategoryName
 			});
-
-			return await services.FirstOrDefaultAsync();
-		}
+            return await services.FirstOrDefaultAsync();
+        }
 
         
         private async Task<List<ServicesVM>> GetRawActiveServicesAsync()

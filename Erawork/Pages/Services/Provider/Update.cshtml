@@ -21,8 +21,15 @@
 
                     <span class="wt-select">
                         <select asp-for="@Model.UpdateRequest.isServiceActive">
-                            <option value="@true" selected="@(Model.UpdateRequest.isServiceActive==true ? "selected": "")">Active</option>
-                            <option value="@false" selected="@(Model.UpdateRequest.isServiceActive==false ? "selected": "")">Inactive</option>
+                            @if (Model.UpdateRequest.isServiceActive == true)
+                            {
+                                <option value="@true" selected>Active</option>
+                            } else
+                            {
+                                <option value="@false" selected>Inactive</option>
+                            }
+
+                            
                         </select>
                     </span>
                 </div>
@@ -37,7 +44,14 @@
                             <option value="">Pick one</option>
                             @foreach (var item in Model.subCates)
                             {
-                                <option value="@item.SubCateId" selected="@(item.SubCateId == Model.UpdateRequest.SubCategoryId?"selected":"")">@item.SubcateName</option>
+                                if (item.SubCateId == Model.UpdateRequest.SubCategoryId)
+                                {
+                                    <option value="@item.SubCateId" selected>@item.SubcateName</option>
+                                } else
+                                {
+                                    <option value="@item.SubCateId">@item.SubcateName</option>
+                                }
+
                             }
                         </select>
                     </span>
@@ -51,6 +65,11 @@
                         <span>Drop files here to upload</span>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <textarea id="wt-ckeditor" asp-for="@Model.UpdateRequest.ServiceDetails" rows="20" class="wt-tinymceeditor" placeholder="Add Service Detail Here"></textarea>
+                </div>
+
                 <div class="form-group">
                     <ul class="wt-attachfile">
                         <li class="wt-uploading">
@@ -66,3 +85,20 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#wt-ckeditor'), {
+                //toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    </script>
+}
