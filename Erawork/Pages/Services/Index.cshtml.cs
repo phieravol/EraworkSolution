@@ -45,8 +45,9 @@ namespace Erawork.Pages.Services
 
 			if (ModelState.IsValid)
 			{
+				int TotalRow = await publicServices.CountTotalRecord(PagingRequest);
 				Services = await publicServices.GetPublicServicesAsync(PagingRequest);
-				TotalPages = (int)Math.Ceiling(Services.Count() / (double)PagingRequest.PageSize);
+				TotalPages = (int)Math.Ceiling(TotalRow / (double)PagingRequest.PageSize);
 			}
 			return Page();
 		}

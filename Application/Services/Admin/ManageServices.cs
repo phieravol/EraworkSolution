@@ -39,6 +39,7 @@ namespace AppModules.Services.Admin
 				isServiceActive = request.isServiceActive,
 				TotalClients = request.TotalClients,
 				TotalStars = request.TotalStars,
+				ServiceAuthor = User.UserName,
 				UserId = User.Id,
 			};
 
@@ -126,6 +127,7 @@ namespace AppModules.Services.Admin
             Service currentService = await GetServiceByIdAsync(newService.ServiceId);
 			if (currentService != null)
 			{
+
 				context.Services.Update(currentService);
                 await context.SaveChangesAsync();
             }

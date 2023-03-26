@@ -12,7 +12,7 @@ namespace ViewModels.ServiceViewModel
 		public int ServiceId { get; set; }
 		public string? ServiceTitle { get; set; }
 		public string? ServiceIntro { get; set; }
-		
+		public string? ServiceAuthor { get; set; }
 		public string? ServiceDetails { get; set; }
 		public int? SubCategoryId { get; set; }
 		public string? SubCateName { get; set; }

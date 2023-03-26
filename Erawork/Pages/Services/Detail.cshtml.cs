@@ -20,10 +20,10 @@ namespace Erawork.Pages.Services
         [BindProperty(SupportsGet = true)] public int id { get; set; }
         public ServicesVM Services { get; set; }
 		public List<Pakage> PakagesByService { get; set; }
+        public AppUser Author { get; set; }
 		public async Task<IActionResult> OnGetAsync()
         {
             Services = await publicServices.GetServiceDetailAsync(id);
-
             PakagesByService = managePakages.GetPakagesService(Services.ServiceId);
 
             if (PakagesByService!= null)
