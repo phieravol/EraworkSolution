@@ -9,19 +9,20 @@ using ViewModels.CategoryVM.Admin;
 using Microsoft.AspNetCore.Http;
 using ViewModels.CategoryVM.Public;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 namespace Erawork.Pages.Admin.Categories
 {
 	public class IndexModel : PageModel
     {
-        private readonly IManageCategory _categoryManage;
-        private readonly EraWorkContext _context;
-        private readonly ILogger<IndexModel> _logger;
-        public IndexModel(IManageCategory categorFactory, EraWorkContext context, ILogger<IndexModel> logger)
+        private readonly IManageCategory categoryManage;
+        private readonly UserManager<AppUser> userManager;
+
+        public IndexModel(IManageCategory categorFactory, UserManager<AppUser> userManager)
         {
-            _context = context;
-            _categoryManage = categorFactory;
-            _logger = logger;
+            this.categoryManage = categorFactory;
+            this.userManager = userManager;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -51,11 +52,32 @@ namespace Erawork.Pages.Admin.Categories
             }
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            Categories = await _categoryManage.GetCategoriesByTermAsync(ViewModel.searchTerm);
+			//get user session
+			string? rawUser = HttpContext.Session.GetString("User");
+			AppUser? user = null;
+			if (rawUser != null)
+			{
+				user = JsonConvert.DeserializeObject<AppUser>(rawUser);
+			}
+			if (user == null)
+			{
+                return RedirectToPage("/User/Login");
+			}
+            else
+            {
+                var Role = await userManager.GetRolesAsync(user);
+                if (Role[0] != "Admin")
+                {
+                    return RedirectToPage("/Forbidden");
+                }
+            }
+
+			Categories = await categoryManage.GetCategoriesByTermAsync(ViewModel.searchTerm);
             TotalPages = (int)Math.Ceiling(Categories.Count() / (double)ViewModel.PageSize);
             Categories = Categories.Skip((ViewModel.CurrentPage - 1) * ViewModel.PageSize).Take(ViewModel.PageSize).ToList();
+            return Page();
         }
 
         /// <summary>
@@ -64,7 +86,7 @@ namespace Erawork.Pages.Admin.Categories
         /// <returns></returns>
         public async Task<IActionResult> OnPostCreateAsync()
         {
-            await _categoryManage.CreateCategoryAsync(createCategoryVM);
+            await categoryManage.CreateCategoryAsync(createCategoryVM);
             return new RedirectToPageResult("./Index");
         }
     }
