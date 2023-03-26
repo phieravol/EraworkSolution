@@ -25,7 +25,10 @@ namespace ViewModels.ServiceViewModel.Admin
         [Display(Name = "Service Details")]
         public string? ServiceDetails { get; set; }
 
-        [Required]
+		[Display(Name = "Service Author")]
+		public string? ServiceAuthor { get; set; }
+
+		[Required]
         [Display(Name = "Select Category")]
         public int? SubCategoryId { get; set; }
 

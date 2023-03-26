@@ -74,9 +74,10 @@ namespace AppModules.Services.Public
 						from sub in subGroup.DefaultIfEmpty()
 						join cate in context.Categories on sub.CategoryId equals cate.CategoryId into cateGroup
 						from cate in cateGroup.DefaultIfEmpty()
+						join u in context.AppUsers on s.ServiceAuthor equals u.UserName
                         where s.ServiceId == detailId
                         select new { 
-							s,sub,cate
+							s,sub,cate,u
 						};
             var services = query.Select(x => new ServicesVM()
             {
@@ -86,10 +87,10 @@ namespace AppModules.Services.Public
 				ServiceDetails = x.s.ServiceDetails,
                 ServiceImage = x.s.ServiceImage,
                 isServiceActive = x.s.isServiceActive,
-				//ProviderFirstName = x.u.FirstName,
-				//ProviderLastName = x.u.LastName,
-				//Avatar = x.u.UserAvatar,
-				//MemberSince = x.u.MemberSince,
+				ProviderFirstName = x.u.FirstName,
+				ProviderLastName = x.u.LastName,
+				Avatar = x.u.UserAvatar,
+				MemberSince = x.u.MemberSince,
 				TotalStars = x.s.TotalStars,
                 TotalClients = x.s.TotalClients,
                 SubCategoryId = x.s.SubCategoryId,
@@ -137,5 +138,34 @@ namespace AppModules.Services.Public
             Services.OrderByDescending(x => x.TotalStars);
             return Services;
         }
-    }
+
+		public async Task<int> CountTotalRecord(ServiceFilterRequest pagingRequest)
+		{
+			var query = from s in context.Services
+							//join p in context.Pakages on s.ServiceId equals p.ServiceId
+						join sub in context.SubCategories on s.SubCategoryId equals sub.SubCateId into groupsub
+						from groupservice in groupsub.DefaultIfEmpty()
+						join c in context.Categories on groupservice.CategoryId equals c.CategoryId into groupcate
+						from gj2 in groupcate.DefaultIfEmpty()
+						join u in context.AppUsers on s.UserId equals u.Id
+						where s.isServiceActive == true
+						select new { s, groupservice, gj2, u };
+			// 2. Search
+			if (!string.IsNullOrEmpty(pagingRequest.SearchTerm))
+			{
+				query = query.Where(x => x.s.ServiceTitle.Contains(pagingRequest.SearchTerm) || x.s.ServiceIntro.Contains(pagingRequest.SearchTerm));
+
+			}
+			if (pagingRequest.CategoryIds != null && pagingRequest.CategoryIds.Count > 0)
+			{
+				query = query.Where(x => pagingRequest.CategoryIds.Contains((int)x.gj2.CategoryId));
+			}
+			if (pagingRequest.RequiredLevels != null && pagingRequest.RequiredLevels.Count > 0)
+			{
+				query = query.Where(x => pagingRequest.RequiredLevels.Contains(x.u.UserLevel));
+			}
+
+			return await query.CountAsync();
+		}
+	}
 }

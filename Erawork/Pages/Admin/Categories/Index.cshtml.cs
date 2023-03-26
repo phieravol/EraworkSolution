@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Erawork.Pages.Admin.Categories
 {
-	[Authorize(Roles = "Admin")]
 	public class IndexModel : PageModel
     {
         private readonly IManageCategory _categoryManage;

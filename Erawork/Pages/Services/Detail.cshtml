@@ -113,32 +113,32 @@
 					</div>
 				</div>
 				<!--Register Form Start-->
-				<section class="wt-haslayout wt-dbsectionspace">
-					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 float-left">
-							<div class="wt-dashboardbox">
-								<div class="wt-dashboardboxtitle">
-									<h2>Packages</h2>
-								</div>
-								<div class="wt-dashboardboxcontent wt-packages">
-									<div class="wt-package wt-packagedetails">
-										<div class="wt-packagehead">
-										</div>
-										<div class="wt-packagecontent">
-											<ul class="wt-packageinfo">
-												<li class="wt-packageprices"><span>Price</span></li>
-												<li><span>Revision Limit</span></li>
-												<li><span>Delivery Days</span></li>
-											</ul>
-										</div>
+				
+                    <section class="wt-haslayout wt-dbsectionspace">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 float-left">
+								<div class="wt-dashboardbox">
+								@if (Model.PakagesByService is null || Model.PakagesByService.Count == 0)
+								{
+									<h4>No packages have been created yet</h4>
+								}
+								else
+								{
+									<div class="wt-dashboardboxtitle">
+										<h2>Packages</h2>
 									</div>
-
-									@if (Model.PakagesByService is null)
-									{
-										<h2>No packages have been created yet</h2>
-									}
-									else
-									{
+									<div class="wt-dashboardboxcontent wt-packages">
+										<div class="wt-package wt-packagedetails">
+											<div class="wt-packagehead">
+											</div>
+											<div class="wt-packagecontent">
+												<ul class="wt-packageinfo">
+													<li class="wt-packageprices"><span>Price</span></li>
+													<li><span>Revision Limit</span></li>
+													<li><span>Delivery Days</span></li>
+												</ul>
+											</div>
+										</div>
 										@foreach (var item in Model.PakagesByService)
 										{
 											<div class="wt-package wt-baiscpackage">
@@ -157,20 +157,19 @@
 												</div>
 											</div>
 										}
-									}
-									
+									</div>
+								}
 								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+                            </div>
+                        </div>
+                    </section>		
 				<!--Register Form End-->
 			</div>
 		</div>
 		<!-- User Profile End-->
 
 		<!-- User Listing Start-->
-		<div class="container">
+		@*<div class="container">
 			<div class="row">
 				<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
@@ -258,7 +257,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>*@
 		<!-- User Listing End-->
 	</div>
 </main>
