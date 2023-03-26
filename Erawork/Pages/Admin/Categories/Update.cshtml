@@ -1,0 +1,62 @@
+﻿@page
+@using Data.Models;
+@using ViewModels.CategoryVM.Admin;
+@model Erawork.Pages.Admin.Categories.UpdateModel
+@{
+    string defaultCateImg = "assets/images/categories/box.png";
+}
+<div class="container container-table">
+    <div class="row vertical-center-row">
+        <div class="wt-dashboardboxtitle">
+            <h2>Update Category</h2>
+        </div>
+        <div class="wt-dashboardboxcontent">
+            <form method="post" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
+
+                <input type="text" asp-for="@Model.Id" class="form-control" hidden placeholder="Name">
+
+                <div class="form-group">
+                    <span class="form-group-description">Enter Category Name</span>
+                    <input type="text" asp-for="@Model.UpdateVM.CategoryName" class="form-control" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <span class="form-group-description">Select Category Status</span>
+
+                    <span class="wt-select">
+                        <select asp-for="@Model.UpdateVM.isCategoryActive">
+                            <option value="@true">Active</option>
+                            <option value="@false">Inactive</option>
+                        </select>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <span class="form-group-description">Enter Category Description</span>
+                    <textarea asp-for="@Model.UpdateVM.CategoryDescription" class="form-control" placeholder="Description">@Model.UpdateVM.CategoryDescription</textarea>
+
+                </div>
+                <div class="form-group form-group-label">
+                    <div class="wt-labelgroup">
+                        <label>
+                            <span class="wt-btn">Select Files</span>
+                            <input asp-for="@Model.UpdateVM.CategoryImage" type="file" accept=".jpg, .jpeg, .png" />
+                        </label>
+                        <span>Drop files here to upload</span>
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <ul class="wt-attachfile">
+                        <li class="wt-uploading">
+                            <span class="uploadprogressbar"></span>
+                            <span>Category Icon.jpg</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group wt-btnarea">
+                    <button class="wt-btn">Update Category</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

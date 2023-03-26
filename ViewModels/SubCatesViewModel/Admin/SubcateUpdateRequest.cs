@@ -1,0 +1,38 @@
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace ViewModels.SubCatesViewModel.Admin
+{
+    public class SubcateUpdateRequest
+    {
+        [Required]
+        [Display(Name ="Subcategory Id")]
+        public int SubcateId { get; set; }
+
+        [Required]
+        [Display(Name = "SubCategory Name")]
+        [StringLength(30, MinimumLength = 3)]
+        public string? SubcateName { get; set; }
+
+        [Required]
+        [Display(Name = "SubCategory Image")]
+        public IFormFile? SubcateImage { get; set; }
+
+        [Required]
+        [Display(Name = "Is Active")]
+        public bool? isSubCateActive { get; set; }
+
+        [Display(Name = "SubCategory Description")]
+        public string? SubcateDesc { get; set; }
+
+        [Required]
+        [Display(Name = "Category Name")]
+        public int? CategoryId { get; set; }
+    }
+}

@@ -1,0 +1,48 @@
+﻿@page
+@model Erawork.Pages.Admin.SubCategories.DeleteModel
+@{
+    string defaultSubCateImg = "assets/images/subcates/empty-box.png";
+}
+
+<div class="container container-table">
+    <div class="row vertical-center-row">
+        <div class="wt-dashboardboxtitle">
+            <h2>Delete SubCategory</h2>
+        </div>
+        <div class="wt-dashboardboxcontent">
+            <form method="post" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
+
+                <div class="form-group">
+                    <span class="form-group-description">SubCategory Name</span>
+                    <input type="text" asp-for="@Model.subCategory.SubcateName" class="form-control" placeholder="Name" disabled>
+                </div>
+                <div class="form-group">
+                    <span class="form-group-description">Select SubCategory Status</span>
+
+                    <span class="wt-select">
+                        <select asp-for="@Model.subCategory.isSubCateActive" disabled>
+                            <option value="@true">Active</option>
+                            <option value="@false">Inactive</option>
+                        </select>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <span class="form-group-description">Enter SubCategory Description</span>
+                    <textarea asp-for="@Model.subCategory.SubcateDesc" class="form-control" placeholder="Description" disabled>@Model.subCategory.SubcateDesc</textarea>
+
+                </div>
+                <div class="form-group form-group-label">
+                    <div class="wt-labelgroup">
+                        <label>
+                            <figure><img height="100px" width="100px" src="~/@(Model.subCategory.SubcateImage==null ? defaultSubCateImg : Model.subCategory.SubcateImage)" alt="img description"></figure>
+                        </label>
+                        
+                    </div>
+                </div>
+                <div class="form-group wt-btnarea">
+                    <button class="wt-btn">Delete subCategory</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

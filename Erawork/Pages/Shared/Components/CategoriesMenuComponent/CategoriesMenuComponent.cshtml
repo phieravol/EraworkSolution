@@ -1,0 +1,37 @@
+﻿@using Data.Models;
+@model List<Category>
+
+
+
+<a href="#">Categories</a>
+
+<ul class="sub-menu">
+
+	@foreach (var cate in Model)
+	{
+		<li class=" page_item_has_children">
+			<span class="wt-dropdowarrow">
+				<i class="lnr lnr-chevron-right"></i>
+			</span>
+			
+			<span class="wt-dropdowarrow">
+				<i class="lnr lnr-chevron-right"></i>
+			</span>
+			@if (cate.SubCategories == null)
+			{
+				<a href="javascript:void(0);" style="content: none"> @cate.CategoryName</a>
+			}
+			else {
+				<a href="/Admin/Categories/Detail?CateId=@cate.CategoryId"> @cate.CategoryName</a>
+			}
+			
+			<ul class="sub-menu">
+				@foreach (var sub in cate.SubCategories)
+				{
+					<li><a href="/Admin/subcategories/detail?subcateId=@sub.SubCateId">@sub.SubcateName</a></li>
+				}
+			</ul>
+		</li>
+	}
+
+</ul>

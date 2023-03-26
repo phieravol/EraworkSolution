@@ -1,0 +1,524 @@
+﻿@page
+@model Erawork.Pages.User.MyProfileModel
+@{
+	string imgDefaultUser = "/assets/images/user/avatar-icon.png";
+	string RoleNameProvider = "Provider";
+}
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>BootStrap HTML5 CSS3 Theme</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/assets/css/normalize.css">
+	<link rel="stylesheet" href="~/assets/css/scrollbar.css">
+	<link rel="stylesheet" href="~/assets/css/fontawesome/fontawesome-all.css">
+	<link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="~/assets/css/themify-icons.css">
+	<link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="~/assets/css/jquery-ui.css">
+	<link rel="stylesheet" href="~/assets/css/linearicons.css">
+	<link rel="stylesheet" href="~/assets/css/tipso.css">
+	<link rel="stylesheet" href="~/assets/css/chosen.css">
+	<link rel="stylesheet" href="~/assets/css/prettyPhoto.css">
+	<link rel="stylesheet" href="~/assets/css/main.css">
+	<link rel="stylesheet" href="~/assets/css/dashboard.css">
+	<link rel="stylesheet" href="~/assets/css/color.css">
+	<link rel="stylesheet" href="~/assets/css/transitions.css">
+	<link rel="stylesheet" href="~/assets/css/responsive.css">
+	<link rel="stylesheet" href="~/assets/css/dbresponsive.css">
+	<script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<main id="wt-main" class="wt-main wt-haslayout">
+	<!--Sidebar Start-->
+	<div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
+		<div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
+			<span class="menu-icon">
+				<em></em>
+				<em></em>
+				<em></em>
+			</span>
+		</div>
+		<div id="wt-verticalscrollbar" class="wt-verticalscrollbar mCustomScrollbar _mCS_1">
+			<div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0">
+				<div id="mCSB_1_container" class="mCSB_container" style="position:relative; top:0; left:0;" dir="ltr">
+					<div class="wt-companysdetails wt-usersidebar">
+						<figure class="wt-companysimg">
+							<img src="~/assets/images/sidebar/img-01.jpg" alt="img description" class="mCS_img_loaded">
+						</figure>
+						<div class="wt-companysinfo">
+							<figure><img src="~/assets/images/sidebar/img-02.html" alt="img description" class="mCS_img_loaded"></figure>
+							<div class="wt-title">
+								<h2><a href="javascript:void(0);"> Louanne Mattioli</a></h2>
+								<span>Amento Tech</span>
+							</div>
+							<div class="wt-btnarea"><a href="dashboard-postjob.html" class="wt-btn">Post a Job</a></div>
+						</div>
+					</div>
+					<nav id="wt-navdashboard" class="wt-navdashboard">
+						<ul>
+							<li class="menu-item-has-children">
+								<span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+								<a href="javascript:void(0);">
+									<i class="ti-dashboard"></i>
+									<span>Insights</span>
+								</a>
+								<ul class="sub-menu">
+									<li><hr><a href="dashboard-insights.html">Insights</a></li>
+									<li><hr><a href="dashboard-insightsuser.html">Insights User</a></li>
+								</ul>
+							</li>
+							<li class="wt-active">
+								<a href="dashboard-profile.html">
+									<i class="ti-briefcase"></i>
+									<span>My Profile</span>
+								</a>
+							</li>
+							<li class="menu-item-has-children">
+								<span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+								<a href="javascript:void(0);">
+									<i class="ti-package"></i>
+									<span>All Jobs</span>
+								</a>
+								<ul class="sub-menu">
+									<li><hr><a href="dashboard-completejobs.html">Completed Jobs</a></li>
+									<li><hr><a href="dashboard-canceljobs.html">Cancelled Jobs</a></li>
+									<li><hr><a href="dashboard-ongoingjob.html">Ongoing Jobs</a></li>
+									<li><hr><a href="dashboard-ongoingsingle.html">Ongoing Single</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="dashboard-managejobs.html">
+									<i class="ti-announcement"></i>
+									<span>Manage Jobs</span>
+								</a>
+							</li>
+							<li class="wt-notificationicon menu-item-has-children">
+								<span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+								<a href="javascript:void(0);">
+									<i class="ti-pencil-alt"></i>
+									<span>Messages</span>
+								</a>
+								<ul class="sub-menu">
+									<li><hr><a href="dashboard-messages.html">Messages</a></li>
+									<li><hr><a href="dashboard-messages2.html">Messages V 2</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="dashboard-saveitems.html">
+									<i class="ti-heart"></i>
+									<span>My Saved Items</span>
+								</a>
+							</li>
+							<li>
+								<a href="dashboard-invocies.html">
+									<i class="ti-file"></i>
+									<span>Invoices</span>
+								</a>
+							</li>
+							<li>
+								<a href="dashboard-category.html">
+									<i class="ti-layers"></i>
+									<span>Category</span>
+								</a>
+							</li>
+							<li>
+								<a href="dashboard-packages.html">
+									<i class="ti-money"></i>
+									<span>Packages</span>
+								</a>
+							</li>
+							<li>
+								<a href="dashboard-proposals.html">
+									<i class="ti-bookmark-alt"></i>
+									<span>Proposals</span>
+								</a>
+							</li>
+							<li>
+								<a href="dashboard-accountsettings.html">
+									<i class="ti-anchor"></i>
+									<span>Account Settings</span>
+								</a>
+							</li>
+							<li>
+								<a href="dashboard-helpsupport.html">
+									<i class="ti-tag"></i>
+									<span>Help &amp; Support</span>
+								</a>
+							</li>
+							<li>
+								<a href="index-2.html">
+									<i class="ti-shift-right"></i>
+									<span>Logout</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<div class="wt-navdashboard-footer">
+						<span>Worktern. © 2019 All Rights Reserved.</span>
+					</div>
+				</div><div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;"><div class="mCSB_draggerContainer"><div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; display: block; height: 715px; max-height: 750px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div></div>
+			</div>
+		</div>
+	</div>
+	<!--Sidebar Start-->
+	<!--Register Form Start-->
+	<section class="wt-haslayout">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+				<div class="wt-haslayout wt-dbsectionspace">
+					<div class="wt-dashboardbox wt-dashboardtabsholder"> 
+						<div class="wt-dashboardboxtitle">
+							<h2>My Profile</h2>
+						</div>
+						<div class="wt-dashboardtabs">
+							<ul class="wt-tabstitle nav navbar-nav">
+								<li class="nav-item">
+									<a class="active show" data-toggle="tab" href="#wt-skills">Personal Details &amp; Skills</a>
+								</li>
+								@if (Model.roleName == RoleNameProvider)
+								{
+									<li class="nav-item"><a data-toggle="tab" href="#wt-education" class="">Pakages &amp; Education</a></li>
+								}
+							</ul>
+						</div>
+						<div class="wt-tabscontent tab-content">
+							<div class="wt-personalskillshold tab-pane fade active show" id="wt-skills">
+								<div class="wt-yourdetails wt-tabsinfo">
+                                    <form asp-page="./MyProfile" enctype="multipart/form-data" method="post" class="wt-formtheme wt-userform">
+                                        <div class="wt-profilephoto wt-tabsinfo">
+                                            <div class="wt-tabscontenttitle">
+                                                <h2>Profile Photo</h2>
+                                            </div>
+                                            <div class="wt-profilephotocontent">
+                                                <fieldset>
+                                                    <div class="form-group form-group-label">
+                                                        <div class="wt-labelgroup">
+                                                            <label for="filep">
+                                                                <span class="wt-btn">Select Files</span>
+                                                                <input asp-for="@Model.Avatar" type="file" accept=".jpg, .jpeg, .png" id="filep">
+                                                            </label>
+                                                            <span>Drop files here to upload</span>
+                                                            <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+
+                                        <fieldset>
+											<div class="form-group form-group-half">
+												<input type="hidden" asp-for="@Model.user.UserName" class="form-control" prequired>
+												<input type="text" asp-for="@Model.user.FirstName" class="form-control" placeholder="First Name" required>
+											</div>
+											<div class="form-group form-group-half">
+												<input type="text" asp-for="@Model.user.LastName" class="form-control" placeholder="Last Name" required>
+											</div>
+											<div class="form-group form-group-half">
+												<span class="wt-select">
+													<select asp-for="@Model.user.Gender" required>
+														<option value="" disabled="">Select Gender</option>
+														@if (Model.user.Gender == "Male")
+														{
+															<option value="Male" selected>Male</option>
+														}
+														else
+														{
+															<option value="Male">Male</option>
+														}
+														
+														@if (Model.user.Gender == "Female")
+														{
+															<option value="Female" selected>Female</option>
+														}
+														else
+														{
+															<option value="Female">Female</option>
+														}
+														
+														@if (Model.user.Gender == "Other")
+														{
+															<option value="Other" selected>Other</option>
+														} else
+														{
+															<option value="Other">Other</option>
+														}
+
+													</select>
+												</span>
+											</div>
+											<div class="form-group form-group-half">
+												<input type="number" asp-for="@Model.user.PhoneNumber" class="form-control" placeholder="Your Phone Number" required>
+											</div>
+											<div class="form-group">
+												<input type="text" asp-for="@Model.user.Slogan" class="form-control" placeholder="Add Your Slogan Here">
+											</div>
+											<div class="form-group">
+												<textarea asp-for="@Model.user.UserDesc" class="form-control" placeholder="Description">@Model.user.UserDesc</textarea>
+											</div>
+											<div class="form-group">
+												<input type="submit" class="wt-btn border no-border" value="Update Profile">
+											</div>
+										</fieldset>
+									</form>
+								</div>
+
+							</div>
+							@if (Model.roleName == RoleNameProvider)
+                            {
+                                <div class="wt-educationholder tab-pane fade" id="wt-education">
+                                    <div class="wt-userexperience wt-tabsinfo">
+                                        <div class="wt-tabscontenttitle wt-addnew">
+                                            <h2>Add Your Experience</h2>
+                                            <a href="javascript:void(0);">Add New</a>
+                                        </div>
+                                        <ul class="wt-experienceaccordion accordion">
+                                            <li>
+                                                <div class="wt-accordioninnertitle">
+                                                    <span id="accordioninnertitle" data-toggle="collapse" data-target="#innertitle">Web &amp; Apps Project Manager<em>(Jun 2017 - Jul 2018)</em></span>
+                                                    <div class="wt-rightarea">
+                                                        <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitle" data-toggle="collapse" data-target="#innertitle" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
+                                                        <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="wt-collapseexp collapse show" id="innertitle" aria-labelledby="accordioninnertitle" data-parent="#accordion">
+                                                    <form class="wt-formtheme wt-userform">
+                                                        <fieldset>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span>* Leave ending date empty if its your current job</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="wt-accordioninnertitle">
+                                                    <span id="accordioninnertitlea" data-toggle="collapse" data-target="#innertitlea" aria-expanded="true">Sr. PHP &amp; Laravel Developer<em>(Jun 2017 - Jul 2018)</em></span>
+                                                    <div class="wt-rightarea">
+                                                        <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitlea" data-toggle="collapse" data-target="#innertitlea" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
+                                                        <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="wt-collapseexp hide collapse show" id="innertitlea" aria-labelledby="accordioninnertitleaa" data-parent="#accordion" style="">
+                                                    <form class="wt-formtheme wt-userform">
+                                                        <fieldset>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span>* Leave ending date empty if its your current job</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="wt-accordioninnertitle">
+                                                    <span id="accordioninnertitleb" data-toggle="collapse" data-target="#innertitleb">PHP &amp; Laravel Developer <em>(Apr 2016 - Jul 2017)</em></span>
+                                                    <div class="wt-rightarea">
+                                                        <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitleb" data-toggle="collapse" data-target="#innertitleb" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
+                                                        <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="wt-collapseexp collapse hide" id="innertitleb" aria-labelledby="accordioninnertitleb" data-parent="#accordion">
+                                                    <form class="wt-formtheme wt-userform">
+                                                        <fieldset>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span>* Leave ending date empty if its your current job</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="wt-userexperience">
+                                        <div class="wt-tabscontenttitle wt-addnew">
+                                            <h2>Add Your Education</h2>
+                                            <a href="javascript:void(0);">Add New</a>
+                                        </div>
+                                        <ul class="wt-experienceaccordion accordion">
+                                            <li>
+                                                <div class="wt-accordioninnertitle">
+                                                    <span id="accordioninnertitle1" data-toggle="collapse" data-target="#innertitle1">Web &amp; Apps Project Manager<em>(Jun 2017 - Jul 2018)</em></span>
+                                                    <div class="wt-rightarea">
+                                                        <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitle1" data-toggle="collapse" data-target="#innertitle1" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
+                                                        <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="wt-collapseexp collapse show" id="innertitle1" aria-labelledby="accordioninnertitle1" data-parent="#accordion">
+                                                    <form class="wt-formtheme wt-userform">
+                                                        <fieldset>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span>* Leave ending date empty if its your current job</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="wt-accordioninnertitle">
+                                                    <span id="accordioninnertitlea2" data-toggle="collapse" data-target="#innertitlea2">Sr. PHP &amp; Laravel Developer<em>(Jun 2017 - Jul 2018)</em></span>
+                                                    <div class="wt-rightarea">
+                                                        <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitlea2" data-toggle="collapse" data-target="#innertitlea2" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
+                                                        <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="wt-collapseexp collapse hide" id="innertitlea2" aria-labelledby="accordioninnertitleaa" data-parent="#accordion">
+                                                    <form class="wt-formtheme wt-userform">
+                                                        <fieldset>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span>* Leave ending date empty if its your current job</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="wt-accordioninnertitle">
+                                                    <span id="accordioninnertitleb3" data-toggle="collapse" data-target="#innertitleb3">PHP &amp; Laravel Developer <em>(Apr 2016 - Jul 2017)</em></span>
+                                                    <div class="wt-rightarea">
+                                                        <a href="javascript:void(0);" class="wt-addinfo wt-skillsaddinfo" id="accordioninnertitleb" data-toggle="collapse" data-target="#innertitleb" aria-expanded="true"><i class="lnr lnr-pencil"></i></a>
+                                                        <a href="javascript:void(0);" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="wt-collapseexp collapse hide" id="innertitleb3" aria-labelledby="accordioninnertitleb3" data-parent="#accordion">
+                                                    <form class="wt-formtheme wt-userform">
+                                                        <fieldset>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Company Title" class="form-control" placeholder="Company Title">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="text" name="Starting Date" class="form-control" placeholder="Starting Date">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="email" name="Ending Date" class="form-control" placeholder="Ending Date *">
+                                                            </div>
+                                                            <div class="form-group form-group-half">
+                                                                <input type="number" name="Job Title" class="form-control" placeholder="Your Job Title">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <textarea name="message" class="form-control" placeholder="Your Job Description"></textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <span>* Leave ending date empty if its your current job</span>
+                                                            </div>
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            }
+							
+						</div>
+					</div>
+				</div>
+				<div class="wt-updatall">
+					<i class="ti-announcement"></i>
+					<span>Update all the latest changes made by you, by just clicking on “Save &amp; Continue” button.</span>
+					<a class="wt-btn" href="javascript:void(0);">Save &amp; Update</a>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+				<div class="wt-haslayout wt-dbsectionspace wt-codescansidebar">
+					<div class="tg-authorcodescan wt-codescanholder">
+						<figure class="tg-qrcodeimg">
+							<img src="@(Model.user.UserAvatar == null? imgDefaultUser: $"/{Model.user.UserAvatar}")">
+						</figure>
+						
+						<div class="wt-codescanicons">
+							<span>Share Your Profile</span>
+							<ul class="wt-socialiconssimple">
+								<li class="wt-facebook"><a href="javascript:void(0);"><i class="fa fa-facebook-f"></i></a></li>
+								<li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i></a></li>
+								<li class="wt-linkedin"><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i></a></li>
+								<li class="wt-clone"><a href="javascript:void(0);"><i class="far fa-clone"></i></a></li>
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--Register Form End-->
+</main>

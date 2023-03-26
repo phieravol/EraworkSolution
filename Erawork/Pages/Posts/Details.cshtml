@@ -1,0 +1,133 @@
+﻿@page
+@using Data.Models;
+@model Erawork.Pages.Posts.DetailsModel
+@{
+}
+
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+	<div class="wt-haslayout wt-main-section">
+		<!-- User Listing Start-->
+		<div class="container">
+			<div class="row">
+				<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+						<div class="wt-proposalholder">
+							<span class="wt-featuredtag"><img src="~/assets/images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+							<div class="wt-proposalhead">
+								<h2>@Model.currentPost.PostTitle</h2>
+								<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
+									<li><span> Budgets: @Model.currentPost.Budget <i class="fa fa-dollar-sign"></i></span></li>
+
+									@switch (Model.currentPost.PostStatus)
+									{
+										case "On going":
+											<li><span><i class="fa-solid fa-circle" style="color: cornflowerblue"></i> @Model.currentPost.PostStatus</span></li>
+											break;
+										case "Canceled":
+											<li><span><i class="fa-solid fa-circle" style="color: red"></i>@Model.currentPost.PostStatus</span></li>
+											break;
+										case "Draft":
+											<li><span><i class="fa-solid fa-circle" style="color: antiquewhite"></i>@Model.currentPost.PostStatus</span></li>
+											break;
+									}
+									
+									<li><span><i class="far fa-folder"></i> Category: @Model.currentPost.Category.CategoryName</span></li>
+									<li><span><i class="far fa-clock"></i> Posted date: @Model.currentPost.PostedDate</span></li>
+									
+								</ul>
+							</div>
+							<div class="wt-btnarea"><a href="javascrip:void(0);" class="wt-btn">Send Proposal</a></div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+						<div class="wt-projectdetail-holder">
+							<div class="wt-projectdetail">
+								<div class="wt-title">
+									<h3>Project Detail</h3>
+								</div>
+								<div class="wt-description">
+									@Html.Raw(Model.currentPost.PostDetails)
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+						<aside id="wt-sidebar" class="wt-sidebar">
+							<div class="wt-proposalsr">
+								<div class="wt-proposalsrcontent">
+									<span class="wt-proposalsicon"><i class="fa fa-angle-double-down"></i><i class="fa fa-newspaper"></i></span>
+									<div class="wt-title">
+										<h3>150</h3>
+										<span>Proposals Received Till<em>@Model.currentPost.ExpirationDate</em></span>
+									</div>
+								</div>
+								<div class="tg-authorcodescan">
+									<figure class="tg-qrcodeimg">
+										<img src="~/assets/images/qrcode.png" alt="img description">
+									</figure>
+									<div class="tg-qrcodedetail">
+										<span class="lnr lnr-laptop-phone"></span>
+										<div class="tg-qrcodefeat">
+											<h3>Scan with your <span>Smart Phone </span> To Get It Handy.</h3>
+										</div>
+									</div>
+								</div>
+								<div class="wt-clicksavearea">
+									<span>Job ID: tQu5DW9F2G</span>
+									<a href="javascrip:void(0);" class="wt-clicksavebtn"><i class="far fa-heart"></i> Click to save</a>
+								</div>
+							</div>
+							<div class="wt-widget wt-companysinfo-jobsingle">
+								<div class="wt-companysdetails">
+									<figure class="wt-companysimg">
+										<img src="~/assets/images/company/img-01.jpg" alt="img description">
+									</figure>
+									<div class="wt-companysinfo">
+										<figure><img src="~/assets/images/company/img-01.png" alt="img description"></figure>
+										<div class="wt-title">
+											<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Verified Company</a>
+											<h2>Angry Creative Studio</h2>
+										</div>
+										<ul class="wt-postarticlemeta">
+											<li>
+												<a href="javascript:void(0);">
+													<span>Open Jobs</span>
+												</a>
+											</li>
+											<li>
+												<a href="javascript:void(0);">
+													<span>Full Profile</span>
+												</a>
+											</li>
+											<li class="wt-following">
+												<a href="javascript:void(0);">
+													<span>Following</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="wt-widget wt-sharejob">
+								<div class="wt-widgettitle">
+									<h2>Share This Job</h2>
+								</div>
+								<div class="wt-widgetcontent">
+									<ul class="wt-socialiconssimple">
+										<li class="wt-facebook"><a href="javascript:void(0);"><i class="fab fa-facebook-f"></i>Share on Facebook</a></li>
+										<li class="wt-twitter"><a href="javascript:void(0);"><i class="fab fa-twitter"></i>Share on Twitter</a></li>
+										<li class="wt-linkedin"><a href="javascript:void(0);"><i class="fab fa-linkedin-in"></i>Share on Linkedin</a></li>
+										<li class="wt-googleplus"><a href="javascript:void(0);"><i class="fab fa-google-plus-g"></i>Share on Google Plus</a></li>
+									</ul>
+								</div>
+							</div>
+
+						</aside>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- User Listing End-->
+	</div>
+</main>

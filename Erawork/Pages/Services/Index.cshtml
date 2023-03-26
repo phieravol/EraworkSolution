@@ -1,0 +1,224 @@
+﻿@page
+@model Erawork.Pages.Services.IndexModel
+@{
+}
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>BootStrap HTML5 CSS3 Theme</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="icon" href="images/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/scrollbar.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/jquery-ui.css">
+	<link rel="stylesheet" href="css/linearicons.css">
+	<link rel="stylesheet" href="css/tipso.css">
+	<link rel="stylesheet" href="css/chosen.css">
+	<link rel="stylesheet" href="css/prettyPhoto.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/color.css">
+	<link rel="stylesheet" href="css/transitions.css">
+	<link rel="stylesheet" href="css/responsive.css">
+	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<!--Inner Home Banner Start-->
+<div class="wt-haslayout wt-innerbannerholder">
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+				<div class="wt-innerbannercontent">
+					<div class="wt-title"><h2>Service List</h2></div>
+					<ol class="wt-breadcrumb">
+						<li><a href="index-2.html">Home</a></li>
+						<li class="wt-active">Services</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Inner Home End-->
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+	<div class="wt-haslayout wt-main-section">
+		<!-- User Listing Start-->
+		<div class="wt-haslayout">
+			<div class="container">
+				<div class="row">
+					<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+						<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+                            <form asp-page="./Index" method="get" class="wt-formtheme wt-formsearch">
+                                <aside id="wt-sidebar" class="wt-sidebar">
+                                    <div class="wt-widget wt-startsearch">
+                                        <div class="wt-widgettitle">
+                                            <h2>Search Services</h2>
+                                        </div>
+                                        <div class="wt-widgetcontent">
+                                            <fieldset>
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="@Model.PagingRequest.SearchTerm" class="form-control" placeholder="Search service">
+                                                    <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
+                                                </div>
+                                            </fieldset>
+
+                                        </div>
+                                    </div>
+                                    <div class="wt-widget wt-effectiveholder">
+                                        <div class="wt-widgettitle">
+                                            <h2>Categories</h2>
+                                        </div>
+                                        <div class="wt-widgetcontent">
+                                            
+                                            <fieldset>
+                                                <div class="wt-checkboxholder wt-verticalscrollbar">
+													@foreach (var item in Model.Categories)
+													{
+														<span class="wt-checkbox">
+															<input id="wt-description-@item.CategoryId" type="checkbox" name="PagingRequest.CategoryIds" value="@item.CategoryId.ToString()">
+															<label for="wt-description-@item.CategoryId"> @item.CategoryName</label>
+														</span>
+													}
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="wt-widget wt-effectiveholder">
+                                        <div class="wt-widgettitle">
+                                            <h2>Job Type</h2>
+                                        </div>
+                                        <div class="wt-widgetcontent">
+
+											<fieldset>
+												<div class="wt-checkboxholder">
+													<span class="wt-checkbox">
+														<input id="beginer" type="checkbox" name="PagingRequest.RequiredLevels" value="beginer">
+														<label for="beginer">Beginer</label>
+													</span>
+													<span class="wt-checkbox">
+														<input id="intermediate" type="checkbox" name="PagingRequest.RequiredLevels" value="intermediate">
+														<label for="intermediate"> Intermediate</label>
+													</span>
+													<span class="wt-checkbox">
+														<input id="profesional" type="checkbox" name="PagingRequest.RequiredLevels" value="profesional">
+														<label for="profesional"> Profesional</label>
+													</span>
+													<span class="wt-checkbox">
+														<input id="expert" type="checkbox" name="PagingRequest.RequiredLevels" value="expert">
+														<label for="expert">Expert</label>
+													</span>
+													<span class="wt-checkbox">
+														<input id="enterprise" type="checkbox" name="PagingRequest.RequiredLevels" value="enterprise">
+														<label for="enterprise"> Enterprise</label>
+													</span>
+												</div>
+											</fieldset>
+
+                                        </div>
+                                    </div>
+									<div class="wt-widget wt-effectiveholder">
+										<div class="wt-widgetcontent">
+											<div class="wt-applyfilters">
+												<span>Click “Apply Filter” to apply latest<br> changes made by you.</span>
+												<input type="submit" value="Apply Filters" class="wt-btn border no-border">
+											</div>
+										</div>
+									</div>
+                                </aside>
+                            </form>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+							<div class="wt-userlistingholder wt-haslayout">
+								<div class="wt-companysinfoholder">
+									<div class="row">
+										@foreach (var item in Model.Services)
+										{
+											<div class="col-12 col-sm-12 col-md-12 col-lg-4">
+												<div class="wt-companysdetails">
+													<figure class="wt-companysimg" >
+														<img src="~/@item.ServiceImage" style="height:180px" alt="img description">
+													</figure>
+													<div class="wt-companysinfo">
+														<figure><img src="~/@item.Avatar" alt="img description"></figure>
+														<div class="wt-title">
+															<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> @item.ProviderFirstName @item.ProviderLastName</a>
+															<p>@item.ServiceTitle</p>
+														</div>
+														<ul class="wt-postarticlemeta d-flex">
+															<li>
+																<a asp-page="./Detail" asp-route-id="@item.ServiceId">
+																	<span>Detail</span>
+																	<span><i class="fa-solid fa-eye"></i></span>
+																</a>
+															</li>
+															<li>
+																<a href="javascript:void(0);">
+																	<span>Stars</span>
+																	<span>@(item.TotalStars == null ? 0 : item.TotalStars) <i class="fa-solid fa-star"></i></span>
+
+																</a>
+															</li>
+															<li class="wt-following">
+																<a href="javascript:void(0);">
+																	<span>clients</span>
+																	<span>@(item.TotalClients == null ? 0 : item.TotalClients) <i class="fa-solid fa-users"></i></span>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										}
+										
+									</div>
+								</div>
+								@if (Model.HasPreviousPage || Model.HasNextPage)
+								{
+									<nav class="wt-pagination">
+										<ul>
+											<li class="wt-prevpage">
+												<a asp-page="./Index" asp-route-CurrentPage="@((Model.PagingRequest.CurrentPage-1)==0?Model.TotalPages:(Model.PagingRequest.CurrentPage-1))" asp-route-searchTerm="@Model.PagingRequest.SearchTerm" asp-route-pageSize="@Model.PagingRequest.PageSize">
+													<i class="lnr lnr-chevron-left"></i>
+												</a>
+											</li>
+											@if (Model.TotalPages <= 3)
+											{
+												for (int i = 1; i <= Model.TotalPages; i++)
+												{
+													<li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.PagingRequest.SearchTerm" asp-route-pageSize="@Model.PagingRequest.PageSize">@i</a></li>
+												}
+											}
+											else
+											{
+												for (int i = 1; i <= Model.TotalPages; i++)
+												{
+													<li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.PagingRequest.SearchTerm" asp-route-pageSize="@Model.PagingRequest.PageSize">@i</a></li>
+												}
+												<li><a href="javascrip:void(0);">...</a></li>
+												<li><a asp-route-CurrentPage="@Model.TotalPages" asp-route-searchTerm="@Model.PagingRequest.SearchTerm" asp-route-pageSize="@Model.PagingRequest.PageSize">Last Page</a></li>
+											}
+											<li class="wt-nextpage">
+												<a asp-page="./Index" asp-route-CurrentPage="@((Model.PagingRequest.CurrentPage+1)>Model.TotalPages?1:(Model.PagingRequest.CurrentPage+1))" asp-route-searchTerm="@Model.PagingRequest.SearchTerm" asp-route-pageSize="@Model.PagingRequest.PageSize">
+													<i class="lnr lnr-chevron-right"></i>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- User Listing End-->
+	</div>
+</main>
+<!--Main End-->

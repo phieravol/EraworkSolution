@@ -1,0 +1,156 @@
+﻿@page
+@model Erawork.Pages.Services.Admin.IndexModel
+@{
+    string defaultImage = "assets/images/services/default_service.png";
+}
+<head>
+    <link rel="apple-touch-icon" href="~/assets/apple-touch-icon.png">
+    <link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/normalize.css">
+    <link rel="stylesheet" href="~/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="~/assets/css/fontawesome/fontawesome-all.css">
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/assets/css/linearicons.css">
+    <link rel="stylesheet" href="~/assets/css/tipso.css">
+    <link rel="stylesheet" href="~/assets/css/chosen.css">
+    <link rel="stylesheet" href="~/assets/css/prettyPhoto.css">
+    <link rel="stylesheet" href="~/assets/css/main.css">
+    <link rel="stylesheet" href="~/assets/css/basictable.css">
+    <link rel="stylesheet" href="~/assets/css/dashboard.css">
+    <link rel="stylesheet" href="~/assets/css/color.css">
+    <link rel="stylesheet" href="~/assets/css/transitions.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link rel="stylesheet" href="~/assets/css/dbresponsive.css">
+    <script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<main id="wt-main" class="wt-main wt-haslayout">
+
+    <!--Register Form Start-->
+    <section class="wt-haslayout wt-dbsectionspace">
+        <div class="row">
+            
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-right">
+                <div class="wt-dashboardbox wt-categorys">
+                    <div class="wt-dashboardboxtitle wt-titlewithsearch">
+                        <a asp-page="./Create" class="btn btn-primary"><h2>Create Service</h2></a>
+                        
+                        <form class="wt-formtheme wt-formsearch">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input type="text" asp-for="@Model.pagingRequest.searchTerm" class="form-control" placeholder="Search SubCategory">
+                                    <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="wt-dashboardboxcontent wt-categoriescontentholder">
+                        @if (Model.servicesPaging is null)
+                        {
+                            <h2>You didn't create any services</h2>
+                        } else
+                        {
+                            <table class="wt-tablecategories">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <span class="wt-checkbox">
+                                                <input id="wt-name" type="checkbox" name="head">
+                                                <label for="wt-name"></label>
+                                            </span>
+                                        </th>
+                                        <th>Title</th>
+                                        @*<th>Description</th>*@
+                                        <th>Status</th>
+                                        <th>Stars</th>
+                                        <th>Clients</th>
+                                        <th>SubCategory</th>
+                                        <th>Images</th>
+                                        <th colspan="3">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.servicesPaging != null)
+                                    {
+                                        @foreach (var item in Model.servicesPaging)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <span class="wt-checkbox">
+                                                        <input id="wt-namea" type="checkbox" name="head">
+                                                        <label for="wt-namea"></label>
+                                                    </span>
+                                                </td>
+
+                                                <td>@item.ServiceTitle</td>
+                                                @*<td>@item.ServiceIntro</td>*@
+                                                <td>@item.isServiceActive</td>
+                                                <td>@item.TotalStars</td>
+                                                <td>@item.TotalClients</td>
+                                                <td>@item.SubCateName</td>
+                                                <td>
+                                                    <figure><img src="~/@(item.ServiceImage==null ? defaultImage : item.ServiceImage)" alt="img description"></figure>
+                                                </td>
+                                                <td>
+                                                    <div class="wt-actionbtn d-flex p-2">
+                                                        <a asp-page="./update" asp-route-id="@item.ServiceId" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                        <a asp-page="./delete" asp-route-id="@item.ServiceId" asp-page-handler="delete" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                        <a asp-page="/services/detail" asp-route-id="@item.ServiceId" class="wt-addinfo"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+
+                            @if (Model.HasPreviousPage || Model.HasNextPage)
+                            {
+                                <nav class="wt-pagination">
+                                    <ul>
+                                        <li class="wt-prevpage">
+                                            <a asp-page="./Index" asp-route-CurrentPage="@((Model.pagingRequest.CurrentPage-1)==0?Model.TotalPages:(Model.pagingRequest.CurrentPage-1))" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">
+                                                <i class="lnr lnr-chevron-left"></i>
+                                            </a>
+                                        </li>
+                                        @if (Model.TotalPages <= 3)
+                                        {
+                                            for (int i = 1; i <= Model.TotalPages; i++)
+                                            {
+                                                <li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">@i</a></li>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            for (int i = 1; i <= Model.TotalPages; i++)
+                                            {
+                                                <li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">@i</a></li>
+                                            }
+                                            <li><a href="javascrip:void(0);">...</a></li>
+                                            <li><a asp-route-CurrentPage="@Model.TotalPages" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">Last Page</a></li>
+                                        }
+                                        <li class="wt-nextpage">
+                                            <a asp-page="./Index" asp-route-CurrentPage="@((Model.pagingRequest.CurrentPage+1)>Model.TotalPages?1:(Model.pagingRequest.CurrentPage+1))" asp-route-searchTerm="@Model.pagingRequest.searchTerm" asp-route-pageSize="@Model.pagingRequest.PageSize">
+                                                <i class="lnr lnr-chevron-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            }
+                        }
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Register Form End-->
+</main>

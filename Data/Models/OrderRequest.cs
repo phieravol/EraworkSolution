@@ -10,13 +10,14 @@ namespace Data.Models
     {
         public int? OrderRequestId { get; set; }
         public int? PostId { get; set; }
-        public int? UserId { get; set; }
+        public Guid UserId { get; set; }
         public int? IsApprove { get; set; }
         public int? ServiceId { get; set; }
         public int? PakageId { get; set; }
         public string? RequestIntro { get; set; }
 
         public virtual Post? Post { get; set; }
+        public virtual AppUser? AppUser { get; set; }
         public virtual Service? Service { get; set; }
 
     }

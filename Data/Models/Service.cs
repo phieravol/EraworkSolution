@@ -8,19 +8,20 @@ namespace Data.Models
 {
     public class Service
     {
-        public int ReviewId { get; set; }
-
-        public string ServiceTitle { get; set; }
-        public int? Stars { get; set; }
-        public string? Comment { get; set; }
-        public bool? IsHelpfull { get; set; }
-        public DateTime? ReviewTime { get; set; }
-        public int? ServiceId { get; set; }
-        public int? Liked { get; set; }
-        public int? Report { get; set; }
-        public bool isServiceActive { get; set; }
+        public int ServiceId { get; set; }
+        public string? ServiceTitle { get; set; }
+        public string? ServiceIntro { get; set; }
+        public string? ServiceDetails { get; set; }
+        public int? SubCategoryId { get; set; }
+        public int? TotalStars { get; set; }
+        public int? TotalClients { get; set; }
+        public bool? isServiceActive { get; set; }
+        public string? ServiceImage { get; set; }
+        public string? ServiceAuthor { get; set; }
+        public Guid UserId { get; set; }
 
         public virtual SubCategory? SubCategory { get; set; }
+        public virtual AppUser? AppUser { get; set; }
         public virtual ICollection<OrderRequest>? OrderRequests { get; set; }
 
         public virtual ICollection<Pakage>? Pakages { get; set; }

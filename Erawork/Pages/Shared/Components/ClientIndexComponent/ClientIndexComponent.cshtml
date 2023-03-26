@@ -1,0 +1,70 @@
+﻿@using ViewModels.ServiceViewModel;
+@model List<ServicesVM>;
+
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+	<div class="wt-haslayout wt-main-section">
+		<!-- User Listing Start-->
+		<div class="wt-haslayout">
+			<div class="container">
+				<div class="row">
+					<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+							<div class="wt-userlistingholder wt-haslayout">
+								<div class="wt-userlistingtitle">
+									<h3>Top Rate Categories</h3>
+								</div>
+								<div class="wt-companysinfoholder">
+									<div class="row">
+										@foreach (var item in Model)
+										{
+											<div class="col-12 col-sm-12 col-md-12 col-lg-4">
+												<div class="wt-companysdetails">
+													<figure class="wt-companysimg" style="height: 290px">
+														<img src="~/@item.ServiceImage" style="max-height: 290px" alt="img description">
+													</figure>
+													<div class="wt-companysinfo">
+														<figure><img src="~/@item.Avatar" alt="img description"></figure>
+														<div class="wt-title">
+															<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> @item.ProviderFirstName @item.ProviderLastName</a>
+															<p>@item.ServiceTitle</p>
+														</div>
+														<ul class="wt-postarticlemeta d-flex">
+															<li>
+																<a href="./Services/Detail?id=@item.ServiceId">
+																	<span>Detail</span>
+																	<span><i class="fa-solid fa-eye"></i></span>
+																</a>
+															</li>
+															<li>
+																<a href="javascript:void(0);">
+																	<span>Stars</span>
+																	<span>@(item.TotalStars == null ? 0 : item.TotalStars) <i class="fa-solid fa-star"></i></span>
+
+																</a>
+															</li>
+															<li class="wt-following">
+																<a href="javascript:void(0);">
+																	<span>clients</span>
+																	<span>@(item.TotalClients == null ? 0 : item.TotalClients) <i class="fa-solid fa-users"></i></span>
+																</a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										}
+
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- User Listing End-->
+	</div>
+</main>
+<!--Main End-->

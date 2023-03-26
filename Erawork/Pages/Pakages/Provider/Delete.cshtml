@@ -1,0 +1,99 @@
+﻿@page
+@model Erawork.Pages.Pakages.Provider.DeleteModel
+@{
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BootStrap HTML5 CSS3 Theme</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/normalize.css">
+    <link rel="stylesheet" href="~/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="~/assets/css/fontawesome/fontawesome-all.css">
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/assets/css/linearicons.css">
+    <link rel="stylesheet" href="~/assets/css/tipso.css">
+    <link rel="stylesheet" href="~/assets/css/chosen.css">
+    <link rel="stylesheet" href="~/assets/css/prettyPhoto.css">
+    <link rel="stylesheet" href="~/assets/css/main.css">
+    <link rel="stylesheet" href="~/assets/css/dashboard.css">
+    <link rel="stylesheet" href="~/assets/css/color.css">
+    <link rel="stylesheet" href="~/assets/css/transitions.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link rel="stylesheet" href="~/assets/css/dbresponsive.css">
+    <script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<!--Register Form Start-->
+<section class="wt-haslayout">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+			<div class="wt-haslayout wt-dbsectionspace">
+				<div class="wt-dashboardbox wt-dashboardtabsholder">
+					<div class="wt-dashboardboxtitle">
+						<h2>My Pakages</h2>
+					</div>
+					<div class="wt-dashboardtabs">
+						<ul class="wt-tabstitle nav navbar-nav">
+							<li class="nav-item"><a data-toggle="tab" href="#wt-education" class="active show">Pakages Manage</a></li>
+						</ul>
+					</div>
+                    <div class="wt-tabscontent tab-content">
+                        <div class="wt-educationholder tab-pane fade active show" id="wt-education">
+
+                            <div class="wt-userexperience wt-tabsinfo">
+                                <div class="wt-tabscontenttitle wt-addnew">
+                                    <h2>Confirm Delete</h2>
+                                    <a asp-page="./Index">Back to List</a>
+                                </div>
+                                <ul class="wt-experienceaccordion accordion">
+                                    <li class="li-item_display">
+                                        <div class="wt-accordioninnertitle">
+                                            <a href="javascript:void(0);">Are you sure to delete pakage <em>(for @Model.DeletePackage.PakageName)</em></a>
+                                        </div>
+                                        <div class="wt-collapseexp collapse show" id="innertitle" aria-labelledby="accordioninnertitle" data-parent="#accordion">
+                                            <form asp-page="./Delete" method="post" class="wt-formtheme wt-userform">
+                                                <fieldset>
+                                                    <div class="form-group form-group-half">
+                                                        <label asp-for="@Model.DeletePackage.PakageName" class="mb-0">Package Name</label>
+                                                        <input type="hidden" asp-for="@Model.DeletePackage.PakageId" />
+                                                        <input type="text" asp-for="@Model.DeletePackage.PakageName" class="form-control" placeholder="Pakage Name" disabled>
+                                                    </div>
+                                                    <div class="form-group form-group-half">
+                                                        <label asp-for="@Model.DeletePackage.Price" class="mb-0">Price (unit: $)</label>
+                                                        <input type="text" asp-for="@Model.DeletePackage.Price" class="form-control" placeholder="Price" disabled>
+                                                    </div>
+                                                    <div class="form-group form-group-half">
+                                                        <label asp-for="@Model.DeletePackage.RevisionLimit" class="mb-0">Revision Limit</label>
+                                                        <input type="text" asp-for="@Model.DeletePackage.RevisionLimit" class="form-control" placeholder="Revision Limit" disabled>
+                                                    </div>
+                                                    <div class="form-group form-group-half">
+                                                        <label asp-for="@Model.DeletePackage.DeliveryDays" class="mb-0">Delivery Days</label>
+                                                        <input type="text" asp-for="@Model.DeletePackage.DeliveryDays" class="form-control" placeholder="Delivery Days" disabled>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="submit" class="wt-btn border no-border" value="I want to delete">
+                                                    </div>
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--Register Form End-->

@@ -1,0 +1,155 @@
+﻿@page
+@model Erawork.Pages.Posts.Client.CreateModel
+@{
+    
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BootStrap HTML5 CSS3 Theme</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/normalize.css">
+    <link rel="stylesheet" href="~/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="~/assets/css/fontawesome/fontawesome-all.css">
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/assets/css/linearicons.css">
+    <link rel="stylesheet" href="~/assets/css/tipso.css">
+    <link rel="stylesheet" href="~/assets/css/chosen.css">
+    <link rel="stylesheet" href="~/assets/css/prettyPhoto.css">
+    <link rel="stylesheet" href="~/assets/css/main.css">
+    <link rel="stylesheet" href="~/assets/css/dashboard.css">
+    <link rel="stylesheet" href="~/assets/css/color.css">
+    <link rel="stylesheet" href="~/assets/css/transitions.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link rel="stylesheet" href="~/assets/css/dbresponsive.css">
+    <script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout d-flex">
+    
+    <!--Register Form Start-->
+    <section class="wt-haslayout wt-dbsectionspace">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 float-left">
+                <div class="wt-dashboardbox">
+                    <div class="wt-dashboardboxtitle">
+                        <h2>Post a Job</h2>
+                    </div>
+                    <div class="wt-dashboardboxcontent">
+                        <div class="wt-jobdescription wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Job Description</h2>
+                            </div>
+                            <form method="POST" class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <input asp-for="@Model.createRequest.PostTitle" type="text" class="form-control" placeholder="Job Title" required />
+                                    </div>
+                                    <div class="form-group form-group-half wt-formwithlabel">
+                                        <span class="wt-select">
+                                            <label for="selectoption">Require Level:</label>
+                                            <select asp-for="@Model.createRequest.LevelRequired">
+                                                <option value="Beginer">Beginer</option>
+                                                <option value="Intermediate">Intermediate</option>
+                                                <option value="Profesional">Professional</option>
+                                                <option value="Expert">Expert</option>
+                                                <option value="Enterprise">Enterprise</option>
+                                            </select>
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="form-group form-group-half wt-formwithlabel">
+                                        <input type="date" asp-for="@Model.createRequest.ExpirationDate" class="form-control" required />
+                                    </div>
+                                    <div class="form-group form-group-half wt-formwithlabel">
+                                        <input type="text" asp-for="@Model.createRequest.Budget" class="form-control" placeholder="Budget" required />
+                                    </div>
+                                    
+                                    <div class="form-group form-group-half wt-formwithlabel">
+                                        <span class="wt-select">
+                                            <label for="selectoption">Category: </label>
+                                            <select asp-for="@Model.createRequest.CategoryId" required>
+                                                @foreach (var item in Model.Categories)
+                                                {
+                                                    <option value="@item.CategoryId">@item.CategoryName</option>
+                                                }
+                                            </select>
+                                        </span>
+                                    </div>
+                                </fieldset>
+                                <div class="wt-jobdetails wt-tabsinfo">
+
+                                    <div class="wt-tabscontenttitle">
+                                        <h2>Job Overview Description</h2>
+                                    </div>
+                                    <fieldset class="mb-3">
+                                        <div class="form-group">
+                                            <textarea class="form-control" asp-for="@Model.createRequest.SortDesc" rows="5" placeholder="Enter Job Sort Description"></textarea>
+                                        </div>
+                                    </fieldset>
+
+                                    <div class="wt-tabscontenttitle">
+                                        <h2>Job Details</h2>
+                                    </div>
+                                    
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <textarea asp-for="@Model.createRequest.PostDetails" id="wt-ckeditor" rows="20" class="wt-tinymceeditor" placeholder="Add Job Detail Here"></textarea>
+                                        </div>
+                                    </fieldset>
+                                    
+                                </div>
+                                <div class="wt-tabscontenttitle">
+                                    <h2>Make it public after Post?</h2>
+                                    <div class="wt-rightarea">
+                                        <span></span>
+                                        <div class="wt-on-off float-right">
+                                            <input type="checkbox" id="hide-on" asp-for="@Model.createRequest.isPostPublic" />
+                                            <label for="hide-on"><i></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wt-jobdetails wt-tabsinfo">
+                                    <div class="d-flex justify-content-between">
+                                        <input type="submit" value="Post Job Now" class="wt-btn" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!--Register Form End-->
+</main>
+<!--Main End-->
+
+
+@section scripts{
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#wt-ckeditor'), {
+                //toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(err => {
+                console.error(err.stack);
+            });
+    </script>
+}

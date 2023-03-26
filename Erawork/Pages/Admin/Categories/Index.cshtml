@@ -1,0 +1,212 @@
+﻿@page
+@using Data.Models;
+@model Erawork.Pages.Admin.Categories.IndexModel
+@{
+    string defaultCateImg = "assets/images/categories/box.png";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BootStrap HTML5 CSS3 Theme</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="~/assets/apple-touch-icon.png">
+    <link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/normalize.css">
+    <link rel="stylesheet" href="~/assets/css/scrollbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/jquery-ui.css">
+    <link rel="stylesheet" href="~/assets/css/linearicons.css">
+    <link rel="stylesheet" href="~/assets/css/tipso.css">
+    <link rel="stylesheet" href="~/assets/css/chosen.css">
+    <link rel="stylesheet" href="~/assets/css/prettyPhoto.css">
+    <link rel="stylesheet" href="~/assets/css/main.css">
+    <link rel="stylesheet" href="~/assets/css/basictable.css">
+    <link rel="stylesheet" href="~/assets/css/dashboard.css">
+    <link rel="stylesheet" href="~/assets/css/color.css">
+    <link rel="stylesheet" href="~/assets/css/transitions.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link rel="stylesheet" href="~/assets/css/dbresponsive.css">
+    <script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout">
+    <!--Register Form Start-->
+    <section class="wt-haslayout wt-dbsectionspace">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-4 float-left">
+                <div class="wt-dashboardbox">
+                    <div class="wt-dashboardboxtitle">
+                        <h2>Add New Category</h2>
+                    </div>
+                    <div class="wt-dashboardboxcontent">
+                        <form method="post" asp-page-handler="Create" enctype="multipart/form-data" class="wt-formtheme wt-formprojectinfo wt-formcategory">
+
+                            <div class="form-group">
+                                <span class="form-group-description">Enter Category Name</span>
+                                <input type="text" asp-for="@Model.createCategoryVM.CategoryName" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <span class="form-group-description">Select Category Status</span>
+
+                                <span class="wt-select">
+                                    <select asp-for="@Model.createCategoryVM.isCategoryActive">
+                                        <option value="@true">Active</option>
+                                        <option value="@false">Inactive</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div class="form-group">
+                                <span class="form-group-description">Enter Category Description</span>
+                                <textarea asp-for="@Model.createCategoryVM.CategoryDescription" class="form-control" placeholder="Description"></textarea>
+
+                            </div>
+                            <div class="form-group form-group-label">
+                                <div class="wt-labelgroup">
+                                    <label>
+                                        <span class="wt-btn">Select Files</span>
+                                        <input asp-for="@Model.createCategoryVM.CategoryImage" type="file" accept=".jpg, .jpeg, .png" id="imageCategory" />
+                                    </label>
+                                    <span>Drop files here to upload</span>
+                                    <em class="wt-fileuploading">Uploading<i class="fa fa-spinner fa-spin"></i></em>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <ul class="wt-attachfile">
+                                    <li class="wt-uploading">
+                                        <span class="uploadprogressbar"></span>
+                                        <span>Category Icon.jpg</span>
+                                        <em>File size: 300 kb<a href="javascript:void(0);" class="lnr lnr-cross"></a></em>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group wt-btnarea">
+                                <button class="wt-btn">Add New Category</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-8 float-right">
+                <div class="wt-dashboardbox wt-categorys">
+                    <div class="wt-dashboardboxtitle wt-titlewithsearch">
+                        <h2>Category</h2>
+                        <form class="wt-formtheme wt-formsearch">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input type="text" asp-for="@Model.ViewModel.searchTerm" class="form-control" placeholder="Search Category">
+                                    <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="wt-dashboardboxcontent wt-categoriescontentholder">
+
+
+                        <table class="wt-tablecategories">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span class="wt-checkbox">
+                                            <input id="wt-name" type="checkbox" name="head">
+                                            <label for="wt-name"></label>
+                                        </span>
+                                    </th>
+                                    <th>Category Name</th>
+                                    <th>Description</th>
+                                    <th>Is Active</th>
+                                    <th>Total SubCate</th>
+                                    <th>Image</th>
+                                    <th colspan="2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Categories != null)
+                                {
+                                    foreach (var item in Model.Categories)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <span class="wt-checkbox">
+                                                    <input id="wt-namea-@item.CategoryId" type="checkbox" name="head">
+                                                    <label for="wt-namea-@item.CategoryId"></label>
+                                                </span>
+                                            </td>
+                                            <td>@item.CategoryName</td>
+                                            <td>@item.CategoryDescription</td>
+                                            <td>@item.isCategoryActive</td>
+                                            <td>@item.TotalSubs</td>
+                                            <td>
+                                                <figure><img src="~/@(item.CategoryImage==null ? defaultCateImg : item.CategoryImage)" alt="img description"></figure>
+                                            </td>
+
+                                            <td>
+                                                <div class="wt-actionbtn">
+                                                    <a asp-page="./Update" asp-route-id="@item.CategoryId" class="wt-addinfo wt-skillsaddinfo"><i class="lnr lnr-pencil"></i></a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wt-actionbtn">
+                                                    <a asp-page="../SubCategories/Index" asp-route-id="@item.CategoryId" asp-route-CateId="@item.CategoryId" class="btn btn-secondary d-flex align-items-center justify-content-center"><i class="fa-solid fa-eye"></i></a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="wt-actionbtn">
+                                                    <a asp-page="./Delete" asp-route-id="@item.CategoryId" asp-page-handler="Delete" class="wt-deleteinfo"><i class="lnr lnr-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+
+                        @if (Model.HasPreviousPage || Model.HasNextPage)
+                        {
+                            <nav class="wt-pagination">
+                                <ul>
+                                    <li class="wt-prevpage">
+                                        <a asp-page="./Index" asp-route-CurrentPage="@Model.ViewModel.CurrentPage-1" asp-route-searchTerm="@Model.ViewModel.searchTerm" asp-route-pageSize="@Model.ViewModel.PageSize">
+                                            <i class="lnr lnr-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    @if (Model.TotalPages <= 3)
+                                    {
+                                        for (int i = 1; i <= Model.TotalPages; i++)
+                                        {
+                                            <li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.ViewModel.searchTerm" asp-route-pageSize="@Model.ViewModel.PageSize">@i</a></li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        for (int i = 1; i <= Model.TotalPages; i++)
+                                        {
+                                            <li><a asp-route-CurrentPage="@i" asp-route-searchTerm="@Model.ViewModel.searchTerm" asp-route-pageSize="@Model.ViewModel.PageSize">@i</a></li>
+                                        }
+                                        <li><a href="javascrip:void(0);">...</a></li>
+                                        <li><a asp-route-CurrentPage="@Model.TotalPages" asp-route-searchTerm="@Model.ViewModel.searchTerm" asp-route-pageSize="@Model.ViewModel.PageSize">Last Page</a></li>
+                                    }
+                                    <li asp-page="./Index" asp-route-CurrentPage="@Model.ViewModel.CurrentPage+1" asp-route-searchTerm="@Model.ViewModel.searchTerm" asp-route-pageSize="@Model.ViewModel.PageSize" class="wt-nextpage">
+                                        <a href="javascrip:void(0);">
+                                            <i class="lnr lnr-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Register Form End-->
+</main>
+<!--Main End-->

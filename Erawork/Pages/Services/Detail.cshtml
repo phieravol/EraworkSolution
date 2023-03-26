@@ -1,0 +1,331 @@
+﻿@page
+@model Erawork.Pages.Services.DetailModel
+@{
+}
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>BootStrap HTML5 CSS3 Theme</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/assets/css/normalize.css">
+	<link rel="stylesheet" href="~/assets/css/scrollbar.css">
+	<link rel="stylesheet" href="~/assets/css/fontawesome/fontawesome-all.css">
+	<link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="~/assets/css/themify-icons.css">
+	<link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="~/assets/css/jquery-ui.css">
+	<link rel="stylesheet" href="~/assets/css/linearicons.css">
+	<link rel="stylesheet" href="~/assets/css/tipso.css">
+	<link rel="stylesheet" href="~/assets/css/chosen.css">
+	<link rel="stylesheet" href="~/assets/css/prettyPhoto.css">
+	<link rel="stylesheet" href="~/assets/css/main.css">
+	<link rel="stylesheet" href="~/assets/css/dashboard.css">
+	<link rel="stylesheet" href="~/assets/css/color.css">
+	<link rel="stylesheet" href="~/assets/css/transitions.css">
+	<link rel="stylesheet" href="~/assets/css/responsive.css">
+	<link rel="stylesheet" href="~/assets/css/dbresponsive.css">
+	<script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+
+<!--Inner Home Banner Start-->
+<div class="wt-haslayout wt-innerbannerholder wt-innerbannerholdervtwo">
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+			</div>
+		</div>
+	</div>
+</div>
+<!--Inner Home End-->
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+	<!-- User Profile Start-->
+	<div class="wt-main-section wt-paddingtopnull wt-haslayout">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
+					<div class="wt-userprofileholder">
+						<span class="wt-featuredtag"><img src="~/assets/images/featured.png" alt="img description" data-tipso="Plus Member" class="template-content tipso_style"></span>
+						<div class="col-12 col-sm-12 col-md-12 col-lg-3 float-left">
+							<div class="row">
+								<div class="wt-userprofile">
+									<figure>
+										<img src="~/@Model.Services.Avatar" alt="img description">
+										<div class="wt-userdropdown wt-online">
+										</div>
+									</figure>
+									<div class="wt-title">
+										<h3><i class="fa fa-check-circle"></i> @Model.Services.ProviderFirstName @Model.Services.ProviderLastName</h3>
+                                        <span>
+                                            <i class="fa-regular fa-star-half-stroke"></i> @(Model.Services.TotalStars==null ? 0: Model.Services.TotalStars)/5
+											<a class="javascript:void(0);">(@(Model.Services.TotalClients == null ? 0 : Model.Services.TotalClients) Clients)</a>
+											<br>@(Model.Services.MemberSince == null ? "" : $"Member since {Model.Services.MemberSince.Value.ToString("dd/MM/yyyy")}") <br>
+                                            <a href="javascript:void(0);">@Model.Services.UserName</a>
+                                            <a href="javascript:void(0);" class="wt-reportuser">Report User</a>
+                                        </span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-sm-12 col-md-12 col-lg-9 float-left">
+							<div class="row">
+								<div class="wt-proposalhead wt-userdetails">
+									<h2>@Model.Services.ServiceTitle</h2>
+									<ul class="wt-userlisting-breadcrumb wt-userlisting-breadcrumbvtwo">
+										
+										<li><span><img src="~/assets/images/flag/img-02.png" alt="img description">@Model.Services.CategoryName > @Model.Services.SubCateName</span></li>
+										<li><a href="javascript:void(0);" class="wt-clicksave"><i class="fa fa-heart"></i> Save</a></li>
+									</ul>
+									<div>
+										<p>@Model.Services.ServiceIntro</p>
+									</div>
+								</div>
+								<div id="wt-statistics" class="wt-statistics wt-profilecounter">
+									
+									<div class="wt-description">
+										<p>* Click "Send Offer" to request service. *</p>
+										<a href="javascript:void(0);" class="wt-btn" data-toggle="modal" data-target="#reviewermodal">Send Offer</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="wt-articlesingle-holder wt-bgwhite">
+						<div class="wt-articlesingle-content">
+							<figure class="wt-singleimg-one">
+								<img src="~/@Model.Services.ServiceImage" alt="img description">
+							</figure>
+							<div class="wt-title">
+								<h2>Service Details</h2>
+							</div>
+							
+							<div class="wt-description">
+								@Html.Raw(Model.Services.ServiceDetails)
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<!--Register Form Start-->
+				
+                    <section class="wt-haslayout wt-dbsectionspace">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 float-left">
+								<div class="wt-dashboardbox">
+								@if (Model.PakagesByService is null || Model.PakagesByService.Count == 0)
+								{
+									<h4>No packages have been created yet</h4>
+								}
+								else
+								{
+									<div class="wt-dashboardboxtitle">
+										<h2>Packages</h2>
+									</div>
+									<div class="wt-dashboardboxcontent wt-packages d-flex">
+										<div class="wt-package wt-packagedetails">
+											<div class="wt-packagehead">
+											</div>
+											<div class="wt-packagecontent">
+												<ul class="wt-packageinfo">
+													<li class="wt-packageprices"><span>Price</span></li>
+													<li><span>Revision Limit</span></li>
+													<li><span>Delivery Days</span></li>
+												</ul>
+											</div>
+										</div>
+										@foreach (var item in Model.PakagesByService)
+										{
+											<div class="wt-package wt-baiscpackage">
+												<div class="wt-packagehead">
+													<h3>@item.PakageName</h3>
+												</div>
+												<div class="wt-packagecontent">
+													<ul class="wt-packageinfo">
+														<li class="wt-packageprice"><span><sup>$</sup>@item.Price<sub>\ Month</sub></span></li>
+														<li><span>@item.RevisionLimit</span></li>
+
+														<li><span>@item.DeliveryDays</span></li>
+
+													</ul>
+													<button class="wt-btn" href="javascript:void(0);"><span>Buy Now</span></button>
+												</div>
+											</div>
+										}
+									</div>
+								}
+								</div>
+                            </div>
+                        </div>
+                    </section>		
+				<!--Register Form End-->
+			</div>
+		</div>
+		<!-- User Profile End-->
+
+		<!-- User Listing Start-->
+		@*<div class="container">
+			<div class="row">
+				<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+						<div class="wt-usersingle">
+							<div class="wt-clientfeedback">
+								<div class="wt-usertitle wt-titlewithselect">
+									<h2>Client Feedback</h2>
+									<div class="form-group">
+										<span class="wt-select">
+											<select>
+												<option value="Show All">Show All</option>
+												<option value="One Page">One Page </option>
+												<option value="Two Page">Two Page</option>
+											</select>
+										</span>
+									</div>
+								</div>
+								<div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">
+									<figure class="wt-userlistingimg">
+										<img src="~/assets/images/client/img-01.jpg" alt="image description">
+									</figure>
+									<div class="wt-userlistingcontent">
+										<div class="wt-contenthead">
+											<div class="wt-title">
+												<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Themeforest Company</a>
+												<h3>Translation and Proof Reading (Multi Language)</h3>
+											</div>
+											<ul class="wt-userlisting-breadcrumb">
+												<li><span><i class="fa fa-dollar-sign"></i> Beginner</span></li>
+												<li><span><img src="~/assets/images/flag/img-04.png" alt="img description"> England</span></li>
+												<li><span><i class="fas fa-spinner fa-spin"></i> In Progress</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="wt-userlistinghold wt-userlistingsingle">
+									<figure class="wt-userlistingimg">
+										<img src="~/assets/images/client/img-02.jpg" alt="image description">
+									</figure>
+									<div class="wt-userlistingcontent">
+										<div class="wt-contenthead">
+											<div class="wt-title">
+												<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Videohive Studio</a>
+												<h3>Need help translating app stringlist from English to Arabic</h3>
+											</div>
+											<ul class="wt-userlisting-breadcrumb">
+												<li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Intermediate</span></li>
+												<li><span><img src="~/assets/images/flag/img-03.png" alt="img description">  Canada</span></li>
+												<li><span><i class="far fa-calendar"></i> Jun 2017 - Jul 2017</span></li>
+												<li><span class="wt-stars"><span></span></span></li>
+											</ul>
+										</div>
+									</div>
+									<div class="wt-description">
+										<p>“ Eiusmod tempor incididunt ut labore et dolore magna quis nostrud exercitation ullamco laboris. ”</p>
+									</div>
+								</div>
+								<div class="wt-userlistinghold wt-userlistingsingle wt-bgcolor">
+									<figure class="wt-userlistingimg">
+										<img src="~/assets/images/client/img-03.jpg" alt="image description">
+									</figure>
+									<div class="wt-userlistingcontent">
+										<div class="wt-contenthead">
+											<div class="wt-title">
+												<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> Photodune Professionals</a>
+												<h3>Blog Post Writing in English Language</h3>
+											</div>
+											<ul class="wt-userlisting-breadcrumb">
+												<li><span><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i><i class="fa fa-dollar-sign"></i> Professional</span></li>
+												<li><span><img src="~/assets/images/flag/img-02.png" alt="img description"> United States</span></li>
+												<li><span><i class="far fa-calendar"></i>  Jun 2017</span></li>
+												<li><span class="wt-stars"><span></span></span></li>
+											</ul>
+										</div>
+									</div>
+									<div class="wt-description">
+										<p>“ Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliquaenim ad minim veniamac quis nostrud exercitation ullamco laboris. ”</p>
+									</div>
+								</div>
+								<div class="wt-btnarea">
+									<a href="javascript:void(0);" class="wt-btn">Load More</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>*@
+		<!-- User Listing End-->
+	</div>
+</main>
+
+
+<div class="modal fade wt-offerpopup" tabindex="-1" role="dialog" id="reviewermodal">
+	<div class="modal-dialog" role="document">
+		<div class="wt-modalcontent modal-content">
+			<div class="wt-popuptitle">
+				<h2>Send a Project Offer</h2>
+				<a href="javascript%3bvoid(0)%3b.html" class="wt-closebtn close"><i class="fa fa-close" data-dismiss="modal" aria-label="Close"></i></a>
+			</div>
+			<div class="modal-body">
+				<div class="wt-projectdropdown-hold">
+					<input type="date" name="expect" />
+					<div class="wt-projectdropdown">
+						<div class="wt-projectselect">
+							@*<figure><img src="~/assets/images/thumbnail/img-07.jpg" alt="img description"></figure>
+							<div class="wt-projectselect-content">
+								<h3>Project Title Here</h3>
+								<span><i class="lnr lnr-calendar-full"></i> Project Deadline: May 27, 2019</span>
+							</div>*@
+							
+						</div>
+					</div>
+					<div class="wt-projectdropdown-option">
+						<div class="wt-projectselect">
+							<figure><img src="~/assets/images/thumbnail/img-07.jpg" alt="img description"></figure>
+							<div class="wt-projectselect-content">
+								<h3>Project Title Here</h3>
+								<span><i class="lnr lnr-calendar-full"></i> Project Deadline: May 27, 2019</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<form class="wt-formtheme wt-formpopup">
+					<fieldset>
+						<div class="form-group">
+							<textarea class="form-control" placeholder="Add Description*"></textarea>
+						</div>
+						<div class="form-group wt-btnarea">
+							<a href="javascript:void(0);" class="wt-btn">Send offer</a>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Popup End-->
+
+
+<!--Main End-->
+@section Scripts {
+	<script src="~/assets/js/vendor/jquery-3.3.1.js"></script>
+	<script src="~/assets/js/vendor/jquery-3.3.1.js"></script>
+	<script src="~/assets/js/vendor/jquery-library.js"></script>
+	<script src="~/assets/js/vendor/bootstrap.min.js"></script>
+	<script src="~/assets/js/owl.carousel.min.js"></script>
+	<script src="~/assets/js/chosen.jquery.js"></script>
+	<script src="~/assets/js/tilt.jquery.js"></script>
+	<script src="~/assets/js/scrollbar.min.js"></script>
+	<script src="~/assets/js/prettyPhoto.js"></script>
+	<script src="~/assets/js/jquery-ui.js"></script>
+	<script src="~/assets/js/readmore.js"></script>
+	<script src="~/assets/js/countTo.js"></script>
+	<script src="~/assets/js/appear.js"></script>
+	<script src="~/assets/js/tipso.js"></script>
+	<script src="~/assets/js/jRate.js"></script>
+	<script src="~/assets/js/main.js"></script>
+}

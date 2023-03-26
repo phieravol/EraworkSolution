@@ -1,0 +1,43 @@
+﻿@page
+@using Data.Models;
+@model Erawork.Pages.Admin.Categories.DeleteModel
+@{
+    
+    Category category = Model.DelViewModel.Category;
+    string defaultCateImg = "assets/images/categories/box.png";
+}
+
+<h1>Delete Category Confirm</h1>
+
+<p>Are you sure you want to delete this Category?</p>
+
+<div>
+    <h4>Category</h4>
+</div>
+<form method="post" class="wt-formtheme wt-formprojectinfo wt-formcategory">
+
+    <div class="form-group">
+        <span class="form-group-description">Category Name</span>
+        <input type="text" class="form-control" placeholder="@category.CategoryName" disabled>
+    </div>
+    
+    <div class="form-group">
+        <span class="form-group-description">Enter Category Description</span>
+        <textarea class="form-control" placeholder="@category.CategoryDescription" disabled></textarea>
+    </div>
+    <div class="form-group form-group-label">
+        <div class="wt-labelgroup">
+            <label>
+                <span class="wt-btn">Select Files</span>
+                <figure><img src="~/@(category.CategoryImage==null ? defaultCateImg : category.CategoryImage)" alt="img description"></figure>
+            </label>
+            
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-page="./Index">Back to List</a>
+    </div>
+
+</form>

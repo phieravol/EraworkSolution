@@ -1,0 +1,119 @@
+﻿@page
+@model Erawork.Pages.Admin.Categories.DetailModel
+@{
+}
+<!--Category banner start-->
+<div class="wt-haslayout wt-innerbannerholder">
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+				<div class="wt-innerbannercontent">
+					<div class="wt-title"><h2>Category Detail</h2></div>
+					<ol class="wt-breadcrumb">
+						<li><a href="index-2.html">Categories</a></li>
+						<li><a href="companygrid.html">@Model.CategoryName</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Category banner end-->
+
+<!--subcategory after banner start-->
+<div class="wt-categoriesslider-holder wt-haslayout">
+	<div class="wt-title">
+		<h2>SubCategories in @Model.CategoryName:</h2>
+	</div>
+    <div id="wt-categoriesslider" class="wt-categoriesslider owl-carousel">
+        @foreach (var item in Model.subCategories)
+        {
+            <div class="wt-categoryslidercontent item">
+                <figure><img src="~/@item.SubcateImage" alt="image description"></figure>
+                <div class="wt-cattitle">
+					<h3><a href="/Admin/subcategories/detail?subcateId=@item.SubCateId">@item.SubcateName</a></h3>
+                    <span>Items: @item.Services.Count</span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!--subcategory after banner end-->
+
+<!--Main Start-->
+<main id="wt-main" class="wt-main wt-haslayout wt-innerbgcolor">
+	<div class="wt-haslayout wt-main-section">
+		<!-- User Listing Start-->
+		<div class="wt-haslayout">
+			<div class="container">
+				<div class="row">
+					<div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+							<div class="wt-userlistingholder wt-haslayout">
+								<div class="wt-userlistingtitle">
+									<h3>Services in SubCategories</h3>
+								</div>
+								<div class="wt-companysinfoholder">
+									<div class="row">
+										@foreach (var item in Model.subCategories)
+										{
+											@if (item.Services.Count != 0)
+											{
+												foreach (var sub in item.Services)
+												{
+													<div class="col-12 col-sm-12 col-md-12 col-lg-4">
+														<div class="wt-companysdetails">
+															<figure class="wt-companysimg" style="height: 290px">
+																<img src="~/@sub.ServiceImage" style="max-height: 290px" alt="img description">
+															</figure>
+															<div class="wt-companysinfo">
+																<figure><img src="~/@sub.Avatar" alt="img description"></figure>
+																<div class="wt-title">
+																	<a href="javascript:void(0);"><i class="fa fa-check-circle"></i> @sub.ProviderFirstName @sub.ProviderLastName</a>
+																	<p>@sub.ServiceTitle</p>
+																</div>
+																<ul class="wt-postarticlemeta d-flex">
+																	<li>
+																		<a href="/Services/Detail?id=@sub.ServiceId">
+																			<span>Detail</span>
+																			<span><i class="fa-solid fa-eye"></i></span>
+																		</a>
+																	</li>
+																	<li>
+																		<a href="javascript:void(0);">
+																			<span>Stars</span>
+																			<span>@(sub.TotalStars == null ? 0 : sub.TotalStars) <i class="fa-solid fa-star"></i></span>
+
+																		</a>
+																	</li>
+																	<li class="wt-following">
+																		<a href="javascript:void(0);">
+																			<span>clients</span>
+																			<span>@(sub.TotalClients == null ? 0 : sub.TotalClients) <i class="fa-solid fa-users"></i></span>
+																		</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												}
+											}
+											
+										}
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="wt-btnarea d-flex justify-content-center">
+						<a href="/services" class="wt-btn">View All</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- User Listing End-->
+	</div>
+</main>
+<!--Main End-->
