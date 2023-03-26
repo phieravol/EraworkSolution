@@ -22,13 +22,13 @@
 				<a href="javascript:void(0);" style="content: none"> @cate.CategoryName</a>
 			}
 			else {
-				<a href="javascript:void(0);"> @cate.CategoryName</a>
+				<a href="/Admin/Categories/Detail?CateId=@cate.CategoryId"> @cate.CategoryName</a>
 			}
 			
 			<ul class="sub-menu">
 				@foreach (var sub in cate.SubCategories)
 				{
-					<li><a href="#">@sub.SubcateName</a></li>
+					<li><a href="/Admin/subcategories/detail?subcateId=@sub.SubCateId">@sub.SubcateName</a></li>
 				}
 			</ul>
 		</li>

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Erawork.Pages
 {
-    public class TestRazorModel : PageModel
+    public class HowItWorkModel : PageModel
     {
         public void OnGet()
         {

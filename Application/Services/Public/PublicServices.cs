@@ -167,5 +167,12 @@ namespace AppModules.Services.Public
 
 			return await query.CountAsync();
 		}
-	}
+
+        public async Task<List<ServicesVM>> GetServiceBySubcateAsync(int subCateId)
+        {
+			var rawService = await GetRawActiveServicesAsync();
+			var result = rawService.Where(x=>x.SubCategoryId == subCateId);
+			return  result.ToList();
+		}
+    }
 }

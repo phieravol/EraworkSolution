@@ -27,6 +27,10 @@ namespace ViewModels.ServiceViewModel
 		public string UserName { get; set; }
 		public string CategoryName { get; set; }
 		public List<Pakage>? Pakages { get; set; }
-		
-	}
+
+        public static implicit operator List<object>(ServicesVM v)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModels.ServiceViewModel;
 
 namespace ViewModels.SubCatesViewModel
 {
@@ -15,5 +17,6 @@ namespace ViewModels.SubCatesViewModel
         public string? SubcateDesc { get; set; }
         public int? CategoryId { get; set; }
         public string? CategoryName { get; set;}
+        public List<ServicesVM> Services { get; set; }
     }
 }
