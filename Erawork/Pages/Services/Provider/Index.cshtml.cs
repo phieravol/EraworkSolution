@@ -49,29 +49,33 @@ namespace Erawork.Pages.Services.Admin
 				return (pagingRequest.CurrentPage < TotalPages);
 			}
 		}
-		public async Task OnGetAsync()
+		public async Task<IActionResult> OnGetAsync()
         {
-			//get user session
-			string? rawUser = HttpContext.Session.GetString("User");
-			AppUser? user = null;
-			if (rawUser != null)
-			{
-				user = JsonConvert.DeserializeObject<AppUser>(rawUser);
-			}
-			if (user == null)
-			{
-                HttpContext.Response.Clear();
-                HttpContext.Response.StatusCode = 404;
-
-                HttpContext.Response.Redirect("/Errors/Error404");
+            //get user session
+            string? rawUser = HttpContext.Session.GetString("User");
+            AppUser? user = null;
+            if (rawUser != null)
+            {
+                user = JsonConvert.DeserializeObject<AppUser>(rawUser);
             }
-			else if (ModelState.IsValid)
-			{
-				servicesPaging = await manageServices.PagingServicesAsync(pagingRequest, user.UserName);
-				subCategories = await manageSubcates.GetSubCatesAsync();
-				TotalPages = (int)Math.Ceiling(servicesPaging.Count() / (double)pagingRequest.PageSize);
-			}
-		}
+            if (user == null)
+            {
+                return RedirectToPage("/User/Login");
+            }
+            else
+            {
+                var Role = await userManager.GetRolesAsync(user);
+                if (Role[0] != "Provider")
+                {
+                    return RedirectToPage("/Forbidden");
+                }
+            }
+
+            servicesPaging = await manageServices.PagingServicesAsync(pagingRequest, user.UserName);
+            subCategories = await manageSubcates.GetSubCatesAsync();
+            TotalPages = (int)Math.Ceiling(servicesPaging.Count() / (double)pagingRequest.PageSize);
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostCreateAsync()
 		{

@@ -44,30 +44,32 @@ namespace Erawork.Pages.Posts.Client
 			}
 		}
 
-		public async Task OnGetAsync()
+		public async Task<IActionResult> OnGetAsync()
 		{
-			//get user session
-			string? rawUser = HttpContext.Session.GetString("User");
-			AppUser? user = null;
-			if (rawUser != null)
-			{
-				user = JsonConvert.DeserializeObject<AppUser>(rawUser);
-			}
-			if (user == null)
-			{
-				HttpContext.Response.Clear();
-				HttpContext.Response.StatusCode = 404;
-				HttpContext.Response.Redirect("/Errors/Error404");
-			}
-			else if (ModelState.IsValid)
-			{
-				PostsPaging = await managePosts.GetPostPagingAsync(pagingRequest, user);
-				TotalPages = (int)Math.Ceiling(PostsPaging.Count() / (double)pagingRequest.PageSize);
-			}
-			foreach (var item in PostsPaging)
-			{
-				Console.WriteLine($"PostTitle: {item.PostTitle}");
-			}
-		}
-	}
+            //get user session
+            string? rawUser = HttpContext.Session.GetString("User");
+            AppUser? user = null;
+            if (rawUser != null)
+            {
+                user = JsonConvert.DeserializeObject<AppUser>(rawUser);
+            }
+            if (user == null)
+            {
+                return RedirectToPage("/User/Login");
+            }
+            else
+            {
+                var Role = await userManager.GetRolesAsync(user);
+                if (Role[0] != "Client")
+                {
+                    return RedirectToPage("/Forbidden");
+                }
+            }
+
+            PostsPaging = await managePosts.GetPostPagingAsync(pagingRequest, user);
+            TotalPages = (int)Math.Ceiling(PostsPaging.Count() / (double)pagingRequest.PageSize);
+
+            return Page();
+        }
+    }
 }

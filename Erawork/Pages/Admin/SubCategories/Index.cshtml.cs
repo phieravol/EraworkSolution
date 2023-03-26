@@ -1,10 +1,12 @@
 using AppModules.Categories.Manage;
 using AppModules.SubCategories.Admin;
 using Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
 using ViewModels.SubCatesViewModel;
 using ViewModels.SubCatesViewModel.Admin;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -15,10 +17,12 @@ namespace Erawork.Pages.Admin.SubCategories
     {
         private readonly IManageSubcates manageSubcates;
         private readonly IManageCategory manageCategory;
-        public IndexModel(IManageSubcates manageSubcates, IManageCategory manageCategory)
+        private readonly UserManager<AppUser> userManager;
+        public IndexModel(IManageSubcates manageSubcates, IManageCategory manageCategory, UserManager<AppUser> userManager)
         {
             this.manageSubcates = manageSubcates;
             this.manageCategory = manageCategory;
+            this.userManager = userManager;
         }
 
         [BindProperty (SupportsGet = true)]
@@ -50,13 +54,32 @@ namespace Erawork.Pages.Admin.SubCategories
             }
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            //get user session
+            string? rawUser = HttpContext.Session.GetString("User");
+            AppUser? user = null;
+            if (rawUser != null)
+            {
+                user = JsonConvert.DeserializeObject<AppUser>(rawUser);
+            }
+            if (user == null)
+            {
+                return RedirectToPage("/User/Login");
+            }
+            else
+            {
+                var Role = await userManager.GetRolesAsync(user);
+                if (Role[0] != "Admin")
+                {
+                    return RedirectToPage("/Forbidden");
+                }
+            }
             categories = await manageCategory.GetCategoriesAsync();
             subcates = await manageSubcates.PagingSubcategoriesAsync(pagingRequest, id);
             List<SubCategory> listSubCate = await manageSubcates.GetSubCatesAsync();
             TotalPages = (int)Math.Ceiling(listSubCate.Count() / (double)pagingRequest.PageSize);
-          
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()

@@ -1,6 +1,9 @@
 using AppModules.Categories.Manage;
+using Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using NuGet.Protocol.Core.Types;
 using ViewModels.CategoryVM.Admin;
 
@@ -8,11 +11,13 @@ namespace Erawork.Pages.Admin.Categories
 {
     public class DeleteModel : PageModel
     {
-        private readonly IManageCategory _manageCategory;
+        private readonly IManageCategory manageCategory;
+        private readonly UserManager<AppUser> userManager;
 
-        public DeleteModel(IManageCategory manageCategory)
+        public DeleteModel(IManageCategory manageCategory, UserManager<AppUser> userManager)
         {
-            _manageCategory = manageCategory;
+            this.manageCategory = manageCategory;
+            this.userManager = userManager;
         }
 
         [BindProperty (SupportsGet =true)]
@@ -20,7 +25,26 @@ namespace Erawork.Pages.Admin.Categories
 
         public async Task<IActionResult> OnGetAsync()
         {
-            DelViewModel.Category = await _manageCategory.GetCategoryByIdAsync(DelViewModel.Id);
+            //get user session
+            string? rawUser = HttpContext.Session.GetString("User");
+            AppUser? user = null;
+            if (rawUser != null)
+            {
+                user = JsonConvert.DeserializeObject<AppUser>(rawUser);
+            }
+            if (user == null)
+            {
+                return RedirectToPage("/User/Login");
+            }
+            else
+            {
+                var Role = await userManager.GetRolesAsync(user);
+                if (Role[0] != "Admin")
+                {
+                    return RedirectToPage("/Forbidden");
+                }
+            }
+            DelViewModel.Category = await manageCategory.GetCategoryByIdAsync(DelViewModel.Id);
 
             if (DelViewModel.Category == null)
             {
@@ -31,7 +55,7 @@ namespace Erawork.Pages.Admin.Categories
         }
         public async Task<IActionResult> OnPostDeleteAsync()
         {
-            await _manageCategory.DelCategoryAsync(DelViewModel.Id);
+            await manageCategory.DelCategoryAsync(DelViewModel.Id);
             return RedirectToPage("./Index");
         }
     }

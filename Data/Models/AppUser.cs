@@ -19,6 +19,7 @@ namespace Data.Models
         public string? Gender { get; set; }
         public string? Slogan { get; set; }
         public string? UserAvatar { set; get; }
+        public string? UserConnectionId { set; get; }
 
         public virtual ICollection<Review>? Reviews { get; set; }
         public virtual ICollection<Post>? Posts { get; set; }

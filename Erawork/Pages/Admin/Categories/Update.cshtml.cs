@@ -1,7 +1,9 @@
 using AppModules.Categories.Manage;
 using Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using NuGet.Protocol.Core.Types;
 using ViewModels.CategoryVM.Admin;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -10,11 +12,13 @@ namespace Erawork.Pages.Admin.Categories
 {
     public class UpdateModel : PageModel
     {
-        private readonly IManageCategory _manageCategory;
+        private readonly IManageCategory manageCategory;
+        private readonly UserManager<AppUser> userManager;
 
-        public UpdateModel(IManageCategory manageCategory)
+        public UpdateModel(IManageCategory manageCategory, UserManager<AppUser> userManager)
         {
-            _manageCategory = manageCategory;
+            this.manageCategory = manageCategory;
+            this.userManager = userManager;
         }
 
         [BindProperty (SupportsGet = true)]
@@ -28,7 +32,26 @@ namespace Erawork.Pages.Admin.Categories
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var currentCategory = await _manageCategory.GetCategoryByIdAsync(Id);
+            //get user session
+            string? rawUser = HttpContext.Session.GetString("User");
+            AppUser? user = null;
+            if (rawUser != null)
+            {
+                user = JsonConvert.DeserializeObject<AppUser>(rawUser);
+            }
+            if (user == null)
+            {
+                return RedirectToPage("/User/Login");
+            }
+            else
+            {
+                var Role = await userManager.GetRolesAsync(user);
+                if (Role[0] != "Admin")
+                {
+                    return RedirectToPage("/Forbidden");
+                }
+            }
+            var currentCategory = await manageCategory.GetCategoryByIdAsync(Id);
 
             if (currentCategory == null)
             {
@@ -48,7 +71,7 @@ namespace Erawork.Pages.Admin.Categories
 
         public async Task<IActionResult> OnPostAsync()
         {
-            Category currentCategory = await _manageCategory.GetCategoryByIdAsync(Id);
+            Category currentCategory = await manageCategory.GetCategoryByIdAsync(Id);
 
             if (currentCategory == null)
             {
@@ -58,9 +81,9 @@ namespace Erawork.Pages.Admin.Categories
             currentCategory.CategoryName = UpdateVM.CategoryName;
             currentCategory.CategoryDescription = UpdateVM.CategoryDescription;
             currentCategory.isCategoryActive = UpdateVM.isCategoryActive;
-            currentCategory.CategoryImage = await _manageCategory.SaveImageAsync(UpdateVM.CategoryImage);
+            currentCategory.CategoryImage = await manageCategory.SaveImageAsync(UpdateVM.CategoryImage);
 
-            await _manageCategory.UpdateCategoryAsync(currentCategory);
+            await manageCategory.UpdateCategoryAsync(currentCategory);
 
             return RedirectToPage("./Index");
         }

@@ -67,6 +67,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Offers\Client\" />
     <Folder Include="Pages\Pakages\Public\" />
     <Folder Include="wwwroot\assets\images\user\avatar\" />
   </ItemGroup>
