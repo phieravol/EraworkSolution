@@ -61,7 +61,7 @@ else
 {
 	<div class="wt-userlogedin">
 		<figure class="wt-userimg">
-			<img src="/@Model.UserAvatar" alt="image description">
+			<img src="/@(Model.UserAvatar==null ? defaultUserImg: Model.UserAvatar)" alt="image description">
 		</figure>
 		<div class="wt-username">
 			<h3>@Model.FirstName @Model.LastName</h3>
