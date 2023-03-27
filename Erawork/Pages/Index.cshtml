@@ -8,8 +8,7 @@
 <!--Banner Home End-->
 
 <!-- Sub Category After Banner -->
-@if (Model.RoleUser == "Provider" || Model.RoleUser == "Client")
-{
+
     <div class="wt-categoriesslider-holder wt-haslayout">
         <div class="wt-title">
             <h2>Top SubCategories:</h2>
@@ -33,7 +32,7 @@
             }
         </div>
     </div>
-}
+
 <!-- Sub Category After End -->
 
 
@@ -70,11 +69,11 @@
 						</div>
                     }
 
-					<div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
+					@*<div class="col-12 col-sm-12 col-md-12 col-lg-12 float-left">
 						<div class="wt-btnarea">
 							<a href="javascript:void(0)" class="wt-btn">View All</a>
 						</div>
-					</div>
+					</div>*@
 				</div>
 			</div>
 		</div>
@@ -82,7 +81,7 @@
 	<!--Categories End-->
 
 	<!--Top Service Component Start-->
-	@if (Model.RoleUser == "Client")
+	@if (Model.RoleUser == "Client" || Model.RoleUser == "Admin")
 	{
 		@await Component.InvokeAsync("ClientIndexComponent")
 	}
@@ -90,7 +89,7 @@
 
 
 	<!--Top Post Component Start-->
-	@if (Model.RoleUser == "Provider")
+	@if (Model.RoleUser == "Provider" || Model.RoleUser == "Admin")
 	{
 		@await Component.InvokeAsync("ProviderIndexComponent")
 	}

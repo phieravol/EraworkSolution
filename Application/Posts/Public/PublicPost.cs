@@ -84,8 +84,9 @@ namespace AppModules.Posts.Public
 			{
 				string rawBudget = pagingRequest.budgetRange.Trim().Replace("$", "");
 				string[] rawBudgetSplit = rawBudget.Split(" - ");
+				query = query.Where(x => x.p.Budget > int.Parse(rawBudgetSplit[0]) && x.p.Budget < int.Parse(rawBudgetSplit[1]));
 			}
-
+			
 			var data = query.Skip((pagingRequest.CurrentPage - 1) * pagingRequest.PageSize).Take(pagingRequest.PageSize)
 				.Select(x => new PostVM()
 				{

@@ -8,24 +8,24 @@
 	<title>BootStrap HTML5 CSS3 Theme</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="apple-touch-icon" href="apple-touch-icon.png">
-	<link rel="icon" href="images/favicon.png" type="image/x-icon">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/scrollbar.css">
+	<link rel="apple-touch-icon" href="~/assets/apple-touch-icon.png">
+	<link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/assets/css/normalize.css">
+	<link rel="stylesheet" href="~/assets/css/scrollbar.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/jquery-ui.css">
-	<link rel="stylesheet" href="css/linearicons.css">
-	<link rel="stylesheet" href="css/tipso.css">
-	<link rel="stylesheet" href="css/chosen.css">
-	<link rel="stylesheet" href="css/prettyPhoto.css">
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/color.css">
-	<link rel="stylesheet" href="css/transitions.css">
-	<link rel="stylesheet" href="css/responsive.css">
-	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+	<link rel="stylesheet" href="~/assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="~/assets/css/jquery-ui.css">
+	<link rel="stylesheet" href="~/assets/css/linearicons.css">
+	<link rel="stylesheet" href="~/assets/css/tipso.css">
+	<link rel="stylesheet" href="~/assets/css/chosen.css">
+	<link rel="stylesheet" href="~/assets/css/prettyPhoto.css">
+	<link rel="stylesheet" href="~/assets/css/main.css">
+	<link rel="stylesheet" href="~/assets/css/color.css">
+	<link rel="stylesheet" href="~/assets/css/transitions.css">
+	<link rel="stylesheet" href="~/assets/css/responsive.css">
+	<script src="~/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 
 <!--Inner Home Banner Start-->
@@ -81,7 +81,14 @@
 													@foreach (var item in Model.Categories)
 													{
 														<span class="wt-checkbox">
-															<input id="wt-description-@item.CategoryId" type="checkbox" name="PagingRequest.CategoryIds" value="@item.CategoryId.ToString()">
+															@if ( Model.PagingRequest.CategoryIds!=null && Model.PagingRequest.CategoryIds.Contains(@item.CategoryId))
+															{
+																<input id="wt-description-@item.CategoryId" type="checkbox" name="PagingRequest.CategoryIds" value="@item.CategoryId.ToString()" checked>
+															}
+															else
+															{
+																<input id="wt-description-@item.CategoryId" type="checkbox" name="PagingRequest.CategoryIds" value="@item.CategoryId.ToString()">
+															}
 															<label for="wt-description-@item.CategoryId"> @item.CategoryName</label>
 														</span>
 													}
@@ -99,23 +106,65 @@
 											<fieldset>
 												<div class="wt-checkboxholder">
 													<span class="wt-checkbox">
-														<input id="beginer" type="checkbox" name="PagingRequest.RequiredLevels" value="beginer">
+
+														@if (Model.PagingRequest.RequiredLevels != null && Model.PagingRequest.RequiredLevels.Contains("beginer"))
+														{
+															<input id="beginer" type="checkbox" name="PagingRequest.RequiredLevels" value="beginer" checked>
+														}
+														else
+														{
+															<input id="beginer" type="checkbox" name="PagingRequest.RequiredLevels" value="beginer">
+														}
+
 														<label for="beginer">Beginer</label>
 													</span>
+
 													<span class="wt-checkbox">
-														<input id="intermediate" type="checkbox" name="PagingRequest.RequiredLevels" value="intermediate">
+														@if (Model.PagingRequest.RequiredLevels != null && Model.PagingRequest.RequiredLevels.Contains("intermediate"))
+														{
+															<input id="intermediate" type="checkbox" name="PagingRequest.RequiredLevels" value="intermediate" checked>
+														}
+														else
+														{
+															<input id="intermediate" type="checkbox" name="PagingRequest.RequiredLevels" value="intermediate">
+														}
 														<label for="intermediate"> Intermediate</label>
 													</span>
+
 													<span class="wt-checkbox">
-														<input id="profesional" type="checkbox" name="PagingRequest.RequiredLevels" value="profesional">
+														@if (Model.PagingRequest.RequiredLevels != null && Model.PagingRequest.RequiredLevels.Contains("profesional"))
+														{
+															<input id="profesional" type="checkbox" name="PagingRequest.RequiredLevels" value="profesional" checked>
+														}
+														else
+														{
+															<input id="profesional" type="checkbox" name="PagingRequest.RequiredLevels" value="profesional">
+														}
 														<label for="profesional"> Profesional</label>
 													</span>
+
 													<span class="wt-checkbox">
-														<input id="expert" type="checkbox" name="PagingRequest.RequiredLevels" value="expert">
+														@if (Model.PagingRequest.RequiredLevels != null && Model.PagingRequest.RequiredLevels.Contains("expert"))
+														{
+															<input id="expert" type="checkbox" name="PagingRequest.RequiredLevels" value="expert" checked>
+														}
+														else
+														{
+															<input id="expert" type="checkbox" name="PagingRequest.RequiredLevels" value="expert">
+														}
 														<label for="expert">Expert</label>
 													</span>
+
 													<span class="wt-checkbox">
-														<input id="enterprise" type="checkbox" name="PagingRequest.RequiredLevels" value="enterprise">
+														@if (Model.PagingRequest.RequiredLevels != null && Model.PagingRequest.RequiredLevels.Contains("enterprise"))
+														{
+															<input id="enterprise" type="checkbox" name="PagingRequest.RequiredLevels" value="enterprise" checked>
+														}
+														else
+														{
+															<input id="enterprise" type="checkbox" name="PagingRequest.RequiredLevels" value="enterprise">
+														}
+
 														<label for="enterprise"> Enterprise</label>
 													</span>
 												</div>

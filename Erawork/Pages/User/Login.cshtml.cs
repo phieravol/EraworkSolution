@@ -43,7 +43,7 @@ namespace Erawork.Pages.User
                 switch (loginResult)
                 {
                     case "Admin":
-                        return RedirectToPage($"/Admin/Index");
+                        return RedirectToPage($"/Index");
                         break;
                     default:
                         return RedirectToPage($"/Index");

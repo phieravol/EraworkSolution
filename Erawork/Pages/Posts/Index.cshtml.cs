@@ -56,11 +56,9 @@ namespace Erawork.Pages.Posts
 				user = JsonConvert.DeserializeObject<AppUser>(rawUser);
 			}
 
-			if (ModelState.IsValid)
-			{
-				PostList = await publicPost.GetPostFilterPaging(pagingRequest);
-				TotalPages = (int)Math.Ceiling(PostList.Count() / (double)pagingRequest.PageSize);
-			}
+			PostList = await publicPost.GetPostFilterPaging(pagingRequest);
+			TotalPages = (int)Math.Ceiling(PostList.Count() / (double)pagingRequest.PageSize);
+
 			return Page();
 		}
 
